@@ -24,6 +24,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('room_number')->nullable();
+            $table->boolean('isActive')->default(0);
             $table->string('profile')->nullable();
 
             $table->foreign('role_id')
