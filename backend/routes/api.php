@@ -1,15 +1,13 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
-
-// for authentication routes
-// use App\Actions\Fortify\ResetUserPassword;
-// use Laravel\Fortify\Http\Controllers\PasswordResetController;
-// use Laravel\Fortify\Http\Controllers\RegisteredUserController;
-// use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
-// use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\PatientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,15 +20,50 @@ use App\Http\Controllers\RoleController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::controller(LoginController::class)->group(function(){
+    Route::post('signup','signup');
+    Route::get('login','login');
+    Route::post('login','login')->name('login');
 });
 
-// for roles functionality API Endpoint
-Route::apiResource('role', RoleController::class)->only(['index', 'store','show','update', 'destroy']);
+Route::middleware(['auth:sanctum'])->group(function () {
 
-// for authentication
-// Route::post('/register', [RegisteredUserController::class, 'store'])->middleware('guest');
-// Route::post('/login', [AuthenticatedSessionController::class, 'store'])->middleware('guest');
-// Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->middleware('guest')->name('password.email');
-// Route::post('/reset-password', [::class, 'reset'])->middleware('guest')->name('password.update');
+    Route::get('/home', function () {
+        if (Auth::check()) {
+            $roleId = Auth::user()->role_id;
+            $routeName = '';
+
+            switch ($roleId) {
+                case 1:
+                    $routeName = 'admin.page';
+                    break;
+                case 2:
+                    $routeName = 'doctor.page';
+                    break;
+                case 3:
+                    $routeName = 'patient.page';
+                    break;
+                default:
+                    return redirect()->route('error.page');
+            }
+
+            return redirect()->route($routeName);
+        }
+    });
+
+    Route::get('admin/page', [AdminController::class, 'index'])->name('admin.page');
+    Route::get('doctor/page', [DoctorController::class, 'index'])->name('doctor.page');
+    Route::get('patient/page', [PatientController::class, 'index'])->name('patient.page');
+
+    Route::apiResource('role', RoleController::class)->only([
+        'index',
+        'store',
+        'show',
+        'update',
+        'destroy'
+    ]);
+    Route::controller(LoginController::class)->group(function(){
+        Route::get('profile','profile');
+        Route::post('signout','signout');
+    });
+});
