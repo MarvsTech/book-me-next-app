@@ -51,9 +51,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         }
     });
 
-    Route::get('admin/page', [AdminController::class, 'index'])->name('admin.page');
-    Route::get('doctor/page', [DoctorController::class, 'index'])->name('doctor.page');
-    Route::get('patient/page', [PatientController::class, 'index'])->name('patient.page');
+    Route::middleware('role:Admin')->get('admin/page', [AdminController::class, 'index'])->name('admin.page');
+    Route::middleware('role:Doctor')->get('doctor/page', [DoctorController::class, 'index'])->name('doctor.page');
+    Route::middleware('role:Patient')->get('patient/page', [PatientController::class, 'index'])->name('patient.page');
 
     Route::apiResource('role', RoleController::class)->only([
         'index',
