@@ -58,12 +58,10 @@ const Sidebar = ({ children }) => {
       <div className="logo-wrapper">
         <ul className="nav flex-column logo-nav">
           {logoItems.map((item, index) => (
-            <li className="nav-item" key={index}>
-              <NavLink to={item.path} className="nav-link">
-                {item.icon} 
-                <span className='logo-header'>{item.label}</span>
-              </NavLink>
-            </li>
+            <NavLink to={item.path} className="nav-link">
+              {item.icon} 
+              <span className='logo-header'>{item.label}</span>
+            </NavLink>
           ))}
         </ul>
       </div>
@@ -82,12 +80,10 @@ const Sidebar = ({ children }) => {
       <div className="logout">
         <ul className="nav flex-column">
           {logoutItems.map((item, index) => (
-            <li className="nav-item" key={index}>
-              <NavLink exact to={dashboardPath} className="nav-link" activeClassName="active">
-                {item.icon} 
-                <span className='nav-link-text'>{item.label}</span>
-              </NavLink>
-            </li>
+            <NavLink exact to={dashboardPath} className="nav-link" activeClassName="active">
+              {item.icon} 
+              <span className='nav-link-text'>{item.label}</span>
+            </NavLink>
           ))}
         </ul>
       </div>
