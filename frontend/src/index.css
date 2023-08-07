@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  overflow-x: hidden;
+  background-color: #DEDEDE;
+  height: 100%;
+}
+
+.sidebar {
+  position: relative;
+  border-radius: 10px;
+}
+.sidebar .nav-item {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.sidebar .nav-item .nav-link .inverted-color {
+  filter: invert(1);
+}
+.sidebar .nav-item .nav-link .nav-link-text {
+  color: #000000;
+  font-family: "Montserrat", Helvetica;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.6px;
+  line-height: normal;
+  top: 0;
+  position: relative;
+  left: 20px;
+}
+.sidebar .nav-item .nav-link .logo-header {
+  color: #00AACF;
+  font-family: "Montserrat", Helvetica;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  line-height: normal;
+  top: 0;
+  position: relative;
+  text-transform: uppercase;
+  left: 20px;
+}
+.sidebar .nav-item .active {
+  background-color: #00AACF;
+  margin-left: 10px;
+  margin-right: 20px;
+  border-radius: 5px;
+  transition: 0.5s ease-in-out;
+}
+.sidebar .nav-item .active .nav-link-text {
+  color: #fff;
+}
+.sidebar .nav-item .active .inverted-color {
+  filter: invert(0);
+}
+.sidebar .logout {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 10px;
+}
+.sidebar .logo-wrapper {
+  margin-top: 50px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #545454;
+}
+.sidebar .logo-nav {
+  margin-bottom: 25px;
+}
+.sidebar .nav-link .inverted-color {
+  filter: invert(1);
+}
+.sidebar .nav-link .nav-link-text {
+  color: #000000;
+  font-family: "Montserrat", Helvetica;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.6px;
+  line-height: normal;
+  top: 0;
+  position: relative;
+  left: 20px;
+}
+.sidebar .nav-link .logo-header {
+  color: #00AACF;
+  font-family: "Montserrat", Helvetica;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  line-height: normal;
+  top: 0;
+  position: relative;
+  text-transform: uppercase;
+  left: 20px;
+}/*# sourceMappingURL=index.css.map */
