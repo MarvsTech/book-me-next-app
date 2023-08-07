@@ -65,5 +65,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::controller(LoginController::class)->group(function(){
         Route::get('profile','profile');
         Route::post('signout','signout');
+        Route::put('updateProfile','updateProfile');
     });
 });

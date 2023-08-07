@@ -12,13 +12,13 @@ class LoginController extends BaseController
 {
     public function signup (Request $request) {
         $validator = Validator::make($request->all(), [
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'middlename' => 'required',
-            'contact_number' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'confirm_password' => 'required|same:password',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'middlename' => 'required|string|max:255',
+            'contact_number' => 'required|numeric',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|max:255',
+            'confirm_password' => 'required|same:password|max:255',
         ]);
 
         if($validator->fails()){
@@ -28,7 +28,7 @@ class LoginController extends BaseController
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('MyApp')->plainTextToken;
+        $success['token'] =  $user->createToken('BookMeNext')->plainTextToken;
         $success['firstname'] =  $user->firstname;
         $success['lastname'] =  $user->lastname;
         $success['middlename'] =  $user->middlename;
@@ -40,7 +40,7 @@ class LoginController extends BaseController
     {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = Auth::user();
-            $success['token'] =  $user->createToken('MyApp')->plainTextToken;
+            $success['token'] =  $user->createToken('BookMeNext')->plainTextToken;
             $success['firstname'] =  $user->firstname;
             $success['lastname'] =  $user->lastname;
             $success['middlename'] =  $user->middlename;
@@ -69,4 +69,46 @@ class LoginController extends BaseController
 
         return ['message' => 'User logged out'];
     }
+
+    public function updateProfile(Request $request, User $user) {
+        try {
+            $validator = Validator::make($request->all(), [
+                'firstname' => 'required|string|max:255',
+                'lastname' => 'required|string|max:255',
+                'middlename' => 'required|string|max:255',
+                'contact_number' => 'required|numeric',
+                'email' => 'required|email|unique:users,email,' . $user->id,
+                'password' => 'required|max:255',
+                'confirm_password' => 'required|same:password|max:255',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['status' => 'error', 'message' => 'Validation Error.', 'data' => $validator->errors()]);
+            }
+
+            $validatedData = $validator->validated();
+
+            // Update the user with the validated data
+            $user->update($validatedData);
+
+            // Optionally, you can handle file uploads (e.g., profile picture)
+            // if ($request->hasFile('profile_picture')) {
+            //     $profilePicturePath = $request->file('profile_picture')->store('profile_pictures', 'public');
+            //     $user->profile_picture = $profilePicturePath;
+            //     $user->save();
+            // }
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Profile updated successfully!',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'An error occurred while updating the profile.',
+                'data' => $e->getMessage(),
+            ]);
+        }
+    }
+
 }
