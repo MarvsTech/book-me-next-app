@@ -37,7 +37,7 @@ The system serves as a consolidated platform for maintaining client information 
 
 # Our Team
 - Marvin M. Ramos - Project Manager/FullStack
-- Irene Luz Cortez - /FullStack
+- Irene Luz Cortez - FullStack
 
 # Technology used
 - Laravel
