@@ -38,6 +38,14 @@ The system serves as a consolidated platform for maintaining client information 
 # Our Team
 - Marvin M. Ramos - Project Manager/FullStack
 - Irene Luz Cortez - /FullStack
+
+# Technology used
+- Laravel
+- React.js
+- React Icon
+- React Bootstrap
+- Sass
+- Html
   
 # Figma design
 - https://www.figma.com/file/BkjtqCdgMKEYiuNN8ZyJRp/book-me-next?type=design&node-id=30%3A370&mode=dev
