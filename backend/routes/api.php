@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\AppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'update',
         'destroy'
     ]);
+    Route::apiResource('appointment', AppointmentController::class)->only([
+        'index',
+        'store',
+        'show',
+        'update',
+        'destroy'
+    ]);
+
     Route::controller(LoginController::class)->group(function(){
         Route::get('profile','profile');
         Route::post('signout','signout');
