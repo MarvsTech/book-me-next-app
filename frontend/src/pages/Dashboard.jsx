@@ -1,8 +1,11 @@
 import React from 'react'
+import BookingCard from '../components/BookingCard'
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <>
+      <BookingCard />
+    </>
   )
 }
 
