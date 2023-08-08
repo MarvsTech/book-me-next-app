@@ -54,40 +54,43 @@ const Sidebar = ({ children }) => {
   const dashboardPath = '/';
 
   return (
-    <nav className="col-md-2 d-md-block bg-light sidebar">
-      <div className="logo-wrapper">
-        <ul className="nav flex-column logo-nav">
-          {logoItems.map((item, index) => (
-            <NavLink to={item.path} className="nav-link">
-              {item.icon} 
-              <span className='logo-header'>{item.label}</span>
-            </NavLink>
-          ))}
-        </ul>
-      </div>
-      <div className="position-sticky">
-        <ul className="nav flex-column">
-          {menuItems.map((item, index) => (
-            <li className="nav-item" key={index}>
-              <NavLink exact to={item.path} className="nav-link" activeClassName="active">
+    <>
+      <nav className="col-md-2 d-md-block bg-light sidebar">
+        <div className="logo-wrapper">
+          <ul className="nav flex-column logo-nav">
+            {logoItems.map((item, index) => (
+              <NavLink to={item.path} className="nav-link">
+                {item.icon} 
+                <span className='logo-header'>{item.label}</span>
+              </NavLink>
+            ))}
+          </ul>
+        </div>
+        <div className="position-sticky">
+          <ul className="nav flex-column">
+            {menuItems.map((item, index) => (
+              <li className="nav-item" key={index}>
+                <NavLink exact to={item.path} className="nav-link" activeClassName="active">
+                  {item.icon} 
+                  <span className='nav-link-text'>{item.label}</span>
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="logout">
+          <ul className="nav flex-column">
+            {logoutItems.map((item, index) => (
+              <NavLink exact to={dashboardPath} className="nav-link" activeClassName="active">
                 {item.icon} 
                 <span className='nav-link-text'>{item.label}</span>
               </NavLink>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="logout">
-        <ul className="nav flex-column">
-          {logoutItems.map((item, index) => (
-            <NavLink exact to={dashboardPath} className="nav-link" activeClassName="active">
-              {item.icon} 
-              <span className='nav-link-text'>{item.label}</span>
-            </NavLink>
-          ))}
-        </ul>
-      </div>
-    </nav>
+            ))}
+          </ul>
+        </div>
+      </nav>
+      <div className='main-content'>{children}</div>
+    </>
   );
 };
 
