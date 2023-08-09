@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use Vonage\Client;
 use App\Models\User;
 use App\Mail\NotificationMail;
 use App\Contracts\PatientContract;
@@ -69,14 +70,29 @@ class PatientController extends Controller
 
             $mailData = [
                 'client_name' => $fullname,
-                'title' => 'Appointment Created Successfully',
+                'title' => 'Congratulations! Account Created Successfully',
                 'email' => $patient['email'],
                 'username' => $patient['email'],
                 'date' => $patient['created_at']->format('F j, Y'),
-                'message' => 'Your appointment has been successfully created. We look forward to seeing you!',
+                'message' => 'Your account has been successfully created. Thank you for using Book Me Next App!',
             ];
 
             Mail::to($patient['email'])->send(new NotificationMail($mailData));
+
+            $basic  = new \Vonage\Client\Credentials\Basic("28783f03", "3pWalnzN41XSb0Xb");
+            $client = new Client($basic);
+
+            $response = $client->sms()->send(
+                new \Vonage\SMS\Message\SMS("639126897665", 'BOOK ME NEXT', $mailData['message']),
+            );
+
+            $message = $response->current();
+
+            if ($message->getStatus() == 0) {
+                return "The message was sent successfully\n";
+            } else {
+                return "The message failed with status: " . $message->getStatus() . "\n";
+            }
 
             return response()->json([
                 'status' => 'success',
