@@ -64,6 +64,9 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::apiResource('doctor', DoctorController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
             ]);
+            Route::apiResource('patient', PatientController::class)->only([
+                'index', 'store', 'show', 'update', 'destroy'
+            ]);
             Route::controller(LoginController::class)->group(function () {
                 Route::get('profile', 'profile');
                 Route::post('signout', 'signout');

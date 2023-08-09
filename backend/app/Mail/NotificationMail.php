@@ -29,7 +29,7 @@ class NotificationMail extends Mailable
     public function build()
     {
         return $this->from('marvinramos.nutnull@gmail.com')
-                    ->subject('Notification Mail')
+                    ->subject('Book Me Next App!')
                     ->view('emails.notification', ['mailData' => $this->mailData]);
     }
 }

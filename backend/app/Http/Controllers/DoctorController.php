@@ -88,7 +88,7 @@ class DoctorController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Doctor created successfully!',
+                'message' => 'Doctor List!',
                 'data' => new DoctorResource($doctor, __FUNCTION__),
             ]);
 
