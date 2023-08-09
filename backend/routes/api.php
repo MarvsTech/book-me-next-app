@@ -20,18 +20,17 @@ use App\Http\Controllers\AppointmentController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
 Route::controller(LoginController::class)->group(function(){
     Route::post('signup','signup');
     Route::get('login','login');
     Route::post('login','login')->name('login');
 });
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/home', function () {
-        if (Auth::check()) {
-            $roleId = Auth::user()->role_id;
+        if (auth()->check()) {
+            $roleId = auth()->user()->role_id;
             $routeName = '';
 
             switch ($roleId) {
@@ -52,28 +51,36 @@ Route::middleware(['auth:sanctum'])->group(function () {
         }
     });
 
-    Route::middleware('role:Admin')->get('admin/page', [AdminController::class, 'index'])->name('admin.page');
-    Route::middleware('role:Doctor')->get('doctor/page', [DoctorController::class, 'index'])->name('doctor.page');
-    Route::middleware('role:Patient')->get('patient/page', [PatientController::class, 'index'])->name('patient.page');
+    // Routes for role: Admin
+    Route::middleware('role:Admin')->group(function () {
+        Route::prefix('admin')->name('admin.')->group(function () {
+            Route::get('page', [AdminController::class, 'index'])->name('page');
+            Route::apiResource('role', RoleController::class)->only([
+                'index', 'store', 'show', 'update', 'destroy'
+            ]);
+            Route::apiResource('appointment', AppointmentController::class)->only([
+                'index', 'store', 'show', 'update', 'destroy'
+            ]);
+            Route::apiResource('doctor', DoctorController::class)->only([
+                'index', 'store', 'show', 'update', 'destroy'
+            ]);
+            Route::controller(LoginController::class)->group(function () {
+                Route::get('profile', 'profile');
+                Route::post('signout', 'signout');
+                Route::put('updateProfile', 'updateProfile');
+            });
+        });
+    });
 
-    Route::apiResource('role', RoleController::class)->only([
-        'index',
-        'store',
-        'show',
-        'update',
-        'destroy'
-    ]);
-    Route::apiResource('appointment', AppointmentController::class)->only([
-        'index',
-        'store',
-        'show',
-        'update',
-        'destroy'
-    ]);
+    // Routes for role: Doctor
+    Route::middleware('role:Doctor')->group(function () {
+        Route::prefix('doctor')->name('doctor.')->group(function () {
+        });
+    });
 
-    Route::controller(LoginController::class)->group(function(){
-        Route::get('profile','profile');
-        Route::post('signout','signout');
-        Route::put('updateProfile','updateProfile');
+    // Routes for role: Patient
+    Route::middleware('role:Patient')->group(function () {
+        Route::prefix('patient')->name('patient.')->group(function () {
+        });
     });
 });
