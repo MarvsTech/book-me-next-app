@@ -14,13 +14,17 @@ use App\Mail\CreateAccountNotificationMail;
 use App\Http\Requests\PatientStoreControllerRequest;
 use App\Http\Requests\PatientUpdateControllerRequest;
 
+use App\Services\SmsService;
+
 class PatientController extends Controller
 {
     protected $patientContract;
+    protected $smsService;
 
-    public function __construct(PatientContract $patientContract)
+    public function __construct(PatientContract $patientContract, SmsService $smsService)
     {
         $this->patientContract = $patientContract;
+        $this->smsService = $smsService;
     }
 
     public function index()
@@ -71,21 +75,7 @@ class PatientController extends Controller
                 Mail::to($user->email)->send(new CreateAccountNotificationMail (
                     $user,
                 ));
-            }
-
-            $basic  = new \Vonage\Client\Credentials\Basic("28783f03", "3pWalnzN41XSb0Xb");
-            $client = new Client($basic);
-
-            $response = $client->sms()->send(
-                new \Vonage\SMS\Message\SMS("639126897665", 'BOOK ME NEXT', 'Account created successfully'),
-            );
-
-            $message = $response->current();
-
-            if ($message->getStatus() == 0) {
-                return "The message was sent successfully\n";
-            } else {
-                return "The message failed with status: " . $message->getStatus() . "\n";
+                $this->smsService->sendSms("639126897665", 'Account created successfully');
             }
 
             return response()->json([

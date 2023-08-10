@@ -14,14 +14,17 @@ use App\Mail\CreateAppointmentNotificationMail;
 use App\Mail\DeleteAppointmentNotificationMail;
 use App\Mail\UpdateAppointmentNotificationMail;
 use App\Http\Requests\AppointmentStoreControllerRequest;
+use App\Services\SmsService;
 
 class AppointmentController extends Controller
 {
     protected $appointmentContract;
+    protected $smsService;
 
-    public function __construct(AppointmentContract $appointmentContract)
+    public function __construct(AppointmentContract $appointmentContract, SmsService $smsService)
     {
         $this->appointmentContract = $appointmentContract;
+        $this->smsService = $smsService;
     }
 
     /**
@@ -70,21 +73,8 @@ class AppointmentController extends Controller
                     $appointment->doctor_schedule_time,
                     $appointment->doctor_schedule_date,
                 ));
-            }
 
-            $basic  = new \Vonage\Client\Credentials\Basic("28783f03", "3pWalnzN41XSb0Xb");
-            $client = new Client($basic);
-
-            $response = $client->sms()->send(
-                new \Vonage\SMS\Message\SMS("639126897665", 'BOOK ME NEXT', 'Appointment created successfully'),
-            );
-
-            $message = $response->current();
-
-            if ($message->getStatus() == 0) {
-                return "The message was sent successfully\n";
-            } else {
-                return "The message failed with status: " . $message->getStatus() . "\n";
+                $this->smsService->sendSms("639126897665", 'Appointment created successfully');
             }
 
             return response()->json([
@@ -151,21 +141,7 @@ class AppointmentController extends Controller
                     $appointment->doctor_schedule_time,
                     $appointment->doctor_schedule_date,
                 ));
-            }
-
-            $basic  = new \Vonage\Client\Credentials\Basic("28783f03", "3pWalnzN41XSb0Xb");
-            $client = new Client($basic);
-
-            $response = $client->sms()->send(
-                new \Vonage\SMS\Message\SMS("639126897665", 'BOOK ME NEXT', 'Appointment updated successfully'),
-            );
-
-            $message = $response->current();
-
-            if ($message->getStatus() == 0) {
-                return "The message was sent successfully\n";
-            } else {
-                return "The message failed with status: " . $message->getStatus() . "\n";
+                $this->smsService->sendSms("639126897665", 'Appointment updated successfully');
             }
 
             return response()->json([
@@ -198,21 +174,7 @@ class AppointmentController extends Controller
                     $appointment->doctor_schedule_time,
                     $appointment->doctor_schedule_date,
                 ));
-            }
-
-            $basic  = new \Vonage\Client\Credentials\Basic("28783f03", "3pWalnzN41XSb0Xb");
-            $client = new Client($basic);
-
-            $response = $client->sms()->send(
-                new \Vonage\SMS\Message\SMS("639126897665", 'BOOK ME NEXT', 'Appointment deleted successfully'),
-            );
-
-            $message = $response->current();
-
-            if ($message->getStatus() == 0) {
-                return "The message was sent successfully\n";
-            } else {
-                return "The message failed with status: " . $message->getStatus() . "\n";
+                $this->smsService->sendSms("639126897665", 'Appointment Deleted successfully');
             }
 
             return response()->json([
