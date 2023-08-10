@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
-use App\Contracts\AppointmentContract;
-use App\Http\Requests\AppointmentStoreControllerRequest;
-use App\Http\Resources\AppointmentResource;
-use App\Repositories\AppointmentRepository;
 use Exception;
+use App\Models\Appointment;
+use Illuminate\Support\Facades\Mail;
+use App\Contracts\AppointmentContract;
+use App\Http\Resources\AppointmentResource;
+use App\Mail\CreateAccountNotificationMail;
+use App\Repositories\AppointmentRepository;
+use App\Mail\CreateAppointmentNotificationMail;
+use App\Mail\DeleteAppointmentNotificationMail;
+use App\Mail\UpdateAppointmentNotificationMail;
+use App\Http\Requests\AppointmentStoreControllerRequest;
 
 class AppointmentController extends Controller
 {
@@ -42,7 +47,7 @@ class AppointmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(AppointmentStoreControllerRequest $request, AppointmentRepository $appointmentRepository)
+    public function store(AppointmentStoreControllerRequest $request)
     {
         try {
             $params = $request->only([
@@ -54,7 +59,17 @@ class AppointmentController extends Controller
                 'remarks',
             ]);
 
-            $appointment = $appointmentRepository->store($params);
+            $appointment = $this->appointmentContract->store($params);
+
+            if(!empty($appointment)) {
+                Mail::to($appointment->patient->email)->send(new CreateAppointmentNotificationMail (
+                    $appointment,
+                    $appointment->patient,
+                    $appointment->doctor,
+                    $appointment->doctor_schedule_time,
+                    $appointment->doctor_schedule_date,
+                ));
+            }
 
             return response()->json([
                 'status' => 'success',
@@ -110,9 +125,17 @@ class AppointmentController extends Controller
                 'remarks',
             ]);
 
-            $appointment->update($params);
+            $appointmentData = $this->appointmentContract->update($appointment->id, $params);
 
-            $appointment->refresh();
+            if(!empty($appointmentData)) {
+                Mail::to($appointmentData->patient->email)->send(new UpdateAppointmentNotificationMail (
+                    $appointment,
+                    $appointment->patient,
+                    $appointment->doctor,
+                    $appointment->doctor_schedule_time,
+                    $appointment->doctor_schedule_date,
+                ));
+            }
 
             return response()->json([
                 'status' => 'success',
@@ -134,8 +157,17 @@ class AppointmentController extends Controller
     public function destroy(Appointment $appointment)
     {
         try{
-            $appointment->delete();
+            $deleteAppointment = $this->appointmentContract->delete($appointment->id);
 
+            if(!empty($deleteAppointment)) {
+                Mail::to($deleteAppointment->patient->email)->send(new DeleteAppointmentNotificationMail (
+                    $appointment,
+                    $appointment->patient,
+                    $appointment->doctor,
+                    $appointment->doctor_schedule_time,
+                    $appointment->doctor_schedule_date,
+                ));
+            }
             return response()->json([
                 'status' => 'success',
                 'message' => 'Appointment deleted successfully!',

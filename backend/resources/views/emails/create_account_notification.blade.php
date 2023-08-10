@@ -5,14 +5,14 @@
     <title>{{ $mailData['title'] }}</title>
 </head>
 <body>
-    <h1>Welcome to Book Me Next App!</h1>
-    <p>Dear {{ $mailData['client_name'] }},</p>
-    <p>{{ $mailData['message'] }}</p>
+    <h1>Welcome to Book Me Next App</h1>
+    <p>Dear {{$user->firstname}} {{$user->middlename}} {{$user->lastname}},</p>
+    <p>Your appointment has been successfully created.</p>
     <p>Here are your account details:</p>
     <ul>
-        <li><strong>Email:</strong> {{ $mailData['email'] }}</li>
-        <li><strong>Username:</strong> {{ $mailData['username'] }}</li>
-        <li><strong>Date:</strong> {{ $mailData['date'] }}</li>
+        <li><strong>Email:</strong> {{$user->email}}</li>
+        <li><strong>Username:</strong> {{$user->email}}</li>
+        <li><strong>Date:</strong> {{$user->created_at}}</li>
     </ul>
     <p>If you have any questions or need assistance, feel free to contact our support team.</p>
     <p>Thank you for using Book Me Next App!</p>
