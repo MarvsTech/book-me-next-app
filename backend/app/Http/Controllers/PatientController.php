@@ -10,6 +10,7 @@ use App\Contracts\PatientContract;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\PatientResource;
 use App\Repositories\PatientRepository;
+use App\Mail\CreateAccountNotificationMail;
 use App\Http\Requests\PatientStoreControllerRequest;
 use App\Http\Requests\PatientUpdateControllerRequest;
 
@@ -64,26 +65,19 @@ class PatientController extends Controller
                 'profile',
             ]);
             $params['role_id'] = 3;
-            $patient = $patientRepository->store($params);
+            $user = $this->patientContract->store($params);
 
-            $fullname = $patient['firstname'] . ' ' . $patient['middlename'] . ' ' . $patient['lastname'];
-
-            $mailData = [
-                'client_name' => $fullname,
-                'title' => 'Congratulations! Account Created Successfully',
-                'email' => $patient['email'],
-                'username' => $patient['email'],
-                'date' => $patient['created_at']->format('F j, Y'),
-                'message' => 'Your account has been successfully created. Thank you for using Book Me Next App!',
-            ];
-
-            Mail::to($patient['email'])->send(new NotificationMail($mailData));
+            if(!empty($user)) {
+                Mail::to($user->email)->send(new CreateAccountNotificationMail (
+                    $user,
+                ));
+            }
 
             $basic  = new \Vonage\Client\Credentials\Basic("28783f03", "3pWalnzN41XSb0Xb");
             $client = new Client($basic);
 
             $response = $client->sms()->send(
-                new \Vonage\SMS\Message\SMS("639126897665", 'BOOK ME NEXT', $mailData['message']),
+                new \Vonage\SMS\Message\SMS("639126897665", 'BOOK ME NEXT', 'Account created successfully'),
             );
 
             $message = $response->current();
@@ -97,7 +91,7 @@ class PatientController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => 'Patient created successfully!',
-                'data' => new PatientResource($patient, __FUNCTION__),
+                'data' => new PatientResource($user, __FUNCTION__),
             ]);
 
         } catch (Exception $e) {

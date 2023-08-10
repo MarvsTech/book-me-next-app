@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>{{ $mailData['title'] }}</title>
+    <title>Book Me Next App</title>
 </head>
 <body>
     <h1>Welcome to Book Me Next App</h1>

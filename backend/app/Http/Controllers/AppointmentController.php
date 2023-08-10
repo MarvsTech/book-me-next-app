@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use Vonage\Client;
 use App\Models\Appointment;
 use Illuminate\Support\Facades\Mail;
 use App\Contracts\AppointmentContract;
@@ -71,6 +72,21 @@ class AppointmentController extends Controller
                 ));
             }
 
+            $basic  = new \Vonage\Client\Credentials\Basic("28783f03", "3pWalnzN41XSb0Xb");
+            $client = new Client($basic);
+
+            $response = $client->sms()->send(
+                new \Vonage\SMS\Message\SMS("639126897665", 'BOOK ME NEXT', 'Appointment created successfully'),
+            );
+
+            $message = $response->current();
+
+            if ($message->getStatus() == 0) {
+                return "The message was sent successfully\n";
+            } else {
+                return "The message failed with status: " . $message->getStatus() . "\n";
+            }
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Appointment created successfully!',
@@ -137,6 +153,21 @@ class AppointmentController extends Controller
                 ));
             }
 
+            $basic  = new \Vonage\Client\Credentials\Basic("28783f03", "3pWalnzN41XSb0Xb");
+            $client = new Client($basic);
+
+            $response = $client->sms()->send(
+                new \Vonage\SMS\Message\SMS("639126897665", 'BOOK ME NEXT', 'Appointment updated successfully'),
+            );
+
+            $message = $response->current();
+
+            if ($message->getStatus() == 0) {
+                return "The message was sent successfully\n";
+            } else {
+                return "The message failed with status: " . $message->getStatus() . "\n";
+            }
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Appointment updated successfully!',
@@ -168,6 +199,22 @@ class AppointmentController extends Controller
                     $appointment->doctor_schedule_date,
                 ));
             }
+
+            $basic  = new \Vonage\Client\Credentials\Basic("28783f03", "3pWalnzN41XSb0Xb");
+            $client = new Client($basic);
+
+            $response = $client->sms()->send(
+                new \Vonage\SMS\Message\SMS("639126897665", 'BOOK ME NEXT', 'Appointment deleted successfully'),
+            );
+
+            $message = $response->current();
+
+            if ($message->getStatus() == 0) {
+                return "The message was sent successfully\n";
+            } else {
+                return "The message failed with status: " . $message->getStatus() . "\n";
+            }
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Appointment deleted successfully!',
