@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\AppointmentController;
 
 /*
@@ -66,6 +67,9 @@ Route::middleware('auth:sanctum')->group(function () {
             ]);
             Route::apiResource('patient', PatientController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
+            ]);
+            Route::apiResource('feedback', FeedbackController::class)->only([
+                'index', 'store'
             ]);
             Route::controller(LoginController::class)->group(function () {
                 Route::get('profile', 'profile');
