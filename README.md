@@ -8,9 +8,10 @@ The system serves as a consolidated platform for maintaining client information 
 # Features
 - View all/specific booking appointments
 - Create booking appointments
-- Email notification on the successful booking appointment
+- Email and SMS notification on the successful booking appointment
 - Successful booking appointments will reflect on the user’s calendar
 - Cancel appointments
+- Online payment for every appointment
 - View all/specific booking history
   
 # Additional Features
@@ -44,6 +45,9 @@ The system serves as a consolidated platform for maintaining client information 
 - React.js
 - React Icon
 - React Bootstrap
+- Smtp Laravel (Email Notification)
+- Vonage Laravel (Sms Notification)
+- Paypal (Online Payment)
 - Sass
 - Html
   
