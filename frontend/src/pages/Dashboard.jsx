@@ -35,7 +35,7 @@ const Dashboard = () => {
           labels : ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
           datasets : [
               {
-                  label: 'Doctor 1',
+                  label: 'success',
                   data: [20, 50, 30, 30, 40, 35, 45],
                   backgroundColor: '#008000',
                   borderColor: '#008000',
@@ -47,7 +47,7 @@ const Dashboard = () => {
           labels : ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
           datasets : [
               {
-                  label: 'Doctor 2',
+                  label: 'pending',
                   data: [20, 50, 30, 30, 40, 35, 45],
                   backgroundColor: '#F77F00',
                   borderColor: '#F77F00',
@@ -59,7 +59,7 @@ const Dashboard = () => {
           labels : ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
           datasets : [
               {
-                  label: 'Doctor 3',
+                  label: 'rejected',
                   data: [20, 50, 30, 30, 40, 35, 45],
                   backgroundColor: '#D62828',
                   borderColor: '#D62828',
