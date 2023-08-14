@@ -2,10 +2,9 @@
 
 namespace App\Contracts;
 
-interface AppointmentContract {
+interface DoctorContract {
 
     public function index();
     public function store($params);
     public function update($id, $params);
-    public function delete($id);
 }
