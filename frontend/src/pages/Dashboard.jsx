@@ -1,8 +1,6 @@
 import React from 'react'
-import BookingCard from '../components/BookingCard'
+import BookingCard from '../components/BookingCard';
 import { Chart } from '../components/Chart'
-
-// const labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL']
 
 const Dashboard = () => {
 
