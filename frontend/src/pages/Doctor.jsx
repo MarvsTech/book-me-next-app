@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Modal, Table } from 'react-bootstrap'
+import { Button, Table } from 'react-bootstrap'
 import addFriend from '../images/add-friend.svg'
 import AddModals from '../components/AddModals'
-import ViewModal from '../components/ViewModal'
+import ViewModalDoctor from '../components/ViewModalDoctor'
 import womanPortrait from '../images/woman.svg'
 import manPortrait from '../images/man.svg'
 
 const Doctor = () => {
-
-  const tableHead = [
-    {tableHead : 'doctor'},
-    {tableHead : 'email'},
-    {tableHead : 'specialization'},
-    {tableHead : 'contact'},
-    {tableHead : 'address'},
-    {tableHead : 'action'},
-  ]
 
   const tableBody = [
     {
@@ -63,11 +54,10 @@ const Doctor = () => {
       image: <img src={womanPortrait} alt="portrait of a woman"/>
     }
   ]
-
-  // const [modalInfo, setModalInfo] = 
   
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
+  
   const [selectedRow, setSelectedRow] = useState({});
 
   const handleCloseModal1 = () => setShowModal1(false);
@@ -86,52 +76,55 @@ const Doctor = () => {
   return (
     <>
       <div className='table-content-wrapper'>
-          <div>
+          <div className='table-header'>
             <Button variant='dark' className='add-doctor-btn' onClick={handleShowModal1}>
               <img src={addFriend} alt="AddDoctor-Logo" />
               Doctor
             </Button>
           </div>
-          <Table>
-            <thead>
-              <tr>
-                <th>Doctor</th>
-                <th>Email</th>
-                <th>Specialization</th>
-                <th>Contact</th>
-                <th>Address</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                (tableBody.map((data, index) => {
-                  return (
-                    <>
-                      <tr key={`row-${index}`} onClick={() => handleShowModal2(data)}>
-                        <td>{data.doctor}</td>
-                        <td>{data.email}</td>
-                        <td>{data.specialization}</td>
-                        <td>{data.contact}</td>
-                        <td>{data.address}</td>
-                        <td>
-                          {
-                            (data.isActive === true) ? 
-                              <Button variant='danger'>Deactivate</Button>
-                            :
-                              <Button variant='success'>Activate</Button>
-                          }
-                        </td>
-                      </tr>
-               
-                    </>
-                    
-                  )
-                }))
-              }
-            </tbody>
-          </Table>
-          <ViewModal showView={showModal2} onCloseView={handleCloseModal2} dataRow={selectedRow} />  
+
+          <div className='table-content'>
+            <Table>
+              <thead>
+                <tr>
+                  <th>Doctor</th>
+                  <th>Email</th>
+                  <th>Specialization</th>
+                  <th>Contact</th>
+                  <th>Address</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  (tableBody.map((data, index) => {
+                    return (
+                      <>
+                        <tr key={`row-${index}`} onClick={() => handleShowModal2(data)}>
+                          <td>{data.doctor}</td>
+                          <td>{data.email}</td>
+                          <td>{data.specialization}</td>
+                          <td>{data.contact}</td>
+                          <td>{data.address}</td>
+                          <td>
+                            {
+                              (data.isActive === true) ? 
+                                <Button variant='danger'>Deactivate</Button>
+                              :
+                                <Button variant='success'>Activate</Button>
+                            }
+                          </td>
+                        </tr>
+                
+                      </>
+                      
+                    )
+                  }))
+                }
+              </tbody>
+            </Table>
+          </div>
+          <ViewModalDoctor showView={showModal2} onCloseView={handleCloseModal2} dataRow={selectedRow} />  
       </div>
       <AddModals showAdd={showModal1} onCloseAdd={handleCloseModal1}/>
     </>
