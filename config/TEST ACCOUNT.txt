@@ -1,0 +1,45 @@
+Test ACCOUNT
+
+Client ID: Af9qfUoeUWzT56x8GPXwFQJT5Buk9156xxpJpBSk0i7x80ro5NLtVdFQnSTxExtqFp7BKMrFZdQWVKG-
+Secret Key: EJvTdPyh5eOmer3LzNOR-FhOryijjbXcfZvO71zN5vqZfcpvKTezkjHcQjgYwb1k9DHJ89xJLDyCODk9
+
+Personal Account
+============================================
+Email: sb-4xa1n27070391@personal.example.com
+Password: Sample.Data@0896
+
+Name: Marvin Ramos
+Account ID: 9HEZ7W2F8PWS6
+Phone: 4087246680
+Bank account number: 00478670
+Bank routing number: 325272063
+Credit card number: 4032030513066036
+Expiration date: 09/2028
+============================================
+============================================
+Email: sb-v3ug327070380@personal.example.com
+Password: Sample.Data@0896
+
+Name: Luz Irene Cortez
+Account ID: MLDC4UU32ZZP2
+Phone: 4086054015
+Bank account number: 340638259632044
+Bank routing number: 325272063
+Credit card number: 4032031279228414
+Expiration date: 09/2028
+============================================
+
+Business Account
+============================================
+Email: sb-izjkp27045482_api1.business.example.com
+Password: Sample.Data@0896
+
+Name: Book Me Next App
+Account ID: F5YDNC6ZKHK8Q
+Phone: 4082046767
+Bank account number: 84244310
+Bank routing number: 325272063
+Credit card number: 4032032190311602
+Expiration date: 09/2028
+============================================
+
