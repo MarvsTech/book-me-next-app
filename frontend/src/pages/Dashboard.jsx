@@ -40,7 +40,8 @@ const Dashboard = () => {
                     borderColor: '#008000',
                     borderRadius: 5
                 }
-            ]
+            ],
+            bar_status : 'success'
         },
         {
             labels : ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
@@ -52,7 +53,8 @@ const Dashboard = () => {
                     borderColor: '#F77F00',
                     borderRadius: 5
                 }
-            ]
+            ],
+            bar_status : 'pending'
         },
         {
             labels : ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
@@ -64,7 +66,8 @@ const Dashboard = () => {
                     borderColor: '#D62828',
                     borderRadius: 5
                 }
-            ]
+            ],
+            bar_status : 'rejected'
         }
     ]
 

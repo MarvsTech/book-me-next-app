@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Modal, Button, Form, Row, Col } from 'react-bootstrap'
+import { Container, Modal, Button, Row, Col } from 'react-bootstrap'
 
-const ViewModal = ({showView, onCloseView, dataRow}) => {
+const ViewModalDoctor = ({showView, onCloseView, dataRow}) => {
 
   const [isDoctor, setIsDoctor] = useState(true);
   const [isPatient, setIsPatient] = useState(false);
@@ -17,10 +17,6 @@ const ViewModal = ({showView, onCloseView, dataRow}) => {
               :
                 <Button variant='danger'>Not Active</Button>
             )}
-              
-            {isPatient && (
-              <h1>Patient</h1>
-            )} 
           </div>
            
         </Modal.Header>
@@ -63,4 +59,4 @@ const ViewModal = ({showView, onCloseView, dataRow}) => {
   )
 }
 
-export default ViewModal
+export default ViewModalDoctor

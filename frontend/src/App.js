@@ -6,19 +6,41 @@ import Appointment from "./pages/Appointment";
 import UserLog from "./pages/UserLog";
 import Setting from "./pages/Setting";
 import Sidebar from "./components/Sidebar";
+import PatientDashboard from "./pages/Patient/PatientDashboard";
 
 function App() {
+  const currentURL = window.location.pathname;
+  const showSidebar = () => {
+    const directories = currentURL.split('/');
+    if (directories.length > 0) {
+      if (directories[1] === 'patient') {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  };
+
   return (
     <BrowserRouter>
-      <Sidebar>
+      {showSidebar() ? (
+        <Sidebar>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/doctor" element={<Doctor />} />
+            <Route path="/appointment" element={<Appointment />} />
+            <Route path="/user/log" element={<UserLog />} />
+            <Route path="/settings" element={<Setting />} />
+          </Routes>
+        </Sidebar>
+      ) : (
         <Routes>
-          <Route path="/" element={<Dashboard/>} />
-          <Route path="/doctor" element={<Doctor />} />
-          <Route path="/appointment" element={<Appointment />} />
-          <Route path="/user/log" element={<UserLog />} />
-          <Route path="/settings" element={<Setting />} />
+          {/* Patient Page */}
+          <Route path="/patient/dashboard" element={<PatientDashboard />} />
         </Routes>
-      </Sidebar>
+      )}
     </BrowserRouter>
   );
 }
