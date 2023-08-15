@@ -49,6 +49,17 @@ export function Chart({chartType, dataLine, dataBar}) {
     const renderedBarChart = dataBar ? dataBar.map(((dataset, index) => {
         return <div key={index} className='bar-chart-wrapper'>
                     <Bar options={options} data={dataset} className='bar-chart' />
+
+                    {
+                        (dataset.bar_status === 'success') ?
+                            <p className='bar-chart-title'>Successful bookings up until the month of July 2023</p>
+                        : (dataset.bar_status === 'pending') ?
+                            <p className='bar-chart-title'>Pending bookings up until the month of July 2023</p>
+                        : (dataset.bar_status === 'rejected') ?
+                            <p className='bar-chart-title'>Rejected bookings up until the month of July 2023</p>
+                        :
+                            null
+                    }
                 </div>
     })) :  null
 
