@@ -2,6 +2,7 @@ import React from 'react'
 import BookingCard from '../components/BookingCard';
 import { Chart } from '../components/Chart'
 import Calendar from '../components/Calendar';
+import DashboardHeader from '../components/DashboardHeader';
 
 const Dashboard = () => {
 
@@ -29,7 +30,6 @@ const Dashboard = () => {
         ]
     }
 
-<<<<<<< HEAD
   const dataBookings = [
       {
           labels : ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
@@ -71,49 +71,10 @@ const Dashboard = () => {
           bar_status : 'rejected'
       }
   ]
-=======
-    const dataBookings = [
-        {
-            labels : ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
-            datasets : [
-                {
-                    label: 'success',
-                    data: [20, 50, 30, 30, 40, 35, 45],
-                    backgroundColor: '#008000',
-                    borderColor: '#008000',
-                    borderRadius: 5
-                }
-            ]
-        },
-        {
-            labels : ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
-            datasets : [
-                {
-                    label: 'pending',
-                    data: [20, 50, 30, 30, 40, 35, 45],
-                    backgroundColor: '#F77F00',
-                    borderColor: '#F77F00',
-                    borderRadius: 5
-                }
-            ]
-        },
-        {
-            labels : ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
-            datasets : [
-                {
-                    label: 'rejected',
-                    data: [20, 50, 30, 30, 40, 35, 45],
-                    backgroundColor: '#D62828',
-                    borderColor: '#D62828',
-                    borderRadius: 5
-                }
-            ]
-        }
-    ]
->>>>>>> b99c79c79e3c0f288990ce4bba740d6fcb6461b1
 
     return (
         <>
+            <DashboardHeader/>
             <BookingCard />
             <div className='chart-card-wrapper'>
                 <Chart chartType="line" dataLine={dataDoctor} />

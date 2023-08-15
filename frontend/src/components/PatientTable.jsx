@@ -4,8 +4,14 @@ import {Table, Button} from 'react-bootstrap'
 const PatientTable = ({dataRow, handleShowModal}) => {
 
   return (
-    <div className='table-content-wrapper'>
-      <Table>
+    <>
+      <div className='table-content-wrapper'>
+        <div className='table-header'>
+            <h1 className='title-without-btn'>Appointments</h1>
+        </div>
+
+        <div className='table-content'>
+          <Table>
             <thead>
               <tr>
                 <th>Patient</th>
@@ -40,14 +46,18 @@ const PatientTable = ({dataRow, handleShowModal}) => {
                           }
                         </td>
                       </tr>
-               
+              
                     </>
                     )
                 }))
               }
             </tbody>
-        </Table> 
-    </div>
+          </Table> 
+        </div>
+      </div>
+      
+    </>
+    
   )
 }
 

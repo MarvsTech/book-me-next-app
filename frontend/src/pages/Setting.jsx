@@ -1,5 +1,6 @@
 import React from 'react'
 import EditProfile from '../components/EditProfile'
+import DashboardHeader from '../components/DashboardHeader'
 
 const Setting = () => {
   const data = 
@@ -14,6 +15,7 @@ const Setting = () => {
 
   return (
     <div>
+      <DashboardHeader/>
       <EditProfile data={data} />
     </div>
   )
