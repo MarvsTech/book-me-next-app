@@ -45,7 +45,7 @@ const BookingCard = () => {
         <Container>
             <Row>
                 {bookingItems.map((item, index) => (
-                    <Col>
+                    <Col className='d-flex justify-content-center'>
                         <div className="card-wrapper" key={index}>
                         <div className="card-icon-wrapper" style={{ backgroundColor: item.background }}>
                             {item.icon}

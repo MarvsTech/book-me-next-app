@@ -51,12 +51,12 @@ const EditProfile = ({data}) => {
    }
 
   return (
-    <div className='relative-container'>
-        <div className='setting-header'>
-            Edit Profile
+    <div className='table-content-wrapper'>
+        <div className='table-header'>
+            <h1 className='title-without-btn'>Edit Profile</h1>
         </div>
 
-        <Container className='form-wrapper'>
+        <Container className='table-content'>
             <Form className='form-container' onSubmit={e => onSubmit(e)}>
                 <div className='change-profile'>
                     <div style={{ display: 'inline-block', cursor: 'pointer' }} className='change-profile-img'>
@@ -98,7 +98,7 @@ const EditProfile = ({data}) => {
                     <div className='right-col'>
                         <Form.Group className='form-group'>
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type='text' value={password} placeholder='Enter Password' onChange={e => setPassword(e.target.value)} />
+                            <Form.Control type='password' value={password} placeholder='Enter Password' onChange={e => setPassword(e.target.value)} />
                         </Form.Group>
 
                         <Form.Group className='form-group'>

@@ -3,6 +3,7 @@ import PatientTable from '../components/PatientTable'
 import ViewPatientModal from '../components/ViewPatientModal'
 import womanPortrait from '../images/woman.svg'
 import manPortrait from '../images/man.svg'
+import DashboardHeader from '../components/DashboardHeader'
 
 const Appointment = () => {
 
@@ -65,6 +66,8 @@ const Appointment = () => {
 
   return (
     <>
+      <DashboardHeader/>
+
       <PatientTable dataRow={tableBody} handleShowModal={handleShowModal}/>
 
       <ViewPatientModal show={showModal} onClose={handleCloseModal} dataRow={selectedRow}/>

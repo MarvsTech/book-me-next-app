@@ -5,6 +5,7 @@ import AddModals from '../components/AddModals'
 import ViewModalDoctor from '../components/ViewModalDoctor'
 import womanPortrait from '../images/woman.svg'
 import manPortrait from '../images/man.svg'
+import DashboardHeader from '../components/DashboardHeader'
 
 const Doctor = () => {
 
@@ -75,8 +76,10 @@ const Doctor = () => {
 
   return (
     <>
+      <DashboardHeader/>
       <div className='table-content-wrapper'>
           <div className='table-header'>
+            <h1 className='title-with-btn'>Doctors</h1>
             <Button variant='dark' className='add-doctor-btn' onClick={handleShowModal1}>
               <img src={addFriend} alt="AddDoctor-Logo" />
               Doctor
