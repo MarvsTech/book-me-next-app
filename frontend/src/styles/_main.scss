@@ -821,7 +821,8 @@
         }
     }
 }
-.login-container-wrapper {
+.login-container-wrapper,
+.register-container-wrapper {
     width: 100%;
     display: flex;
     justify-items: center;
@@ -876,7 +877,6 @@
                         font-style: normal;
                         font-weight: 400;
                         line-height: normal;
-                        width: 550px;
                         height: 60px;
                         border-radius: 10px;
                         background: #EBEBEB;
@@ -900,6 +900,64 @@
                         font-weight: 400;
                         line-height: normal;
                         letter-spacing: 0.75px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.register-container-wrapper {
+    .container {
+        .row {
+            .col-md-6 {
+                form {
+                    .row {
+                        .col-md-6 {
+                            .form-floating {
+                                input {
+                                    border-radius: 10px;
+                                    background: #EBEBEB;
+                                    color: #545454;
+                                    font-family: Montserrat;
+                                    font-size: 25px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: normal;
+                                    letter-spacing: 0.75px;
+                                }
+                                label {
+                                    color: #545454;
+                                    font-family: Montserrat;
+                                    font-size: 15px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: normal;
+                                }
+                            }
+                        }
+                    }
+                    .form-floating {
+                        input,
+                        textarea {
+                            border-radius: 10px;
+                            background: #EBEBEB;
+                            color: #545454;
+                            font-family: Montserrat;
+                            font-size: 25px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: normal;
+                            letter-spacing: 0.75px;
+                        }
+                        label {
+                            color: #545454;
+                            font-family: Montserrat;
+                            font-size: 15px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: normal;
+                        }
                     }
                 }
             }
