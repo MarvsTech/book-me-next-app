@@ -19,6 +19,7 @@ class LoginController extends BaseController
             'email' => 'required|email|unique:users,email',
             'password' => 'required|max:255',
             'confirm_password' => 'required|same:password|max:255',
+            'role_id' => 'exists:roles,id'
         ]);
 
         if($validator->fails()){
@@ -26,6 +27,8 @@ class LoginController extends BaseController
         }
 
         $input = $request->all();
+        $input['role_id'] = 3;
+        $input['specialization'] = 'Patient';
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['token'] =  $user->createToken('BookMeNext')->plainTextToken;
