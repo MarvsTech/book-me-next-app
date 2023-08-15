@@ -1,4 +1,4 @@
-import React, {useS} from 'react'
+import React from 'react'
 import {Table, Button} from 'react-bootstrap'
 
 const PatientTable = ({dataRow, handleShowModal}) => {
