@@ -8,6 +8,7 @@ import Setting from "./pages/Setting";
 import Sidebar from "./components/Sidebar";
 import PatientDashboard from "./pages/Patient/PatientDashboard";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   const currentURL = window.location.pathname;
@@ -41,6 +42,7 @@ function App() {
           {/* Patient Page */}
           <Route path="/patient/dashboard" element={<PatientDashboard />} />
           <Route path="/user/login" element={<Login />} />
+          <Route path="/user/register" element={<Register />} />
         </Routes>
       )}
     </BrowserRouter>
