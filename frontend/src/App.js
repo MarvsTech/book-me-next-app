@@ -7,13 +7,14 @@ import UserLog from "./pages/UserLog";
 import Setting from "./pages/Setting";
 import Sidebar from "./components/Sidebar";
 import PatientDashboard from "./pages/Patient/PatientDashboard";
+import Login from "./pages/Login";
 
 function App() {
   const currentURL = window.location.pathname;
   const showSidebar = () => {
     const directories = currentURL.split('/');
     if (directories.length > 0) {
-      if (directories[1] === 'patient') {
+      if (directories[1] === 'patient' || directories[1] === 'user') {
         return false;
       } else {
         return true;
@@ -39,6 +40,7 @@ function App() {
         <Routes>
           {/* Patient Page */}
           <Route path="/patient/dashboard" element={<PatientDashboard />} />
+          <Route path="/user/login" element={<Login />} />
         </Routes>
       )}
     </BrowserRouter>

@@ -821,3 +821,88 @@
         }
     }
 }
+.login-container-wrapper {
+    width: 100%;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+
+    .row {
+        .col-md-6 {
+            .logo-brand {
+                display: flex;
+                justify-content: center;
+
+                h1 {
+                    color: #000;
+                    font-family: Montserrat;
+                    font-size: 30px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;
+                    letter-spacing: 1.5px;
+                }
+
+                img {
+                    margin-right: 10px;
+                }
+            }
+            p {         
+                text-align: center;
+                margin: 20px 0;
+                color: #545454;
+                font-family: Montserrat;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+            }
+
+            form {
+                .position-relative {
+                    label {
+                        color: #545454;
+                        font-family: Montserrat;
+                        font-size: 20px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: normal;
+                        letter-spacing: 0.6px;
+                    }
+                    input {
+                        color: #545454;
+                        font-family: Montserrat;
+                        font-size: 20px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: normal;
+                        width: 550px;
+                        height: 60px;
+                        border-radius: 10px;
+                        background: #EBEBEB;
+                    }
+                }
+
+                .btn-submit {
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 75px;
+
+                    button {
+                        text-align: center;
+                        width: 288px;
+                        border-radius: 10px;
+                        height: 66px;
+                        color: #FFF;
+                        font-family: Montserrat;
+                        font-size: 20px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: normal;
+                        letter-spacing: 0.75px;
+                    }
+                }
+            }
+        }
+    }
+}
