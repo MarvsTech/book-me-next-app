@@ -2,6 +2,7 @@ import React from 'react'
 import BookingCard from '../components/BookingCard';
 import { Chart } from '../components/Chart'
 import Calendar from '../components/Calendar';
+import DashboardHeader from '../components/DashboardHeader';
 
 const Dashboard = () => {
 
@@ -29,50 +30,51 @@ const Dashboard = () => {
         ]
     }
 
-    const dataBookings = [
-        {
-            labels : ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
-            datasets : [
-                {
-                    label: 'success',
-                    data: [20, 50, 30, 30, 40, 35, 45],
-                    backgroundColor: '#008000',
-                    borderColor: '#008000',
-                    borderRadius: 5
-                }
-            ],
-            bar_status : 'success'
-        },
-        {
-            labels : ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
-            datasets : [
-                {
-                    label: 'pending',
-                    data: [20, 50, 30, 30, 40, 35, 45],
-                    backgroundColor: '#F77F00',
-                    borderColor: '#F77F00',
-                    borderRadius: 5
-                }
-            ],
-            bar_status : 'pending'
-        },
-        {
-            labels : ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
-            datasets : [
-                {
-                    label: 'rejected',
-                    data: [20, 50, 30, 30, 40, 35, 45],
-                    backgroundColor: '#D62828',
-                    borderColor: '#D62828',
-                    borderRadius: 5
-                }
-            ],
-            bar_status : 'rejected'
-        }
-    ]
+  const dataBookings = [
+      {
+          labels : ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
+          datasets : [
+              {
+                  label: 'success',
+                  data: [20, 50, 30, 30, 40, 35, 45],
+                  backgroundColor: '#008000',
+                  borderColor: '#008000',
+                  borderRadius: 5
+              }
+          ],
+          bar_status : 'success'
+      },
+      {
+          labels : ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
+          datasets : [
+              {
+                  label: 'pending',
+                  data: [20, 50, 30, 30, 40, 35, 45],
+                  backgroundColor: '#F77F00',
+                  borderColor: '#F77F00',
+                  borderRadius: 5
+              }
+          ],
+          bar_status : 'pending'
+      },
+      {
+          labels : ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
+          datasets : [
+              {
+                  label: 'rejected',
+                  data: [20, 50, 30, 30, 40, 35, 45],
+                  backgroundColor: '#D62828',
+                  borderColor: '#D62828',
+                  borderRadius: 5
+              }
+          ],
+          bar_status : 'rejected'
+      }
+  ]
 
     return (
         <>
+            <DashboardHeader/>
             <BookingCard />
             <div className='chart-card-wrapper'>
                 <Chart chartType="line" dataLine={dataDoctor} />

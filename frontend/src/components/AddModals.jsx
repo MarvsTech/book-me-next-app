@@ -25,8 +25,6 @@ const AddModals = ({showAdd, onCloseAdd}) => {
    const onSubmit = e => {
     e.preventDefault();
 
-    // navigate('/settings');
-
     setUsername('');
     setPassword('');
     setFirstName('');
@@ -37,16 +35,8 @@ const AddModals = ({showAdd, onCloseAdd}) => {
 
   return (
     <Container>
-        {/* <div className='add/edit'></div> */}
         <Modal show={showAdd} onHide={onCloseAdd}>
-            <Modal.Header closeButton className='add-modal-header'>
-                {
-                    (location.pathname === '/doctor') ?
-                        <h1>Add Doctor</h1>
-                    :
-                        null
-                }
-            </Modal.Header>
+            <Modal.Header closeButton className='add-modal-header'></Modal.Header>
             
             <Modal.Body>
                 <Form className='modal-form-container' onSubmit={e => onSubmit(e)}>
@@ -63,7 +53,6 @@ const AddModals = ({showAdd, onCloseAdd}) => {
                                 <Col className='left-col'>
                                     <Form.Group className='form-group'>
                                         <Form.Label>Username</Form.Label>
-                                        {/* make conditional here for updating and adding */}
                                         <Form.Control type='text' value={username} placeholder='Enter Username' onChange={e => setUsername(e.target.value)} />
                                     </Form.Group>
 
@@ -100,7 +89,7 @@ const AddModals = ({showAdd, onCloseAdd}) => {
                         
                     </div>
                     
-                    <div className='horizontal-line'></div>
+                    <hr className='horizontal-line'></hr>
                     
                     <div className='btn-container'>
                         <Button type='submit' onSubmit={onCloseAdd}>Update Profile</Button>
@@ -109,14 +98,6 @@ const AddModals = ({showAdd, onCloseAdd}) => {
                 </Form>
             </Modal.Body>
         </Modal>
-
-        {/* <Modal show={show} onHide={onClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
-
-            <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-      </Modal> */}
     </Container>
   )
 }
