@@ -1,16 +1,15 @@
 import React from 'react'
 import {Table, Button} from 'react-bootstrap'
 
-const PatientTable = ({dataRow, handleShowModal}) => {
+const PatientAppointmentTable = ({dataRow, handleShowModal}) => {
 
   return (
     <div className='table-content-wrapper'>
-      <Table>
+      <Table className='patient-appointment-table'>
         <thead>
           <tr>
-            <th>Patient</th>
-            <th>Email</th>
             <th>Doctor</th>
+            <th>Email</th>
             <th>Booking Date</th>
             <th>Booking Time</th>
             <th>Status</th>
@@ -21,22 +20,21 @@ const PatientTable = ({dataRow, handleShowModal}) => {
             (dataRow.map((data, index) => {
               return (
                 <>
-                  <tr key={`row-${index}`} onClick={() => handleShowModal(data)}>
-                    <td>{data.patient}</td>
-                    <td>{data.email}</td>
+                  <tr key={`row-${index}`}>
                     <td>{data.doctor}</td>
+                    <td>{data.email}</td>
                     <td>{data.booking_date}</td>
                     <td>{data.booking_time}</td>
                     <td>
                       {
                         (data.status === 'pending') ? 
-                            <Button variant='warning'>Pending</Button>
+                          <Button variant='warning' className='patient-appointment-status'>Pending</Button>
                         : (data.status === 'completed') ?
-                            <Button variant='success'>Completed</Button>
+                          <Button variant='success' className='patient-appointment-status'>Completed</Button>
                         : (data.status === 'rejected') ?
-                            <Button variant='danger'>Rejected</Button>
+                          <Button variant='danger' className='patient-appointment-status'>Rejected</Button>
                         :
-                            null
+                          null
                       }
                     </td>
                   </tr>
@@ -51,4 +49,4 @@ const PatientTable = ({dataRow, handleShowModal}) => {
   )
 }
 
-export default PatientTable
+export default PatientAppointmentTable
