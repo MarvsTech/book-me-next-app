@@ -1,6 +1,6 @@
 import React from 'react'
-import UserLogTable from '../components/UserLogTable'
-import DashboardHeader from '../components/DashboardHeader'
+import UserLogTable from '../../components/UserLogTable'
+import DashboardHeader from '../../components/DashboardHeader'
 
 const UserLog = () => {
 
