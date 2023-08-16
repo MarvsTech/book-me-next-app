@@ -8,15 +8,17 @@ import { NavLink } from "react-router-dom";
 
 import Logo from '../../images/booking-logo.svg';
 import PatientProfile from '../../images/woman.svg';
-import Calendar from '../../images/calendar.svg';
-import UserIcon from '../../images/user.svg';
-import PhoneNumber from '../../images/phone.svg';
-import Address from '../../images/maps.svg';
+
 import AddButton from '../../images/add-btn.svg';
 import PatientAppointmentTable from '../../components/PatientAppointmentTable';
 import { Navbar } from 'react-bootstrap';
+import PatientCard from '../../components/PatientCard';
+
+import UserProvider, { useAuth } from '../../config/UserContext';
 
 const PatientDashboard = () => {
+  const { currentUser } = useAuth();
+
   const tableBody = [
     {
       doctor : 'Jane Doe',
@@ -62,25 +64,7 @@ const PatientDashboard = () => {
                     <img src={PatientProfile} alt="" className='profile-container-profile'/>
                   </Col>
                   <Col md={6}>
-                    <div className="profile-wrapper">
-                      <h1>Jane Smith</h1>
-                      <div className="profile-content-wrapper">
-                        <img src={UserIcon} alt="User Icon" />
-                        <p>Female</p>
-                      </div>
-                      <div className="profile-content-wrapper">
-                        <img src={Calendar} alt="Calendar" />
-                        <p>July 9, 2000</p>
-                      </div>
-                      <div className="profile-content-wrapper">
-                        <img src={PhoneNumber} alt="Phone Number" />
-                        <p>+639123456789</p>
-                      </div>
-                      <div className="profile-content-wrapper">
-                        <img src={Address} alt="Address" />
-                        <p>123 Magic Shop, CA</p>
-                      </div>
-                    </div>
+                    <PatientCard currentUser={ currentUser } />
                   </Col>
                 </Row>
               </div>
