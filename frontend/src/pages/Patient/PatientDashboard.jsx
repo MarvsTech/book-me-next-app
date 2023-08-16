@@ -14,6 +14,7 @@ import PhoneNumber from '../../images/phone.svg';
 import Address from '../../images/maps.svg';
 import AddButton from '../../images/add-btn.svg';
 import PatientAppointmentTable from '../../components/PatientAppointmentTable';
+import { Navbar } from 'react-bootstrap';
 
 const PatientDashboard = () => {
   const tableBody = [
@@ -49,22 +50,8 @@ const PatientDashboard = () => {
 
   return (
     <div>
-      <div className="patient-navbar">
-        <Row>
-          <Col md={6} className='navbar-brand-container'>
-            <div className="navbar-brand">
-              <img src={Logo} alt="Logo" />
-              <h1>Book Me Next</h1>
-            </div>
-          </Col>
-          <Col md={6} className='navbar-links'>
-            <NavLink to="/home">Home</NavLink>
-            <NavLink to="/home">How it works</NavLink>
-            <NavLink to="/home">Our doctors</NavLink>
-            <img src={PatientProfile} alt="Logo" />
-          </Col>
-        </Row>
-      </div>
+      <Navbar/>
+
       <div className="patient-main-content">
         <Container>
           <Row>

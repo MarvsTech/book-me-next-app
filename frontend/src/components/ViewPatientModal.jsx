@@ -1,7 +1,10 @@
 import React from 'react'
 import {Modal, Button, Container, Row, Col} from 'react-bootstrap'
+import { useLocation } from 'react-router-dom'
 
 const ViewPatientModal = ({show, onClose, dataRow}) => {
+
+  const location = useLocation();
 
   return (
     <>
@@ -17,6 +20,15 @@ const ViewPatientModal = ({show, onClose, dataRow}) => {
                     <Button variant='danger'>Rejected</Button>
                 :
                     null
+            }
+          </div>
+
+          <div>
+            {
+              (dataRow.status === 'pending' && location.pathname === '/doctor/appointment') ?
+                <Button variant='danger'>Reject</Button>
+              :
+                null
             }
           </div>
            

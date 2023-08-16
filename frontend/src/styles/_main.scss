@@ -440,43 +440,53 @@
         }
     }
 .modal-body {
-    .user-portrait {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 15px;
+    .container {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
 
-        img {
-            width: 90px;
-            height: 90px;
+        .user-portrait {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+    
+            img {
+                width: 90px;
+                height: 90px;
+            }
+        }
+    
+        .input-container,
+        .input-container-row {
+            width: 20vw;
+            height: 60px;
+            border-radius: 10px;
+            background: #E6E6E6;
+            display: flex;
+            margin-left: 20p;
+            padding-left: 20px;
+            align-content: center;
+            align-items: center;
+            font-weight: 500;
+            font-family: Montserrat;
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+    
+        .input-label {
+            color: #545454;
+            font-size: 15px;
+            margin-bottom: 5px;
+            font-family: Montserrat;
+        }
+    
+        .input-container-row {
+            width: 44vw !important;
         }
     }
 
-    .input-container, .input-container-row {
-        width: 20vw;
-        height: 60px;
-        border-radius: 10px;
-        background: #E6E6E6;
-        display: flex;
-        margin-left: 20p;
-        padding-left: 20px;
-        align-content: center;
-        align-items: center;
-        font-weight: 500;
-        font-family: Montserrat;
-        font-size: 18px;
-        margin-bottom: 25px;
-    }
-
-    .input-label {
-        color: #545454;
-        font-size: 15px;
-        margin-bottom: 5px;
-        font-family: Montserrat;
-    }
-
-    .input-container-row {
-        width: 44vw !important;
-    }
+    
 }
 
 // Add Modal
@@ -509,7 +519,6 @@
     }
 
     .modal-form-content {
-        margin-left: 5%;
         margin-bottom: 25px;
 
         .form-group {

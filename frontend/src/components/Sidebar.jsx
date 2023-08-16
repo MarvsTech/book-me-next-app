@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import Dashboard from '../images/dashboard.svg';
 import UserLog from '../images/user.svg';
 import Appointment from '../images/appointment.svg';
@@ -10,30 +10,43 @@ import Logo from '../images/booking-logo.svg';
 const Sidebar = ({ children }) => {
   const menuItems = [
     {
-      path: '/dashboard',
+      path: '/admin/dashboard',
       name: "dashboard",
       label: "Dashboard",
       icon: <img src={Dashboard} alt="Dashboard" className='inverted-color' style={{ width: '20px'}}/>,
     },
     {
-      path: '/appointment',
+      path: '/admin/appointment',
       name: "appointment",
       label: "Appointments",
       icon: <img src={Appointment} alt="Appointments" className='inverted-color' style={{ width: '20px'}} />,
     },
     {
-      path: '/user/log',
+      path: 'admin/user/log',
       name: "userlogs",
       label: "User logs",
       icon: <img src={UserLog} alt="User Logs" className='inverted-color' style={{ width: '20px'}} />,
     },
     {
-      path: '/settings',
+      path: '/admin/settings',
       name: "settings",
       label: "Settings",
       icon: <img src={Setting} alt="Settings" className='inverted-color' style={{ width: '20px'}} />,
     },
   ];
+
+  const doctorExclude = ['']
+
+  // const filteredLinks = () => {
+  //    const role = user.role;
+  //     if(role === 'doctor'){
+  //       return menuItems.filter((link) => link.name !== 'doctor')
+  //     } else {
+  //       return menuItems
+  //     }
+    
+  // }
+
   const logoutItems = [
     {
       path: '/logout',
@@ -42,6 +55,7 @@ const Sidebar = ({ children }) => {
       icon: <img src={Logout} alt="Dashboard" className='inverted-color' style={{ width: '20px'}}/>,
     },
   ];
+
   const logoItems = [
     {
       path: '/book-me-next',

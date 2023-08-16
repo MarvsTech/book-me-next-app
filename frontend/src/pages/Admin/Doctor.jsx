@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Table } from 'react-bootstrap'
-import addFriend from '../images/add-friend.svg'
-import AddModals from '../components/AddModals'
-import ViewModalDoctor from '../components/ViewModalDoctor'
-import womanPortrait from '../images/woman.svg'
-import manPortrait from '../images/man.svg'
-import DashboardHeader from '../components/DashboardHeader'
+import addFriend from '../../images/add-friend.svg'
+import AddModals from '../../components/AddModals'
+import ViewModalDoctor from '../../components/ViewModalDoctor'
+import womanPortrait from '../../images/woman.svg'
+import manPortrait from '../../images/man.svg'
+import DashboardHeader from '../../components/DashboardHeader'
 
 const Doctor = () => {
 

@@ -13,15 +13,15 @@ const DashboardHeader = () => {
         <div className='header-top'>
             <div className='left-header'>
                 {
-                    (location.pathname === '/') ?
+                    (location.pathname === '/admin/dashboard' || location.pathname === '/doctor/dashboard') ?
                         <h1>Dashboard</h1>
-                    : (location.pathname === '/doctor') ?
+                    : (location.pathname === '/doctor/dashboard') ?
                         <h1>Doctors</h1>
-                    : (location.pathname === '/appointment') ?
+                    : (location.pathname === '/admin/appointment' || location.pathname === '/doctor/appointment') ?
                         <h1>Appointments</h1>
-                    : (location.pathname === '/user/log') ?
+                    : (location.pathname === 'admin/user/log' || location.pathname === '/doctor/user/log') ?
                         <h1>User Logs</h1>
-                    : (location.pathname === '/settings') ?
+                    : (location.pathname === '/admin/settings' || location.pathname === '/doctor/settings') ?
                         <h1>Settings</h1>
                     :
                         null
@@ -38,7 +38,7 @@ const DashboardHeader = () => {
 
         <div className='header-bottom'>
             {
-                (location.pathname === '/') ?
+                (location.pathname === '/dashboard' || location.pathname === '/doctor/dashboard') ?
                     <h1>Month of <span>July 2023</span></h1>
                 :
                     null
