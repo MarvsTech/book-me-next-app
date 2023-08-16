@@ -6,8 +6,13 @@ import { Chart } from '../../components/Chart'
 import UserProvider, { useAuth } from '../../config/UserContext';
 
 const DoctorDashboard = () => {
-
-    const {currentUser: {firstname, lastname, middlename}} = useAuth();
+    const {currentUser: {
+        firstname, 
+        lastname, 
+        middlename,
+        roleId,
+    }} = useAuth();
+    const name = `${firstname}`;
 
     const dataDoctor = {
         labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
@@ -60,13 +65,11 @@ const DoctorDashboard = () => {
             bar_status: 'rejected'
         }
     ]
-
+    
     return (
         <div>
-            <DashboardHeader />
-
+            <DashboardHeader name={ name }/>
             <BookingCard />
-            <h1> My name is {firstname}</h1>
             <div className='chart-card-wrapper'>
                 <Chart chartType="line" dataLine={dataDoctor} />
                 <Chart chartType="bar" dataBar={dataBookings} />

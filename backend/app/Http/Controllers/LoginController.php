@@ -49,14 +49,18 @@ class LoginController extends BaseController
             $data['lastname'] = $user->lastname;
             $data['middlename'] = $user->middlename;
             $data['roleId'] = $user->role_id;
+            $data['message'] = 'User login successfully.';
 
             $responseData = [
-                'message' => 'User login successfully.',
                 'data' => $data,
             ];
             return response()->json($responseData);
         } else {
-            return $this->sendError('Unauthorized.', ['error' => 'Unauthorized']);
+            $data['message'] = 'Invalid credentials.';
+            $responseData = [
+                'data' => $data,
+            ];
+            return response()->json($responseData);
         }
     }
 
@@ -95,16 +99,7 @@ class LoginController extends BaseController
             }
 
             $validatedData = $validator->validated();
-
-            // Update the user with the validated data
             $user->update($validatedData);
-
-            // Optionally, you can handle file uploads (e.g., profile picture)
-            // if ($request->hasFile('profile_picture')) {
-            //     $profilePicturePath = $request->file('profile_picture')->store('profile_pictures', 'public');
-            //     $user->profile_picture = $profilePicturePath;
-            //     $user->save();
-            // }
 
             return response()->json([
                 'status' => 'success',

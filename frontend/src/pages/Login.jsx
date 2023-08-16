@@ -26,7 +26,6 @@ const Login = ({setUserInfo}) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [validationError, setValidationError] = useState({});
 
     const loginUser = async (e) => {
         e.preventDefault();
@@ -35,40 +34,48 @@ const Login = ({setUserInfo}) => {
 
         formData.append('email', email);
         formData.append('password', password);
-        const {data: {data}} = await axios.post(`http://localhost:8000/api/login`, formData);
 
-        localStorage.setItem('userToken', data.token);
+        try {
+            const {data: {data}} = await axios.post(`http://localhost:8000/api/login`, formData);
 
-        if (data) {
-            setCurrentUser(data)
-            navigate("/doctor/dashboard");
-
-            // Swal.fire({
-            //     icon: "success",
-            //     title: "Access Granted",
-            //     text: data.message
-            // });
-
-            // switch (data.roleId) {
-            //     case 1:
-            //         navigate("/admin/dashboard");
-            //         break;
-            //     case 2:
-            //         navigate("/doctor/dashboard");
-            //         break;
-            //     case 3:
-            //         navigate("/patient/dashboard");
-            //         break;
-            //     default:
-            //         navigate("/user/login");
-            // }
-        } else {
-            // Swal.fire({
-            //     icon: "success",
-            //     title: "Invalid Credentials",
-            //     text: data.message
-            // });
-        }
+            localStorage.setItem('userToken', data.token);
+    
+            if (data) {
+                setCurrentUser(data);
+    
+                Swal.fire({
+                    icon: "success",
+                    title: "Success",
+                    text: data.message
+                });
+    
+                switch (data.roleId) {
+                    case 1:
+                        navigate("/admin/dashboard");
+                        break;
+                    case 2:
+                        navigate("/doctor/dashboard");
+                        break;
+                    case 3:
+                        navigate("/patient/dashboard");
+                        break;
+                    default:
+                        navigate("/user/login");
+                }
+            } else {
+                Swal.fire({
+                    icon: "danger",
+                    title: "Warning",
+                    text: data.message
+                });
+            } 
+        } catch (error) {
+            Swal.fire({
+                icon: "danger",
+                title: "Warning",
+                text: "Please contact your administrator",
+            });
+        } 
     }
 
     return (
