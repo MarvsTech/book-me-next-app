@@ -389,16 +389,23 @@ html, body {
   font-weight: 400;
 }
 
-.modal-body .user-portrait {
+.modal-body .container {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.modal-body .container .user-portrait {
   display: flex;
   justify-content: center;
   margin-bottom: 15px;
 }
-.modal-body .user-portrait img {
+.modal-body .container .user-portrait img {
   width: 90px;
   height: 90px;
 }
-.modal-body .input-container, .modal-body .input-container-row {
+.modal-body .container .input-container,
+.modal-body .container .input-container-row {
   width: 20vw;
   height: 60px;
   border-radius: 10px;
@@ -413,13 +420,13 @@ html, body {
   font-size: 18px;
   margin-bottom: 25px;
 }
-.modal-body .input-label {
+.modal-body .container .input-label {
   color: #545454;
   font-size: 15px;
   margin-bottom: 5px;
   font-family: Montserrat;
 }
-.modal-body .input-container-row {
+.modal-body .container .input-container-row {
   width: 44vw !important;
 }
 
@@ -449,7 +456,6 @@ html, body {
   width: 90px;
 }
 .modal-content .modal-form-content {
-  margin-left: 5%;
   margin-bottom: 25px;
 }
 .modal-content .modal-form-content .form-group {

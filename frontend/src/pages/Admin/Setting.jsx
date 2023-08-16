@@ -1,6 +1,6 @@
 import React from 'react'
-import EditProfile from '../components/EditProfile'
-import DashboardHeader from '../components/DashboardHeader'
+import EditProfile from '../../components/EditProfile'
+import DashboardHeader from '../../components/DashboardHeader'
 
 const Setting = () => {
   const data = 
