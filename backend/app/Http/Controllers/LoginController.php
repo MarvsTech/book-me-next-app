@@ -19,6 +19,7 @@ class LoginController extends BaseController
             'email' => 'required|email|unique:users,email',
             'password' => 'required|max:255',
             'confirm_password' => 'required|same:password|max:255',
+            'role_id' => 'exists:roles,id'
         ]);
 
         if($validator->fails()){
@@ -26,6 +27,8 @@ class LoginController extends BaseController
         }
 
         $input = $request->all();
+        $input['role_id'] = 3;
+        $input['specialization'] = 'Patient';
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['token'] =  $user->createToken('BookMeNext')->plainTextToken;
@@ -38,17 +41,26 @@ class LoginController extends BaseController
 
     public function login(Request $request)
     {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-            $success['token'] =  $user->createToken('BookMeNext')->plainTextToken;
-            $success['firstname'] =  $user->firstname;
-            $success['lastname'] =  $user->lastname;
-            $success['middlename'] =  $user->middlename;
 
-            return $this->sendResponse($success, 'User login successfully.');
-        }
-        else{
-            return $this->sendError('Unauthorized.', ['error'=>'Unauthorized']);
+            $data['token'] = $user->createToken('BookMeNext')->plainTextToken;
+            $data['firstname'] = $user->firstname;
+            $data['lastname'] = $user->lastname;
+            $data['middlename'] = $user->middlename;
+            $data['roleId'] = $user->role_id;
+            $data['message'] = 'User login successfully.';
+
+            $responseData = [
+                'data' => $data,
+            ];
+            return response()->json($responseData);
+        } else {
+            $data['message'] = 'Invalid credentials.';
+            $responseData = [
+                'data' => $data,
+            ];
+            return response()->json($responseData);
         }
     }
 
@@ -87,16 +99,7 @@ class LoginController extends BaseController
             }
 
             $validatedData = $validator->validated();
-
-            // Update the user with the validated data
             $user->update($validatedData);
-
-            // Optionally, you can handle file uploads (e.g., profile picture)
-            // if ($request->hasFile('profile_picture')) {
-            //     $profilePicturePath = $request->file('profile_picture')->store('profile_pictures', 'public');
-            //     $user->profile_picture = $profilePicturePath;
-            //     $user->save();
-            // }
 
             return response()->json([
                 'status' => 'success',
