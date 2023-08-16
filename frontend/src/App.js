@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Admin/Dashboard";
 import Doctor from "./pages/Admin/Doctor";
@@ -13,6 +13,7 @@ import DoctorDashboard from "./pages/Doctor/DoctorDashboard";
 import DoctorAppointment from "./pages/Doctor/DoctorAppointment";
 import DoctorUserLogs from "./pages/Doctor/DoctorUserLogs";
 import DoctorSettings from "./pages/Doctor/DoctorSettings";
+import UserProvider from './config/UserContext';
 
 function App() {
   const currentURL = window.location.pathname;
@@ -28,7 +29,7 @@ function App() {
       return false;
     }
   };
-
+  
   return (
     <BrowserRouter>
       {showSidebar() ? (
@@ -51,6 +52,7 @@ function App() {
           <Route path="/patient/dashboard" element={<PatientDashboard />} />
           <Route path="/user/login" element={<Login />} />
           <Route path="/user/register" element={<Register />} />
+          <Route path="/doctor/dashboard" element={<DoctorDashboard />} />
         </Routes>
       )}
     </BrowserRouter>

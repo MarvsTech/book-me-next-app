@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Row from 'react-bootstrap/Row';
@@ -8,8 +8,6 @@ import Container from 'react-bootstrap/Container';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
-import { Link } from "react-router-dom";
 
 import RegisterBackground from '../images/register.svg';
 import Logo from '../images/booking-logo.svg';
@@ -117,7 +115,7 @@ const Register = () => {
                                 </Col>
                             </Row>
 
-                            <p>Do you have an account? <Link to="/register">Login</Link></p>
+                            <p>Do you have an account? <Link to="/user/login">Login</Link></p>
                             <div className='btn-submit'>
                                 <Button type="submit">Register Account</Button>
                             </div>

@@ -41,17 +41,22 @@ class LoginController extends BaseController
 
     public function login(Request $request)
     {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-            $success['token'] =  $user->createToken('BookMeNext')->plainTextToken;
-            $success['firstname'] =  $user->firstname;
-            $success['lastname'] =  $user->lastname;
-            $success['middlename'] =  $user->middlename;
 
-            return $this->sendResponse($success, 'User login successfully.');
-        }
-        else{
-            return $this->sendError('Unauthorized.', ['error'=>'Unauthorized']);
+            $data['token'] = $user->createToken('BookMeNext')->plainTextToken;
+            $data['firstname'] = $user->firstname;
+            $data['lastname'] = $user->lastname;
+            $data['middlename'] = $user->middlename;
+            $data['roleId'] = $user->role_id;
+
+            $responseData = [
+                'message' => 'User login successfully.',
+                'data' => $data,
+            ];
+            return response()->json($responseData);
+        } else {
+            return $this->sendError('Unauthorized.', ['error' => 'Unauthorized']);
         }
     }
 
