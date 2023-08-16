@@ -23,6 +23,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'role_id',
+        'gender_id',
         'firstname',
         'lastname',
         'middlename',
@@ -32,6 +33,7 @@ class User extends Authenticatable
         'email',
         'password',
         'room_number',
+        'birthday',
         'profile',
     ];
 
@@ -62,5 +64,14 @@ class User extends Authenticatable
     public function hasAnyRole(...$role)
     {
         return $this->role()->whereIn('role_name', $role)->exists();
+    }
+
+    public function gender() {
+        return $this->belongsTo(Gender::class, 'gender_id');
+    }
+
+    public function hasAnyGender(...$gender)
+    {
+        return $this->role()->whereIn('gender', $gender)->exists();
     }
 }

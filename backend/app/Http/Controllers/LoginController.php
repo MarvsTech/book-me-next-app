@@ -49,6 +49,15 @@ class LoginController extends BaseController
             $data['lastname'] = $user->lastname;
             $data['middlename'] = $user->middlename;
             $data['roleId'] = $user->role_id;
+            $data['genderId'] = $user->gender_id;
+            $data['specialization'] = $user->specialization;
+            $data['contactNumber'] = $user->contact_number;
+            $data['address'] = $user->address;
+            $data['email'] = $user->email;
+            $data['roomNumber'] = $user->room_number;
+            $data['isActive'] = $user->isActive;
+            $data['profile'] = $user->profile;
+            $data['birthday'] = $user->birthday;
             $data['message'] = 'User login successfully.';
 
             $responseData = [
