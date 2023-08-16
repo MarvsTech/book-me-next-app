@@ -730,17 +730,20 @@ html, body {
   height: 40px;
 }
 
-.login-container-wrapper {
+.login-container-wrapper,
+.register-container-wrapper {
   width: 100%;
   display: flex;
   justify-items: center;
   align-items: center;
 }
-.login-container-wrapper .row .col-md-6 .logo-brand {
+.login-container-wrapper .row .col-md-6 .logo-brand,
+.register-container-wrapper .row .col-md-6 .logo-brand {
   display: flex;
   justify-content: center;
 }
-.login-container-wrapper .row .col-md-6 .logo-brand h1 {
+.login-container-wrapper .row .col-md-6 .logo-brand h1,
+.register-container-wrapper .row .col-md-6 .logo-brand h1 {
   color: #000;
   font-family: Montserrat;
   font-size: 30px;
@@ -749,10 +752,12 @@ html, body {
   line-height: normal;
   letter-spacing: 1.5px;
 }
-.login-container-wrapper .row .col-md-6 .logo-brand img {
+.login-container-wrapper .row .col-md-6 .logo-brand img,
+.register-container-wrapper .row .col-md-6 .logo-brand img {
   margin-right: 10px;
 }
-.login-container-wrapper .row .col-md-6 p {
+.login-container-wrapper .row .col-md-6 p,
+.register-container-wrapper .row .col-md-6 p {
   text-align: center;
   margin: 20px 0;
   color: #545454;
@@ -762,7 +767,8 @@ html, body {
   font-weight: 500;
   line-height: normal;
 }
-.login-container-wrapper .row .col-md-6 form .position-relative label {
+.login-container-wrapper .row .col-md-6 form .position-relative label,
+.register-container-wrapper .row .col-md-6 form .position-relative label {
   color: #545454;
   font-family: Montserrat;
   font-size: 20px;
@@ -771,24 +777,26 @@ html, body {
   line-height: normal;
   letter-spacing: 0.6px;
 }
-.login-container-wrapper .row .col-md-6 form .position-relative input {
+.login-container-wrapper .row .col-md-6 form .position-relative input,
+.register-container-wrapper .row .col-md-6 form .position-relative input {
   color: #545454;
   font-family: Montserrat;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  width: 550px;
   height: 60px;
   border-radius: 10px;
   background: #EBEBEB;
 }
-.login-container-wrapper .row .col-md-6 form .btn-submit {
+.login-container-wrapper .row .col-md-6 form .btn-submit,
+.register-container-wrapper .row .col-md-6 form .btn-submit {
   display: flex;
   justify-content: center;
   margin-top: 75px;
 }
-.login-container-wrapper .row .col-md-6 form .btn-submit button {
+.login-container-wrapper .row .col-md-6 form .btn-submit button,
+.register-container-wrapper .row .col-md-6 form .btn-submit button {
   text-align: center;
   width: 288px;
   border-radius: 10px;
@@ -800,4 +808,44 @@ html, body {
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0.75px;
+}
+
+.register-container-wrapper .container .row .col-md-6 form .row .col-md-6 .form-floating input {
+  border-radius: 10px;
+  background: #EBEBEB;
+  color: #545454;
+  font-family: Montserrat;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.75px;
+}
+.register-container-wrapper .container .row .col-md-6 form .row .col-md-6 .form-floating label {
+  color: #545454;
+  font-family: Montserrat;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.register-container-wrapper .container .row .col-md-6 form .form-floating input,
+.register-container-wrapper .container .row .col-md-6 form .form-floating textarea {
+  border-radius: 10px;
+  background: #EBEBEB;
+  color: #545454;
+  font-family: Montserrat;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.75px;
+}
+.register-container-wrapper .container .row .col-md-6 form .form-floating label {
+  color: #545454;
+  font-family: Montserrat;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }/*# sourceMappingURL=index.css.map */

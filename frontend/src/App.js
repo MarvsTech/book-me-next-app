@@ -8,6 +8,7 @@ import Setting from "./pages/Admin/Setting";
 import Sidebar from "./components/Sidebar";
 import PatientDashboard from "./pages/Patient/PatientDashboard";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import DoctorDashboard from "./pages/Doctor/DoctorDashboard";
 import DoctorAppointment from "./pages/Doctor/DoctorAppointment";
 import DoctorUserLogs from "./pages/Doctor/DoctorUserLogs";
@@ -49,6 +50,7 @@ function App() {
           {/* Patient Page */}
           <Route path="/patient/dashboard" element={<PatientDashboard />} />
           <Route path="/user/login" element={<Login />} />
+          <Route path="/user/register" element={<Register />} />
         </Routes>
       )}
     </BrowserRouter>
