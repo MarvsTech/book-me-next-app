@@ -56,6 +56,7 @@ function RoleBasedRoutes() {
   }, [navigate, currentUser]);  
 
   return (
+
     <Routes>
       <Route path="/admin/*" element={<AdminRoutes />} />
       <Route path="/doctor/*" element={<DoctorRoutes />} />

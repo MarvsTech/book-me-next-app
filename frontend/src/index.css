@@ -537,7 +537,7 @@ html, body {
   width: 100vw;
   background-color: #c9c9c9;
   border-radius: 0px 0px 30px 30px;
-  height: 110px;
+  height: 90px;
   left: 0;
   position: fixed;
   padding: 0 30px;
@@ -571,16 +571,34 @@ html, body {
   line-height: normal;
   top: 0;
   white-space: nowrap;
+  margin-bottom: 0;
 }
 .patient-navbar .row .navbar-links {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+}
+.patient-navbar .row .navbar-links .navlink {
+  margin-left: 30px;
+  font-weight: 600;
+}
+.patient-navbar .row .navbar-links .navlink:hover {
+  color: #00AACF;
+}
+.patient-navbar .row .navbar-links .btn-primary {
+  background: none;
+  padding: 10px;
+  border-width: 2px;
+  border-color: #00AACF;
+}
+.patient-navbar .row .navbar-links .btn-primary:hover {
+  background-color: #00AACF;
+  color: #fff;
 }
 .patient-navbar .row .navbar-links a {
   color: #000000;
-  font-family: "Montserrat-Medium", Helvetica;
-  font-size: 18px;
+  font-family: "Montserrat", Helvetica;
+  font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.5px;
   line-height: normal;
@@ -848,4 +866,196 @@ html, body {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.landing-page {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) no-repeat center, url("https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80") no-repeat center;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 60px;
+  display: flex;
+}
+.landing-page .row-container {
+  width: 100%;
+  padding-bottom: 30px;
+}
+.landing-page .left-landing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.landing-page .left-landing h1, .landing-page .left-landing h4 {
+  color: #FFF;
+  font-family: Montserrat;
+  letter-spacing: 1.75px;
+}
+.landing-page .left-landing h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+.landing-page .left-landing h4 {
+  font-size: 20px;
+  font-weight: 400;
+}
+.landing-page .right-landing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 30px;
+}
+.landing-page .right-landing .right-container {
+  width: 250px;
+  height: 200px;
+  border-radius: 10px;
+  background: #FFF;
+  margin-right: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.landing-page .right-landing .right-container img {
+  width: 200px;
+  height: 150px;
+}
+.landing-page .right-landing .right-container h1 {
+  color: #000;
+  font-family: Montserrat;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.blog-container {
+  display: block !important;
+  width: 100%;
+}
+
+.container-title {
+  width: 100%;
+}
+.container-title h1 {
+  color: #000;
+  font-family: Montserrat;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 1.25px;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.booking-steps-content p {
+  margin-top: 10px;
+}
+
+.how-it-works .row-container {
+  margin-bottom: 30px;
+}
+.how-it-works .booking-steps-div {
+  width: 33%;
+  color: #fff;
+  gap: 20px;
+}
+.how-it-works .booking-steps-div .booking-steps-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.how-it-works .booking-steps-div .booking-steps-content img {
+  width: 250px;
+  height: 200px;
+  border-radius: 20px;
+}
+.how-it-works .booking-steps-div .booking-steps-content p {
+  color: #545454;
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  width: 60%;
+  text-align: center;
+}
+
+.testimonials {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) no-repeat center, url("https://images.unsplash.com/photo-1584516150909-c43483ee7932?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80") no-repeat center;
+  background-size: cover;
+  height: 80vh;
+  display: flex;
+  padding-top: none !important;
+  flex-direction: column;
+}
+.testimonials .container-title h1 {
+  color: #fff;
+}
+.testimonials .row-container .booking-steps-div {
+  width: 33%;
+  display: flex;
+  justify-content: center;
+}
+.testimonials .row-container .booking-steps-div .booking-steps-content {
+  width: 400px;
+  height: 50vh;
+  border-radius: 20px;
+  background: #DEDEDE;
+  box-shadow: 4px 4px 15px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 15px;
+}
+.testimonials .row-container .booking-steps-div .booking-steps-content p {
+  color: #00AACF;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1.25px;
+}
+
+.footer-container {
+  background: #00AACF;
+  padding-top: 40px;
+  padding-left: 50px !important;
+}
+.footer-container .footer-links {
+  list-style-type: none;
+  color: #fff;
+  width: 35%;
+  padding-bottom: 10px;
+}
+.footer-container .footer-links .quick-links-container h4, .footer-container .footer-links .follow-us-container h4 {
+  margin-bottom: 15px;
+}
+.footer-container .footer-links .quick-links-container ul, .footer-container .footer-links .follow-us-container ul {
+  padding-left: 0;
+}
+.footer-container .footer-links .quick-links-container ul a, .footer-container .footer-links .follow-us-container ul a {
+  text-decoration: none;
+  color: #fff;
+}
+.footer-container .footer-logo {
+  padding-top: 50px;
+}
+.footer-container .footer-logo .footer-logo-content {
+  display: flex;
+  flex-wrap: unset;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 40px;
+}
+.footer-container .footer-logo .footer-logo-content img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+.footer-container .footer-logo .footer-logo-content h4,
+.footer-container .footer-logo .footer-logo-content img {
+  padding: 0;
+  margin-bottom: 0;
+  color: #fff;
 }/*# sourceMappingURL=index.css.map */
