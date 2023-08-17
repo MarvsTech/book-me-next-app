@@ -3,10 +3,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-
-import { NavLink } from "react-router-dom";
-
-import Logo from '../../images/booking-logo.svg';
 import PatientProfile from '../../images/woman.svg';
 import Calendar from '../../images/calendar.svg';
 import UserIcon from '../../images/user.svg';
@@ -14,7 +10,7 @@ import PhoneNumber from '../../images/phone.svg';
 import Address from '../../images/maps.svg';
 import AddButton from '../../images/add-btn.svg';
 import PatientAppointmentTable from '../../components/PatientAppointmentTable';
-import { Navbar } from 'react-bootstrap';
+import Navbar from '../../components/Navbar';
 
 const PatientDashboard = () => {
   const tableBody = [
@@ -48,9 +44,13 @@ const PatientDashboard = () => {
     }
   ]
 
+   const user = {
+        isPatient : true
+    }
+
   return (
     <div>
-      <Navbar/>
+      <Navbar user={user}/>
 
       <div className="patient-main-content">
         <Container>

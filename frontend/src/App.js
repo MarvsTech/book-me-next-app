@@ -13,13 +13,19 @@ import DoctorDashboard from "./pages/Doctor/DoctorDashboard";
 import DoctorAppointment from "./pages/Doctor/DoctorAppointment";
 import DoctorUserLogs from "./pages/Doctor/DoctorUserLogs";
 import DoctorSettings from "./pages/Doctor/DoctorSettings";
+import Blog from "./pages/Blog";
 
 function App() {
   const currentURL = window.location.pathname;
+
   const showSidebar = () => {
     const directories = currentURL.split("/");
     if (directories.length > 0) {
-      if (directories[1] === "patient" || directories[1] === "user") {
+      if (
+        directories[1] === "patient" ||
+        directories[1] === "user" ||
+        directories[1] === "blog"
+      ) {
         return false;
       } else {
         return true;
@@ -49,6 +55,7 @@ function App() {
         <Routes>
           {/* Patient Page */}
           <Route path="/patient/dashboard" element={<PatientDashboard />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/user/login" element={<Login />} />
           <Route path="/user/register" element={<Register />} />
         </Routes>
