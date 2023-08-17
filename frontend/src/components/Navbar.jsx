@@ -1,13 +1,20 @@
 import React from 'react'
-import { Row, Col, Button } from 'react-bootstrap'
-import { NavLink } from "react-router-dom";
+import { Row, Col } from 'react-bootstrap'
+import { NavLink } from 'react-router-dom'
 import Logo from '../images/booking-logo.svg';
 import PatientProfile from '../images/woman.svg';
 
-const Navbar = ({user}) => {
+const Navbar = ({children}) => {
+
+  const user = [
+    {isAdmin : true},
+    {isDoctor : true},
+    {isPatient : true}
+  ]
 
   return (
-    <div className="patient-navbar">
+    <>
+      <div className="patient-navbar">
         <Row>
           <Col md={6} className='navbar-brand-container'>
             <div className="navbar-brand">
@@ -37,6 +44,8 @@ const Navbar = ({user}) => {
           </Col>
         </Row>
       </div>
+      <div className='main-content'>{children}</div>
+    </>
   )
 }
 

@@ -1,66 +1,114 @@
-import React, { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Dashboard from "./pages/Admin/Dashboard";
-import Doctor from "./pages/Admin/Doctor";
-import Appointment from "./pages/Admin/Appointment";
-import UserLog from "./pages/Admin/UserLog";
-import Setting from "./pages/Admin/Setting";
-import Sidebar from "./components/Sidebar";
-import PatientDashboard from "./pages/Patient/PatientDashboard";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import DoctorDashboard from "./pages/Doctor/DoctorDashboard";
-import DoctorAppointment from "./pages/Doctor/DoctorAppointment";
-import DoctorUserLogs from "./pages/Doctor/DoctorUserLogs";
-import DoctorSettings from "./pages/Doctor/DoctorSettings";
-import Blog from "./pages/Blog";
+import React, { useEffect } from 'react';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+
+import Sidebar from './components/Sidebar';
+import Navbar from './components/Navbar';
+import Doctor from './pages/Admin/Doctor';
+import Appointment from './pages/Admin/Appointment';
+import UserLog from './pages/Admin/UserLog';
+import Setting from './pages/Admin/Setting';
+import PatientDashboard from './pages/Patient/PatientDashboard';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import DoctorDashboard from './pages/Doctor/DoctorDashboard';
+import DoctorAppointment from './pages/Doctor/DoctorAppointment';
+import DoctorUserLogs from './pages/Doctor/DoctorUserLogs';
+import DoctorSettings from './pages/Doctor/DoctorSettings';
+import AdminDashboard from './pages/Admin/AdminDashboard';
+
+import { useAuth } from './config/UserContext';
 
 function App() {
-  const currentURL = window.location.pathname;
-
-  const showSidebar = () => {
-    const directories = currentURL.split("/");
-    if (directories.length > 0) {
-      if (
-        directories[1] === "patient" ||
-        directories[1] === "user" ||
-        directories[1] === "blog"
-      ) {
-        return false;
-      } else {
-        return true;
-      }
-    } else {
-      return false;
-    }
-  };
-
   return (
     <BrowserRouter>
-      {showSidebar() ? (
-        <Sidebar>
-          <Routes>
-            <Route path="/admin/dashboard" element={<Dashboard />} />
-            <Route path="/doctor/dashboard" element={<DoctorDashboard />} />
-            <Route path="/admin/doctor" element={<Doctor />} />
-            <Route path="/admin/appointment" element={<Appointment />} />
-            <Route path="/doctor/appointment" element={<DoctorAppointment />} />
-            <Route path="admin/user/log" element={<UserLog />} />
-            <Route path="/doctor/user/log" element={<DoctorUserLogs />} />
-            <Route path="/admin/settings" element={<Setting />} />
-            <Route path="/doctor/settings" element={<DoctorSettings />} />
-          </Routes>
-        </Sidebar>
-      ) : (
-        <Routes>
-          {/* Patient Page */}
-          <Route path="/patient/dashboard" element={<PatientDashboard />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/user/login" element={<Login />} />
-          <Route path="/user/register" element={<Register />} />
-        </Routes>
-      )}
+      <RoleBasedRoutes />
     </BrowserRouter>
+  );
+}
+
+function RoleBasedRoutes() {
+
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
+
+  const data = {
+    roleId: 0,
+  };
+
+  useEffect(() => {
+    if (currentUser) {
+      switch (currentUser.roleId) {
+        case 1:
+          navigate('/admin/dashboard');
+          break;
+        case 2:
+          navigate('/doctor/dashboard');
+          break;
+        case 3:
+          navigate('/patient/dashboard');
+          break;
+        default:
+          navigate('/user/login');
+      }
+    } else {
+      navigate('/user/login');
+    }
+  }, [navigate, currentUser]);  
+
+  return (
+
+    <Routes>
+      <Route path="/admin/*" element={<AdminRoutes />} />
+      <Route path="/doctor/*" element={<DoctorRoutes />} />
+      <Route path="/patient/*" element={<PatientRoutes />} />
+      <Route path="/user/*" element={<UserRoutes />} />
+    </Routes>
+  );
+}
+
+function AdminRoutes() {
+  return (
+    <Sidebar>
+      <Routes>
+        <Route path="/dashboard" element={<AdminDashboard />} />
+        <Route path="/doctor" element={<Doctor />} />
+        <Route path="/appointment" element={<Appointment />} />
+        <Route path="/user/log" element={<UserLog />} />
+        <Route path="/settings" element={<Setting />} />
+      </Routes>
+    </Sidebar>
+  );
+}
+
+function DoctorRoutes() {
+  return (
+    <Sidebar>
+      <Routes>
+        <Route path="/user/log" element={<DoctorUserLogs />} />
+        <Route path="/dashboard" element={<DoctorDashboard />} />
+        <Route path="/settings" element={<DoctorSettings />} />
+        <Route path="/appointment" element={<DoctorAppointment />} />
+      </Routes>
+    </Sidebar>
+  );
+}
+
+function PatientRoutes() {
+  return (
+    <Navbar>
+      <Routes>
+        <Route path="/dashboard" element={<PatientDashboard />} />
+      </Routes>
+    </Navbar>
+  );
+}
+
+function UserRoutes() {
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+    </Routes>
   );
 }
 

@@ -36,16 +36,16 @@ Route::middleware('auth:sanctum')->group(function () {
 
             switch ($roleId) {
                 case 1:
-                    $routeName = 'admin.page';
+                    $routeName = 'admin.dashboard';
                     break;
                 case 2:
-                    $routeName = 'doctor.page';
+                    $routeName = 'doctor.dashboard';
                     break;
                 case 3:
-                    $routeName = 'patient.page';
+                    $routeName = 'patient.dashboard';
                     break;
                 default:
-                    return redirect()->route('error.page');
+                    return redirect()->route('error.dashboard');
             }
 
             return redirect()->route($routeName);
@@ -55,7 +55,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Routes for role: Admin
     Route::middleware('role:Admin')->group(function () {
         Route::prefix('admin')->name('admin.')->group(function () {
-            Route::get('page', [AdminController::class, 'index'])->name('page');
+            Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
             Route::apiResource('role', RoleController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
             ]);

@@ -6,7 +6,6 @@ import Appointment from '../Admin/Appointment'
 
 const DoctorAppointment = () => {
     
-
   return (
     <div>
         <Appointment/>
