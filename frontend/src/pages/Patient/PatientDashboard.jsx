@@ -11,7 +11,6 @@ import PatientProfile from '../../images/woman.svg';
 
 import AddButton from '../../images/add-btn.svg';
 import PatientAppointmentTable from '../../components/PatientAppointmentTable';
-import { Navbar } from 'react-bootstrap';
 import PatientCard from '../../components/PatientCard';
 
 import UserProvider, { useAuth } from '../../config/UserContext';
@@ -52,8 +51,6 @@ const PatientDashboard = () => {
 
   return (
     <div>
-      <Navbar/>
-
       <div className="patient-main-content">
         <Container>
           <Row>

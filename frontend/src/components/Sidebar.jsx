@@ -35,18 +35,6 @@ const Sidebar = ({ children }) => {
     },
   ];
 
-  const doctorExclude = ['']
-
-  // const filteredLinks = () => {
-  //    const role = user.role;
-  //     if(role === 'doctor'){
-  //       return menuItems.filter((link) => link.name !== 'doctor')
-  //     } else {
-  //       return menuItems
-  //     }
-    
-  // }
-
   const logoutItems = [
     {
       path: '/logout',
