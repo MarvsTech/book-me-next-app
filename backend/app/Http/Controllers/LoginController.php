@@ -41,17 +41,35 @@ class LoginController extends BaseController
 
     public function login(Request $request)
     {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-            $success['token'] =  $user->createToken('BookMeNext')->plainTextToken;
-            $success['firstname'] =  $user->firstname;
-            $success['lastname'] =  $user->lastname;
-            $success['middlename'] =  $user->middlename;
 
-            return $this->sendResponse($success, 'User login successfully.');
-        }
-        else{
-            return $this->sendError('Unauthorized.', ['error'=>'Unauthorized']);
+            $data['token'] = $user->createToken('BookMeNext')->plainTextToken;
+            $data['firstname'] = $user->firstname;
+            $data['lastname'] = $user->lastname;
+            $data['middlename'] = $user->middlename;
+            $data['roleId'] = $user->role_id;
+            $data['genderId'] = $user->gender_id;
+            $data['specialization'] = $user->specialization;
+            $data['contactNumber'] = $user->contact_number;
+            $data['address'] = $user->address;
+            $data['email'] = $user->email;
+            $data['roomNumber'] = $user->room_number;
+            $data['isActive'] = $user->isActive;
+            $data['profile'] = $user->profile;
+            $data['birthday'] = $user->birthday;
+            $data['message'] = 'User login successfully.';
+
+            $responseData = [
+                'data' => $data,
+            ];
+            return response()->json($responseData);
+        } else {
+            $data['message'] = 'Invalid credentials.';
+            $responseData = [
+                'data' => $data,
+            ];
+            return response()->json($responseData);
         }
     }
 
@@ -90,16 +108,7 @@ class LoginController extends BaseController
             }
 
             $validatedData = $validator->validated();
-
-            // Update the user with the validated data
             $user->update($validatedData);
-
-            // Optionally, you can handle file uploads (e.g., profile picture)
-            // if ($request->hasFile('profile_picture')) {
-            //     $profilePicturePath = $request->file('profile_picture')->store('profile_pictures', 'public');
-            //     $user->profile_picture = $profilePicturePath;
-            //     $user->save();
-            // }
 
             return response()->json([
                 'status' => 'success',
