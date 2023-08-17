@@ -31,10 +31,6 @@ function RoleBasedRoutes() {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
-  const data = {
-    roleId: 0,
-  };
-
   useEffect(() => {
     if (currentUser) {
       switch (currentUser.roleId) {
@@ -48,10 +44,10 @@ function RoleBasedRoutes() {
           navigate('/patient/dashboard');
           break;
         default:
-          navigate('/user/login');
+          navigate("/user/login");
       }
     } else {
-      navigate('/user/login');
+      navigate("/blog");
     }
   }, [navigate, currentUser]);  
 
