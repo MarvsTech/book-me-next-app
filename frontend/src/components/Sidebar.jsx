@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Dashboard from '../images/dashboard.svg';
 import UserLog from '../images/user.svg';
 import Appointment from '../images/appointment.svg';
