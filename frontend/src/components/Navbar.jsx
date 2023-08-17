@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Button } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import Logo from '../images/booking-logo.svg';
 import PatientProfile from '../images/woman.svg';
