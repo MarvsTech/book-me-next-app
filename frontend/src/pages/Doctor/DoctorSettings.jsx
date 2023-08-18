@@ -1,8 +1,17 @@
 import React from 'react'
 import DashboardHeader from '../../components/DashboardHeader'
 import EditProfile from '../../components/EditProfile'
+import { useAuth } from '../../config/UserContext';
 
 const DoctorSettings = () => {
+  const {currentUser: {
+    firstname, 
+    lastname, 
+    middlename,
+    roleId,
+  }} = useAuth();
+  const name = `${firstname}`;
+
   const data = 
     {
       username : 'janedoe',
@@ -15,7 +24,7 @@ const DoctorSettings = () => {
 
   return (
     <div>
-      <DashboardHeader/>
+      <DashboardHeader name={ name }/>
 
       <EditProfile data={data}/>
     </div>

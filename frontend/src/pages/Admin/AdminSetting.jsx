@@ -1,8 +1,17 @@
 import React from 'react'
 import EditProfile from '../../components/EditProfile'
 import DashboardHeader from '../../components/DashboardHeader'
+import { useAuth } from '../../config/UserContext';
 
-const Setting = () => {
+const AdminSetting = () => {
+  const {currentUser: {
+    firstname, 
+    lastname, 
+    middlename,
+    roleId,
+  }} = useAuth();
+  const name = `${firstname}`;
+
   const data = 
     {
       username : 'admin',
@@ -15,10 +24,10 @@ const Setting = () => {
 
   return (
     <div>
-      <DashboardHeader/>
+      <DashboardHeader name={ name }/>
       <EditProfile data={data} />
     </div>
   )
 }
 
-export default Setting
+export default AdminSetting

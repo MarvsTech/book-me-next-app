@@ -4,8 +4,16 @@ import ViewPatientModal from '../../components/ViewPatientModal'
 import womanPortrait from '../../images/woman.svg'
 import manPortrait from '../../images/man.svg'
 import DashboardHeader from '../../components/DashboardHeader'
+import { useAuth } from '../../config/UserContext';
 
-const Appointment = () => {
+const AdminAppointment = () => {
+  const {currentUser: {
+    firstname, 
+    lastname, 
+    middlename,
+    roleId,
+  }} = useAuth();
+  const name = `${firstname}`;
 
   const tableBody = [
     {
@@ -66,7 +74,7 @@ const Appointment = () => {
 
   return (
     <>
-      <DashboardHeader/>
+      <DashboardHeader name={ name }/>
 
       <PatientTable dataRow={tableBody} handleShowModal={handleShowModal}/>
 
@@ -75,4 +83,4 @@ const Appointment = () => {
   )
 }
 
-export default Appointment
+export default AdminAppointment

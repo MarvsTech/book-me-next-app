@@ -54,7 +54,7 @@ const PatientDashboard = () => {
   ]
 
    const user = {
-        isPatient : true
+      isPatient : true
     }
 
     // useState, useEffect, and onSubmit function for user data start

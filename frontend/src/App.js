@@ -1,111 +1,127 @@
-import React, { useEffect } from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
-import Doctor from "./pages/Admin/Doctor";
-import Appointment from "./pages/Admin/Appointment";
-import UserLog from "./pages/Admin/UserLog";
-import Setting from "./pages/Admin/Setting";
 import PatientDashboard from "./pages/Patient/PatientDashboard";
+
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+
 import DoctorDashboard from "./pages/Doctor/DoctorDashboard";
 import DoctorAppointment from "./pages/Doctor/DoctorAppointment";
 import DoctorUserLogs from "./pages/Doctor/DoctorUserLogs";
 import DoctorSettings from "./pages/Doctor/DoctorSettings";
+
 import AdminDashboard from "./pages/Admin/AdminDashboard";
+import AdminDoctor from "./pages/Admin/AdminDoctor";
+import AdminAppointment from "./pages/Admin/AdminAppointment";
+import AdminUserLog from "./pages/Admin/AdminUserLog";
 
 import { useAuth } from "./config/UserContext";
 import Blog from "./pages/Blog";
+import AdminSetting from "./pages/Admin/AdminSetting";
 
 function App() {
+  const { currentUser } = useAuth();
+  const CurrentUserType = currentUser ? currentUser.roleId : 0;
+  
   return (
     <BrowserRouter>
-      <RoleBasedRoutes />
+      <Routes>
+        <Route path="/access/denied" element={<AccessDenied />} />
+        <Route path="/page/not/found" element={<NotFound />} />
+
+        <Route path="*" element={PublicElement(CurrentUserType, '')} />
+        <Route path="/" element={PublicElement(CurrentUserType, 'blog')} />
+        <Route path="/login" element={PublicElement(CurrentUserType, 'login')} />
+        <Route path="/register" element={PublicElement(CurrentUserType, 'register')} />
+
+        <Route path="*" element={AdminElement(CurrentUserType, '')} />
+        <Route path="/admin" element={AdminElement(CurrentUserType, 'admin')}/>
+        <Route path="/admin/doctors" element={AdminElement(CurrentUserType, 'admin-doctor')}/>
+        <Route path="/admin/appointments" element={AdminElement(CurrentUserType, 'admin-appointment')}/>
+        <Route path="/admin/user/logs" element={AdminElement(CurrentUserType, 'admin-logs')}/>
+        <Route path="/admin/settings" element={AdminElement(CurrentUserType, 'admin-logs')}/>
+
+        <Route path="*" element={DoctorElement(CurrentUserType, '')} />
+        <Route path="/doctor" element={DoctorElement(CurrentUserType, 'doctor')}/>
+        <Route path="/doctor/appointments" element={DoctorElement(CurrentUserType, 'doctor-appointment')}/>
+        <Route path="/doctor/user/logs" element={DoctorElement(CurrentUserType, 'doctor-log')}/>
+        <Route path="/doctor/settings" element={DoctorElement(CurrentUserType, 'doctor-setting')}/>
+
+        <Route path="*" element={PatientElement(CurrentUserType, '')} />
+        <Route path="/patient" element={PatientElement(CurrentUserType, 'patient')}/>
+
+      </Routes>
     </BrowserRouter>
   );
 }
 
-function RoleBasedRoutes() {
-  const navigate = useNavigate();
-  const { currentUser } = useAuth();
 
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     switch (currentUser.roleId) {
-  //       case 1:
-  //         navigate("/admin/dashboard");
-  //         break;
-  //       case 2:
-  //         navigate("/doctor/dashboard");
-  //         break;
-  //       case 3:
-  //         navigate("/patient/dashboard");
-  //         break;
-  //       default:
-  //         navigate("/user/login");
-  //     }
-  //   } else {
-  //     navigate("/blog");
-  //   }
-  // }, [navigate, currentUser]);
-
-  return (
-    <Routes>
-      <Route path="/admin/*" element={<AdminRoutes />} />
-      <Route path="/doctor/*" element={<DoctorRoutes />} />
-      <Route path="/patient/*" element={<PatientRoutes />} />
-      <Route path="/user/*" element={<UserRoutes />} />
-      <Route path="/blog" element={<Blog />} />
-    </Routes>
-  );
+function NotFound () {
+  return <div>Page Not Found.</div>;
 }
 
-function AdminRoutes() {
-  return (
-    <Sidebar>
-      <Routes>
-        <Route path="/dashboard" element={<AdminDashboard />} />
-        <Route path="/doctor" element={<Doctor />} />
-        <Route path="/appointment" element={<Appointment />} />
-        <Route path="/user/log" element={<UserLog />} />
-        <Route path="/settings" element={<Setting />} />
-      </Routes>
-    </Sidebar>
-  );
+function AccessDenied () {
+  return <div>You dont have a permission to access this page.</div>;
 }
 
-function DoctorRoutes() {
-  return (
-    <Sidebar>
-      <Routes>
-        <Route path="/user/log" element={<DoctorUserLogs />} />
-        <Route path="/dashboard" element={<DoctorDashboard />} />
-        <Route path="/settings" element={<DoctorSettings />} />
-        <Route path="/appointment" element={<DoctorAppointment />} />
-      </Routes>
-    </Sidebar>
-  );
+function PublicElement (roleId, page) {  
+  if (roleId !== 0) {
+    return <Navigate to={"/access/denied"}/>;
+  } else {
+    switch(page){
+      case 'blog': return <Blog />
+      case 'login': return <Login />
+      case 'register': return <Register />
+      case '': return <Navigate to={"/page/not/found"}/>
+      default: return ''
+    }
+  }
 }
 
-function PatientRoutes() {
-  return (
-    <Navbar>
-      <Routes>
-        <Route path="/dashboard" element={<PatientDashboard />} />
-      </Routes>
-    </Navbar>
-  );
+function AdminElement (roleId, page) {
+  if (roleId !== 1) {
+    return <Navigate to={"/access/denied"}/>;
+  } else {
+    switch(page){
+      case 'admin': return <><Sidebar roleId={roleId}><AdminDashboard /></Sidebar></>
+      case 'admin-doctor': return <><Sidebar roleId={roleId}><AdminDoctor /></Sidebar></>
+      case 'admin-appointment': return <><Sidebar roleId={roleId}><AdminAppointment /></Sidebar></>
+      case 'admin-logs': return <><Sidebar roleId={roleId}><AdminUserLog /></Sidebar></>
+      case 'admin-setting': return <><Sidebar roleId={roleId}><AdminSetting /></Sidebar></>
+      case '': return <Navigate to={"/page/not/found"}/>
+      default: return ''
+    }
+  }
 }
 
-function UserRoutes() {
-  return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-    </Routes>
-  );
+function DoctorElement (roleId, page) {
+  if (roleId !== 2) {
+    return <Navigate to={"/access/denied"}/>;
+  } else {
+    switch(page){
+      case 'doctor': return <><Sidebar roleId={roleId}><DoctorDashboard /></Sidebar></>
+      case 'doctor-appointment': return <><Sidebar roleId={roleId}><DoctorAppointment /></Sidebar></>
+      case 'doctor-log': return <><Sidebar roleId={roleId}><DoctorUserLogs /></Sidebar></>
+      case 'doctor-setting': return <><Sidebar roleId={roleId}><DoctorSettings /></Sidebar></>
+      case '': return <Navigate to={"/page/not/found"}/>
+      default: return ''
+    }
+  }
+}
+
+function PatientElement (roleId, page) {
+  if (roleId !== 3) {
+    return <Navigate to={"/access/denied"}/>;
+  } else {
+    switch(page){
+      case 'patient': return <><Navbar roleId={roleId}><PatientDashboard /></Navbar></>
+      case '': return <Navigate to={"/page/not/found"}/>
+      default: return ''
+    }
+  }
 }
 
 export default App;

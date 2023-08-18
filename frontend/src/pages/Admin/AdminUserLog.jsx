@@ -1,8 +1,16 @@
 import React from 'react'
 import UserLogTable from '../../components/UserLogTable'
 import DashboardHeader from '../../components/DashboardHeader'
+import { useAuth } from '../../config/UserContext';
 
-const UserLog = () => {
+const AdminUserLog = () => {
+  const {currentUser: {
+    firstname, 
+    lastname, 
+    middlename,
+    roleId,
+  }} = useAuth();
+  const name = `${firstname}`;
 
   const tableBody = [
     {
@@ -21,10 +29,10 @@ const UserLog = () => {
 
   return (
     <>
-      <DashboardHeader/>
+      <DashboardHeader name={ name }/>
       <UserLogTable data={tableBody}/>
     </>
   )
 }
 
-export default UserLog
+export default AdminUserLog
