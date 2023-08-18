@@ -7,7 +7,7 @@ import womanPortrait from '../../images/woman.svg'
 import manPortrait from '../../images/man.svg'
 import DashboardHeader from '../../components/DashboardHeader'
 
-const Doctor = () => {
+const AdminDoctor = () => {
 
   const tableBody = [
     {
@@ -135,4 +135,4 @@ const Doctor = () => {
   )
 }
 
-export default Doctor
+export default AdminDoctor

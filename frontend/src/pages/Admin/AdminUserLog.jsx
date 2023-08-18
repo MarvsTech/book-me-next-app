@@ -2,7 +2,7 @@ import React from 'react'
 import UserLogTable from '../../components/UserLogTable'
 import DashboardHeader from '../../components/DashboardHeader'
 
-const UserLog = () => {
+const AdminUserLog = () => {
 
   const tableBody = [
     {
@@ -27,4 +27,4 @@ const UserLog = () => {
   )
 }
 
-export default UserLog
+export default AdminUserLog
