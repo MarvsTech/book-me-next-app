@@ -8,7 +8,10 @@ import manPortrait from '../../images/man.svg'
 import DashboardHeader from '../../components/DashboardHeader'
 import { useAuth } from '../../config/UserContext';
 
+import axios from 'axios';
+
 const AdminDoctor = () => {
+  const [doctors, setDoctors] = useState([])
   const {currentUser: {
     firstname, 
     lastname, 
@@ -17,53 +20,22 @@ const AdminDoctor = () => {
   }} = useAuth();
   const name = `${firstname}`;
 
-  const tableBody = [
-    {
-      doctor : 'Jane Doe',
-      room : '312',
-      no_bookings: 5,
-      email : 'janedoe@mail.com',
-      specialization : 'Endocrinologist',
-      contact : '+639123456789',
-      address : '123 Magic Shop, CA',
-      isActive : true,
-      image: <img src={womanPortrait} alt="portrait of a woman"/>
-    },
-    {
-      doctor : 'John Doe',
-      room : '312',
-      no_bookings: 5,
-      email : 'johndoe@mail.com',
-      specialization : 'Neurologist',
-      contact : '+639123456789',
-      address : '123 Magic Shop, CA',
-      isActive : false,
-      image: <img src={manPortrait} alt="portrait of a woman"/>
-    },
-    {
-      doctor : 'Juan Dela Cruz',
-      room : '312',
-      no_bookings: 5,
-      email : 'juandelacruz@mail.com',
-      specialization : 'ENT',
-      contact : '+639123456789',
-      address : '123 Magic Shop, CA',
-      isActive : false,
-      image: <img src={manPortrait} alt="portrait of a woman"/>
-    },
-    {
-      doctor : 'Juana Dela Cruz',
-      room : '312',
-      no_bookings: 5,
-      email : 'juanadelacruz@mail.com',
-      specialization : 'Pedia',
-      contact : '+639123456789',
-      address : '123 Magic Shop, CA',
-      isActive : true,
-      image: <img src={womanPortrait} alt="portrait of a woman"/>
-    }
-  ]
-  
+  useEffect(()=>{
+    fetchDoctors() 
+  },[]);
+
+  const fetchDoctors = async () => {
+    axios.get('http://localhost:8000/api/admin/doctor/all', {
+      headers: {
+        'Authorization': `Bearer YOUR_API_TOKEN`,
+      },
+    }).then(({data}) => {
+      setDoctors(data);
+    }).catch(error => {
+      console.error('API request failed:', error);
+  }); 
+}
+
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   
@@ -108,29 +80,25 @@ const AdminDoctor = () => {
               </thead>
               <tbody>
                 {
-                  (tableBody.map((data, index) => {
-                    return (
-                      <>
-                        <tr key={`row-${index}`} onClick={() => handleShowModal2(data)}>
-                          <td>{data.doctor}</td>
-                          <td>{data.email}</td>
-                          <td>{data.specialization}</td>
-                          <td>{data.contact}</td>
-                          <td>{data.address}</td>
-                          <td>
-                            {
-                              (data.isActive === true) ? 
-                                <Button variant='danger'>Deactivate</Button>
-                              :
-                                <Button variant='success'>Activate</Button>
-                            }
-                          </td>
-                        </tr>
-                
-                      </>
-                      
-                    )
-                  }))
+                  doctors.length > 0 && (
+                    doctors.map((row, key)=>(
+                      <tr key={`row-${key}`} onClick={() => handleShowModal2(row)}>
+                        <td>{row.doctor}</td>
+                        <td>{row.email}</td>
+                        <td>{row.specialization}</td>
+                        <td>{row.contact}</td>
+                        <td>{row.address}</td>
+                        <td>
+                          {
+                            (row.isActive === 0) ? 
+                              <Button variant='danger'>Deactivate</Button>
+                            :
+                              <Button variant='success'>Activate</Button>
+                          }
+                        </td>
+                      </tr>
+                    ))
+                  )
                 }
               </tbody>
             </Table>
