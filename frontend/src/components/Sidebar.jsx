@@ -11,25 +11,25 @@ import Logo from '../images/booking-logo.svg';
 const Sidebar = ({ children, roleId }) => {
   const menuItems = [
     {
-      path: '/admin/dashboard',
+      path: (roleId === 1) ? '/admin' : '/doctor',
       name: "dashboard",
       label: "Dashboard",
       icon: <img src={Dashboard} alt="Dashboard" className='inverted-color' style={{ width: '20px'}}/>,
     },
     {
-      path: '/admin/appointment',
+      path: (roleId === 1) ? '/admin/appointments' : '/doctor/appointments',
       name: "appointment",
       label: "Appointments",
       icon: <img src={Appointment} alt="Appointments" className='inverted-color' style={{ width: '20px'}} />,
     },
     {
-      path: 'admin/user/log',
+      path: (roleId === 1) ? '/admin/user/logs' : '/doctor/user/logs',
       name: "userlogs",
       label: "User logs",
       icon: <img src={UserLog} alt="User Logs" className='inverted-color' style={{ width: '20px'}} />,
     },
     {
-      path: '/admin/settings',
+      path: (roleId === 1) ? '/admin/settings' : '/doctor/settings',
       name: "settings",
       label: "Settings",
       icon: <img src={Setting} alt="Settings" className='inverted-color' style={{ width: '20px'}} />,
@@ -37,8 +37,8 @@ const Sidebar = ({ children, roleId }) => {
   ];
 
   if (roleId === 1) {
-    menuItems.splice(1, 0, { // Insert the Doctor menu item at index 1
-      path: '/admin/doctor',
+    menuItems.splice(1, 0, { 
+      path: '/admin/doctors',
       name: 'doctor',
       label: 'Doctors',
       icon: <img src={Doctor} alt="Doctors" className='inverted-color' style={{ width: '20px' }} />,

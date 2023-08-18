@@ -41,6 +41,7 @@ function App() {
         <Route path="/admin/doctors" element={AdminElement(CurrentUserType, 'admin-doctor')}/>
         <Route path="/admin/appointments" element={AdminElement(CurrentUserType, 'admin-appointment')}/>
         <Route path="/admin/user/logs" element={AdminElement(CurrentUserType, 'admin-logs')}/>
+        <Route path="/admin/settings" element={AdminElement(CurrentUserType, 'admin-logs')}/>
 
         <Route path="*" element={DoctorElement(CurrentUserType, '')} />
         <Route path="/doctor" element={DoctorElement(CurrentUserType, 'doctor')}/>
@@ -87,6 +88,7 @@ function AdminElement (roleId, page) {
       case 'admin-doctor': return <><Sidebar roleId={roleId}><AdminDoctor /></Sidebar></>
       case 'admin-appointment': return <><Sidebar roleId={roleId}><AdminAppointment /></Sidebar></>
       case 'admin-logs': return <><Sidebar roleId={roleId}><AdminUserLog /></Sidebar></>
+      case 'admin-setting': return <><Sidebar roleId={roleId}><AdminUserLog /></Sidebar></>
       case '': return <Navigate to={"/page/not/found"}/>
       default: return ''
     }
