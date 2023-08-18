@@ -42,6 +42,27 @@ class DoctorController extends Controller
         }
     }
 
+    public function getAllDoctors(DoctorContract $doctorContract)
+    {
+        try {
+            $doctor = $this->doctorContract->getAllDoctors('doctor');
+
+            return (new DoctorResource($doctor, __FUNCTION__))->additional([
+                'status' => 'success',
+                'message' => 'Welcome to Doctor Page',
+            ]);
+
+        } catch(Exception $e) {
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed.',
+                'error' => $e->getMessage(),
+            ], 500);
+
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      */

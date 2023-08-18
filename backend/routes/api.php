@@ -62,6 +62,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::apiResource('appointment', AppointmentController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
             ]);
+            Route::get('/doctor/all', [DoctorController::class, 'getAllDoctors']);
             Route::apiResource('doctor', DoctorController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
             ]);
