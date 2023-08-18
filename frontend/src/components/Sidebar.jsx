@@ -1,13 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Dashboard from '../images/dashboard.svg';
+import Doctor from '../images/doctor.svg';
 import UserLog from '../images/user.svg';
 import Appointment from '../images/appointment.svg';
 import Setting from '../images/settings.svg';
 import Logout from '../images/logout.svg';
 import Logo from '../images/booking-logo.svg';
 
-const Sidebar = ({ children }) => {
+const Sidebar = ({ children, roleId }) => {
   const menuItems = [
     {
       path: '/admin/dashboard',
@@ -34,6 +35,15 @@ const Sidebar = ({ children }) => {
       icon: <img src={Setting} alt="Settings" className='inverted-color' style={{ width: '20px'}} />,
     },
   ];
+
+  if (roleId === 1) {
+    menuItems.splice(1, 0, { // Insert the Doctor menu item at index 1
+      path: '/admin/doctor',
+      name: 'doctor',
+      label: 'Doctors',
+      icon: <img src={Doctor} alt="Doctors" className='inverted-color' style={{ width: '20px' }} />,
+    });
+  }
 
   const logoutItems = [
     {

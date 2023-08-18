@@ -83,10 +83,10 @@ function AdminElement (roleId, page) {
     return <Navigate to={"/access/denied"}/>;
   } else {
     switch(page){
-      case 'admin': return <AdminDashboard />
-      case 'admin-doctor': return <AdminDoctor />
-      case 'admin-appointment': return <AdminAppointment />
-      case 'admin-logs': return <AdminUserLog />
+      case 'admin': return <><Sidebar roleId={roleId}><AdminDashboard /></Sidebar></>
+      case 'admin-doctor': return <><Sidebar roleId={roleId}><AdminDoctor /></Sidebar></>
+      case 'admin-appointment': return <><Sidebar roleId={roleId}><AdminAppointment /></Sidebar></>
+      case 'admin-logs': return <><Sidebar roleId={roleId}><AdminUserLog /></Sidebar></>
       case '': return <Navigate to={"/page/not/found"}/>
       default: return ''
     }
@@ -98,10 +98,10 @@ function DoctorElement (roleId, page) {
     return <Navigate to={"/access/denied"}/>;
   } else {
     switch(page){
-      case 'doctor': return <DoctorDashboard />
-      case 'doctor-appointment': return <DoctorAppointment />
-      case 'doctor-log': return <DoctorUserLogs />
-      case 'doctor-setting': return <DoctorSettings />
+      case 'doctor': return <><Sidebar roleId={roleId}><DoctorDashboard /></Sidebar></>
+      case 'doctor-appointment': return <><Sidebar roleId={roleId}><DoctorAppointment /></Sidebar></>
+      case 'doctor-log': return <><Sidebar roleId={roleId}><DoctorUserLogs /></Sidebar></>
+      case 'doctor-setting': return <><Sidebar roleId={roleId}><DoctorSettings /></Sidebar></>
       case '': return <Navigate to={"/page/not/found"}/>
       default: return ''
     }
@@ -113,7 +113,7 @@ function PatientElement (roleId, page) {
     return <Navigate to={"/access/denied"}/>;
   } else {
     switch(page){
-      case 'patient': return <PatientDashboard />
+      case 'patient': return <><Navbar roleId={roleId}><PatientDashboard /></Navbar></>
       case '': return <Navigate to={"/page/not/found"}/>
       default: return ''
     }
