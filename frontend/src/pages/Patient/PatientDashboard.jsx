@@ -3,10 +3,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-
-import { NavLink } from "react-router-dom";
-
-import Logo from '../../images/booking-logo.svg';
 import PatientProfile from '../../images/woman.svg';
 
 import AddButton from '../../images/add-btn.svg';
@@ -14,6 +10,7 @@ import PatientAppointmentTable from '../../components/PatientAppointmentTable';
 import PatientCard from '../../components/PatientCard';
 
 import UserProvider, { useAuth } from '../../config/UserContext';
+
 
 const PatientDashboard = () => {
   const { currentUser } = useAuth();
@@ -48,6 +45,10 @@ const PatientDashboard = () => {
       status : 'pending',
     }
   ]
+
+   const user = {
+      isPatient : true
+    }
 
   return (
     <div>

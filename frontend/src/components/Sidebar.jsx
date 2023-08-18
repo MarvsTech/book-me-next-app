@@ -1,39 +1,49 @@
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Dashboard from '../images/dashboard.svg';
+import Doctor from '../images/doctor.svg';
 import UserLog from '../images/user.svg';
 import Appointment from '../images/appointment.svg';
 import Setting from '../images/settings.svg';
 import Logout from '../images/logout.svg';
 import Logo from '../images/booking-logo.svg';
 
-const Sidebar = ({ children }) => {
+const Sidebar = ({ children, roleId }) => {
   const menuItems = [
     {
-      path: '/admin/dashboard',
+      path: (roleId === 1) ? '/admin' : '/doctor',
       name: "dashboard",
       label: "Dashboard",
       icon: <img src={Dashboard} alt="Dashboard" className='inverted-color' style={{ width: '20px'}}/>,
     },
     {
-      path: '/admin/appointment',
+      path: (roleId === 1) ? '/admin/appointments' : '/doctor/appointments',
       name: "appointment",
       label: "Appointments",
       icon: <img src={Appointment} alt="Appointments" className='inverted-color' style={{ width: '20px'}} />,
     },
     {
-      path: 'admin/user/log',
+      path: (roleId === 1) ? '/admin/user/logs' : '/doctor/user/logs',
       name: "userlogs",
       label: "User logs",
       icon: <img src={UserLog} alt="User Logs" className='inverted-color' style={{ width: '20px'}} />,
     },
     {
-      path: '/admin/settings',
+      path: (roleId === 1) ? '/admin/settings' : '/doctor/settings',
       name: "settings",
       label: "Settings",
       icon: <img src={Setting} alt="Settings" className='inverted-color' style={{ width: '20px'}} />,
     },
   ];
+
+  if (roleId === 1) {
+    menuItems.splice(1, 0, { 
+      path: '/admin/doctors',
+      name: 'doctor',
+      label: 'Doctors',
+      icon: <img src={Doctor} alt="Doctors" className='inverted-color' style={{ width: '20px' }} />,
+    });
+  }
 
   const logoutItems = [
     {
