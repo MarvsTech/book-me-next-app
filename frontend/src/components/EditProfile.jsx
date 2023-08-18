@@ -1,11 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import camera from '../images/camera.svg'
 import woman from '../images/woman.svg'
 
 const EditProfile = ({data}) => {
-
     const navigate = useNavigate();
 
     const [username, setUsername] = useState(""); 
@@ -27,8 +25,6 @@ const EditProfile = ({data}) => {
         }
 
     }, [data])
-
-   // chatgpt
     
     const [selectedFile, setSelectedFile] = useState(null);
 

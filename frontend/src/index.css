@@ -1058,4 +1058,150 @@ html, body {
   padding: 0;
   margin-bottom: 0;
   color: #fff;
+}
+
+.booking-modal-content {
+  height: none;
+}
+
+.booking-header h1 {
+  margin: auto;
+  color: #545454;
+  font-family: Montserrat;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.booking-header .btn-close {
+  margin: 0 !important;
+}
+
+.booking-body {
+  padding-left: 60px !important;
+  padding-right: 60px !important;
+  padding-top: 40px !important;
+}
+.booking-body .form-label {
+  color: #545454;
+  font-family: Montserrat;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.6px;
+}
+.booking-body .form-control, .booking-body .form-select {
+  margin-bottom: 50px;
+  width: 300px;
+  height: 60px;
+  border-radius: 10px;
+  background: #E6E6E6;
+  padding-left: 20px;
+}
+.booking-body .form-select {
+  width: 100%;
+}
+.booking-body .form-control::-moz-placeholder {
+  color: #545454;
+  font-family: Montserrat;
+  font-weight: 500;
+  letter-spacing: 0.75px;
+}
+.booking-body .form-control::placeholder {
+  color: #545454;
+  font-family: Montserrat;
+  font-weight: 500;
+  letter-spacing: 0.75px;
+}
+.booking-body .book-btn {
+  margin-top: 40px;
+}
+.booking-body .book-btn .btn {
+  width: 255px;
+  height: 50px;
+  border-radius: 10px;
+  background: #00AACF;
+  border: none;
+  margin: auto;
+  color: #FFF;
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.fc-day-today {
+  background-color: #C9C9C9 !important;
+}
+
+.fc-button-primary {
+  background-color: #00AACF !important;
+  border: none !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  font-family: Montserrat !important;
+}
+
+.fc-toolbar-title {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  font-family: Montserrat !important;
+}
+
+.fc-col-header-cell-cushion, .fc-daygrid-day-number {
+  text-decoration: none !important;
+  color: #000 !important;
+}
+
+.fc-highlight {
+  background: #C9C9C9 !important;
+}
+
+.fc-event-draggable {
+  background: none !important;
+  border: none !important;
+}
+
+.fc-event {
+  background-color: #00AACF !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.fc-event-main p {
+  color: #fff !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  font-family: Montserrat !important;
+  text-align: center !important;
+  margin-bottom: 0 !important;
+}
+
+.fc-other-month, .fc-day-number {
+  display: none !important;
+}
+
+.hiddenEvent {
+  display: none;
+}
+
+.fc-other-month .fc-day-number {
+  display: none;
+}
+
+td.fc-other-month .fc-day-number {
+  visibility: hidden;
+}
+
+.view-calendar-modal .modal-content {
+  height: 720px !important;
+}
+
+.edit-profile-modal .left-col .form-group {
+  padding-right: 10px !important;
+}
+.edit-profile-modal .right-col .form-group {
+  padding-right: 10px !important;
+}
+.edit-profile-modal .form-control {
+  margin-bottom: 35px !important;
 }/*# sourceMappingURL=index.css.map */
