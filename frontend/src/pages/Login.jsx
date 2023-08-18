@@ -51,16 +51,16 @@ const Login = ({setUserInfo}) => {
     
                 switch (data.roleId) {
                     case 1:
-                        navigate("/admin/dashboard");
+                        navigate("/admin");
                         break;
                     case 2:
-                        navigate("/doctor/dashboard");
+                        navigate("/doctor");
                         break;
                     case 3:
-                        navigate("/patient/dashboard");
+                        navigate("/patient");
                         break;
                     default:
-                        navigate("/user/login");
+                        navigate("/login");
                 }
             } else {
                 Swal.fire({

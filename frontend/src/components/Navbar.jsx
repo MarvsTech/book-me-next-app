@@ -1,6 +1,6 @@
 import React from 'react'
 import { Row, Col, Button } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import Logo from '../images/booking-logo.svg';
 import PatientProfile from '../images/woman.svg';
 
@@ -26,18 +26,18 @@ const Navbar = ({children}) => {
             {
                 (user.isPatient) ?
                     <>
-                        <NavLink to="/home" className='navlink'>Home</NavLink>
-                        <NavLink to="/home" className='navlink'>How it works</NavLink>
-                        <NavLink to="/home" className='navlink'>Our doctors</NavLink>
+                        <NavLink to="/" className='navlink'>Home</NavLink>
+                        <NavLink to="/" className='navlink'>How it works</NavLink>
+                        <NavLink to="/" className='navlink'>Our doctors</NavLink>
                         <img src={PatientProfile} alt="Logo" className='navlink'/>
                     </>
                 :
                     <>
-                        <NavLink to="/home" className='navlink'>Home</NavLink>
-                        <NavLink to="/home" className='navlink'>How it works</NavLink>
-                        <NavLink to="/home" className='navlink'>Our doctors</NavLink>
-                        <Button className='navlink' as={NavLink} to={'/user/login'}>Login</Button>
-                        <Button className='navlink' as={NavLink} to={'/user/register'}>Register</Button>
+                        <NavLink to="/" className='navlink'>Home</NavLink>
+                        <NavLink to="/" className='navlink'>How it works</NavLink>
+                        <NavLink to="/" className='navlink'>Our doctors</NavLink>
+                        <Button className='navlink' as={Link} to='/login'>Login</Button>
+                        <Button className='navlink' as={Link} to='/register'>Register</Button>
                     </>
             }
             

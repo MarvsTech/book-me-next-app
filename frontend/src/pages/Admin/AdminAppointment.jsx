@@ -5,7 +5,7 @@ import womanPortrait from '../../images/woman.svg'
 import manPortrait from '../../images/man.svg'
 import DashboardHeader from '../../components/DashboardHeader'
 
-const Appointment = () => {
+const AdminAppointment = () => {
 
   const tableBody = [
     {
@@ -75,4 +75,4 @@ const Appointment = () => {
   )
 }
 
-export default Appointment
+export default AdminAppointment
