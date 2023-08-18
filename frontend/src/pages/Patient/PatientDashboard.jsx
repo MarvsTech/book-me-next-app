@@ -47,7 +47,7 @@ const PatientDashboard = () => {
   ]
 
    const user = {
-        isPatient : true
+      isPatient : true
     }
 
   return (

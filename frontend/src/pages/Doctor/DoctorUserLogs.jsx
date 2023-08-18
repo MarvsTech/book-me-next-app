@@ -1,8 +1,17 @@
 import React from 'react'
 import DashboardHeader from '../../components/DashboardHeader'
 import UserLogTable from '../../components/UserLogTable'
+import { useAuth } from '../../config/UserContext';
 
 const DoctorUserLogs = () => {
+  const {currentUser: {
+    firstname, 
+    lastname, 
+    middlename,
+    roleId,
+  }} = useAuth();
+  const name = `${firstname}`;
+
   const tableBody = [
     {
       name : 'Jane Doe',
@@ -20,7 +29,7 @@ const DoctorUserLogs = () => {
 
   return (
     <div>
-      <DashboardHeader/>
+      <DashboardHeader name={ name }/>
 
       <UserLogTable data={tableBody} />
     </div>

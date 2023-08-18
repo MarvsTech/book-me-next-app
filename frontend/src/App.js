@@ -20,6 +20,7 @@ import AdminUserLog from "./pages/Admin/AdminUserLog";
 
 import { useAuth } from "./config/UserContext";
 import Blog from "./pages/Blog";
+import AdminSetting from "./pages/Admin/AdminSetting";
 
 function App() {
   const { currentUser } = useAuth();
@@ -88,7 +89,7 @@ function AdminElement (roleId, page) {
       case 'admin-doctor': return <><Sidebar roleId={roleId}><AdminDoctor /></Sidebar></>
       case 'admin-appointment': return <><Sidebar roleId={roleId}><AdminAppointment /></Sidebar></>
       case 'admin-logs': return <><Sidebar roleId={roleId}><AdminUserLog /></Sidebar></>
-      case 'admin-setting': return <><Sidebar roleId={roleId}><AdminUserLog /></Sidebar></>
+      case 'admin-setting': return <><Sidebar roleId={roleId}><AdminSetting /></Sidebar></>
       case '': return <Navigate to={"/page/not/found"}/>
       default: return ''
     }
