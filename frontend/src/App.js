@@ -31,25 +31,25 @@ function RoleBasedRoutes() {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
-  useEffect(() => {
-    if (currentUser) {
-      switch (currentUser.roleId) {
-        case 1:
-          navigate("/admin/dashboard");
-          break;
-        case 2:
-          navigate("/doctor/dashboard");
-          break;
-        case 3:
-          navigate("/patient/dashboard");
-          break;
-        default:
-          navigate("/user/login");
-      }
-    } else {
-      navigate("/blog");
-    }
-  }, [navigate, currentUser]);
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     switch (currentUser.roleId) {
+  //       case 1:
+  //         navigate("/admin/dashboard");
+  //         break;
+  //       case 2:
+  //         navigate("/doctor/dashboard");
+  //         break;
+  //       case 3:
+  //         navigate("/patient/dashboard");
+  //         break;
+  //       default:
+  //         navigate("/user/login");
+  //     }
+  //   } else {
+  //     navigate("/blog");
+  //   }
+  // }, [navigate, currentUser]);
 
   return (
     <Routes>

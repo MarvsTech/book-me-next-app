@@ -1,6 +1,7 @@
 import FullCalendar from "@fullcalendar/react";
 import daygridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+ 
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 
@@ -34,17 +35,21 @@ const Calendar = () => {
 
   return (
     <FullCalendar
+    viewClassNames='calendar-modal'
     editable
     selectable
     events={events}
     select={handleSelect}
     headerToolbar={{
       start: "today prev next",
+      center: "title",
       end: "dayGridMonth dayGridWeek dayGridDay",
     }}
     eventContent={(info) => <EventItem info={info} />}
     plugins={[daygridPlugin, interactionPlugin]}
     views={["dayGridMonth", "dayGridWeek", "dayGridDay"]}
+    showNonCurrentDates={false}
+    fixedWeekCount={false}
     />
   )
 }
