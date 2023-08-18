@@ -6,8 +6,16 @@ import ViewModalDoctor from '../../components/ViewModalDoctor'
 import womanPortrait from '../../images/woman.svg'
 import manPortrait from '../../images/man.svg'
 import DashboardHeader from '../../components/DashboardHeader'
+import { useAuth } from '../../config/UserContext';
 
 const AdminDoctor = () => {
+  const {currentUser: {
+    firstname, 
+    lastname, 
+    middlename,
+    roleId,
+  }} = useAuth();
+  const name = `${firstname}`;
 
   const tableBody = [
     {
@@ -76,7 +84,7 @@ const AdminDoctor = () => {
 
   return (
     <>
-      <DashboardHeader/>
+      <DashboardHeader name={ name }/>
       <div className='table-content-wrapper'>
           <div className='table-header'>
             <h1 className='title-with-btn'>Doctors</h1>
