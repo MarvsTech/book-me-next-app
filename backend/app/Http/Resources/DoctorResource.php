@@ -26,4 +26,9 @@ class DoctorResource extends JsonResource
     {
         return $this->resource;
     }
+
+    public function getAllDoctors()
+    {
+        return $this->resource;
+    }
 }

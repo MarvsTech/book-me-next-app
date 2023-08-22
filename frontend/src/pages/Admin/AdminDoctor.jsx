@@ -1,69 +1,38 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import addFriend from '../../images/add-friend.svg'
-import AddModals from '../../components/AddModals'
+import DoctorModals from '../../components/DoctorModals'
 import ViewModalDoctor from '../../components/ViewModalDoctor'
 import womanPortrait from '../../images/woman.svg'
 import manPortrait from '../../images/man.svg'
 import DashboardHeader from '../../components/DashboardHeader'
 import { useAuth } from '../../config/UserContext';
 
-const AdminDoctor = () => {
-  const {currentUser: {
-    firstname, 
-    lastname, 
-    middlename,
-    roleId,
-  }} = useAuth();
-  const name = `${firstname}`;
+import axios from 'axios';
 
-  const tableBody = [
-    {
-      doctor : 'Jane Doe',
-      room : '312',
-      no_bookings: 5,
-      email : 'janedoe@mail.com',
-      specialization : 'Endocrinologist',
-      contact : '+639123456789',
-      address : '123 Magic Shop, CA',
-      isActive : true,
-      image: <img src={womanPortrait} alt="portrait of a woman"/>
-    },
-    {
-      doctor : 'John Doe',
-      room : '312',
-      no_bookings: 5,
-      email : 'johndoe@mail.com',
-      specialization : 'Neurologist',
-      contact : '+639123456789',
-      address : '123 Magic Shop, CA',
-      isActive : false,
-      image: <img src={manPortrait} alt="portrait of a woman"/>
-    },
-    {
-      doctor : 'Juan Dela Cruz',
-      room : '312',
-      no_bookings: 5,
-      email : 'juandelacruz@mail.com',
-      specialization : 'ENT',
-      contact : '+639123456789',
-      address : '123 Magic Shop, CA',
-      isActive : false,
-      image: <img src={manPortrait} alt="portrait of a woman"/>
-    },
-    {
-      doctor : 'Juana Dela Cruz',
-      room : '312',
-      no_bookings: 5,
-      email : 'juanadelacruz@mail.com',
-      specialization : 'Pedia',
-      contact : '+639123456789',
-      address : '123 Magic Shop, CA',
-      isActive : true,
-      image: <img src={womanPortrait} alt="portrait of a woman"/>
-    }
-  ]
-  
+const AdminDoctor = () => {
+  const [doctors, setDoctors] = useState([])
+  const {currentUser: {
+    firstname, lastname, middlename, roleId, token,
+  }} = useAuth();
+
+  useEffect(()=>{
+    fetchDoctors() 
+  },[]);
+
+  const fetchDoctors = async () => {
+    axios.get('http://localhost:8000/api/admin/doctor/all', {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    }).then(({data}) => {
+      setDoctors(data);
+    }).catch(error => {
+      console.error('API request failed:', error);
+  }); 
+}
+
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   
@@ -84,7 +53,7 @@ const AdminDoctor = () => {
 
   return (
     <>
-      <DashboardHeader name={ name }/>
+      <DashboardHeader firstname={ firstname } token={ token }/>
       <div className='table-content-wrapper'>
           <div className='table-header'>
             <h1 className='title-with-btn'>Doctors</h1>
@@ -108,36 +77,32 @@ const AdminDoctor = () => {
               </thead>
               <tbody>
                 {
-                  (tableBody.map((data, index) => {
-                    return (
-                      <>
-                        <tr key={`row-${index}`} onClick={() => handleShowModal2(data)}>
-                          <td>{data.doctor}</td>
-                          <td>{data.email}</td>
-                          <td>{data.specialization}</td>
-                          <td>{data.contact}</td>
-                          <td>{data.address}</td>
-                          <td>
-                            {
-                              (data.isActive === true) ? 
-                                <Button variant='danger'>Deactivate</Button>
-                              :
-                                <Button variant='success'>Activate</Button>
-                            }
-                          </td>
-                        </tr>
-                
-                      </>
-                      
-                    )
-                  }))
+                  doctors.length > 0 && (
+                    doctors.map((row, key)=>(
+                      <tr key={`row-${key}`} onClick={() => handleShowModal2(row)}>
+                        <td>{row.doctor}</td>
+                        <td>{row.email}</td>
+                        <td>{row.specialization}</td>
+                        <td>{row.contact}</td>
+                        <td>{row.address}</td>
+                        <td>
+                          {
+                            (row.isActive === 0) ? 
+                              <Button variant='danger'>Deactivate</Button>
+                            :
+                              <Button variant='success'>Activate</Button>
+                          }
+                        </td>
+                      </tr>
+                    ))
+                  )
                 }
               </tbody>
             </Table>
           </div>
           <ViewModalDoctor showView={showModal2} onCloseView={handleCloseModal2} dataRow={selectedRow} />  
       </div>
-      <AddModals showAdd={showModal1} onCloseAdd={handleCloseModal1}/>
+      <DoctorModals showAdd={showModal1} onCloseAdd={handleCloseModal1}/>
     </>
 
   )

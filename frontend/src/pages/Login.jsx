@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 import DoctorBackground from '../images/doctor-background.svg';
 import Logo from '../images/booking-logo.svg';
 
-import UserProvider, { useAuth } from '../config/UserContext';
+import { useAuth } from '../config/UserContext';
 
 const Login = ({setUserInfo}) => {
     const { setCurrentUser } = useAuth();
@@ -42,7 +42,6 @@ const Login = ({setUserInfo}) => {
     
             if (data) {
                 setCurrentUser(data);
-    
                 Swal.fire({
                     icon: "success",
                     title: "Success",
