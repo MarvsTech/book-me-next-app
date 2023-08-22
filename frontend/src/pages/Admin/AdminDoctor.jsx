@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import addFriend from '../../images/add-friend.svg'
-import AddModals from '../../components/AddModals'
+import DoctorModals from '../../components/DoctorModals'
 import ViewModalDoctor from '../../components/ViewModalDoctor'
 import womanPortrait from '../../images/woman.svg'
 import manPortrait from '../../images/man.svg'
@@ -13,12 +13,8 @@ import axios from 'axios';
 const AdminDoctor = () => {
   const [doctors, setDoctors] = useState([])
   const {currentUser: {
-    firstname, 
-    lastname, 
-    middlename,
-    roleId,
+    firstname, lastname, middlename, roleId, token,
   }} = useAuth();
-  const name = `${firstname}`;
 
   useEffect(()=>{
     fetchDoctors() 
@@ -27,7 +23,8 @@ const AdminDoctor = () => {
   const fetchDoctors = async () => {
     axios.get('http://localhost:8000/api/admin/doctor/all', {
       headers: {
-        'Authorization': `Bearer YOUR_API_TOKEN`,
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
       },
     }).then(({data}) => {
       setDoctors(data);
@@ -56,7 +53,7 @@ const AdminDoctor = () => {
 
   return (
     <>
-      <DashboardHeader name={ name }/>
+      <DashboardHeader firstname={ firstname } token={ token }/>
       <div className='table-content-wrapper'>
           <div className='table-header'>
             <h1 className='title-with-btn'>Doctors</h1>
@@ -105,7 +102,7 @@ const AdminDoctor = () => {
           </div>
           <ViewModalDoctor showView={showModal2} onCloseView={handleCloseModal2} dataRow={selectedRow} />  
       </div>
-      <AddModals showAdd={showModal1} onCloseAdd={handleCloseModal1}/>
+      <DoctorModals showAdd={showModal1} onCloseAdd={handleCloseModal1}/>
     </>
 
   )

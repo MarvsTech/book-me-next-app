@@ -28,8 +28,6 @@ class DoctorStoreControllerRequest extends FormRequest
             'middlename' => 'required|string|max:255',
             'contact_number' => 'required|string|max:20',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required',
-            'confirm_password' => 'required|same:password',
         ];
     }
 
@@ -51,9 +49,6 @@ class DoctorStoreControllerRequest extends FormRequest
             'email.required' => 'Email Address is required',
             'email.email' => 'Email Address should be a valid email',
             'email.unique' => 'This email is already in use',
-            'password.required' => 'Password is required',
-            'confirm_password.required' => 'Confirm Password is required',
-            'confirm_password.same' => 'Confirm Password should match the Password',
         ];
     }
 }
