@@ -1411,3 +1411,54 @@ td.fc-other-month .fc-day-number {
         margin-bottom: 35px !important;
     }
 }
+
+// Dropdown Profile
+.dropdown {
+    .btn-primary {
+        padding: 0px !important;
+        border: none !important;
+    }
+
+    .btn-primary:hover {
+        background-color: transparent !important;
+    }
+
+    .dropdown-menu.show {
+        transform: translate3d(0px, 70px, 0px) !important;
+    }
+
+    .dropdown-menu {
+        padding-top: 15px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 15px !important;
+        box-shadow: 2px 0px 15px 0px rgba(0, 0, 0, 0.25);
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+
+            div {
+                font-size: 16px;
+            }
+
+            div:hover {
+                color: #00AACF;
+            }
+    
+            img {
+                width: 20px;
+                height: 20px;
+                margin-right: 10px;
+                border: none !important;
+                border-radius: 0px !important;
+                color: #000;
+            }
+
+            img:hover {
+                color: transparent !important;
+            }
+        }
+    }
+}
