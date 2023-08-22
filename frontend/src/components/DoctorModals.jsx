@@ -6,18 +6,18 @@ import { FiUserPlus, FiCamera } from "react-icons/fi";
 import { useLocation } from 'react-router-dom';
 import { useAuth } from '../config/UserContext';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const DoctorModals = ({showAdd, onCloseAdd}) => {
-    const {currentUser: {
-        firstname, lastname, middlename, roleId, token,
-    }} = useAuth();
+    const {currentUser: { token }} = useAuth();
 
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [MI, setMI] = useState("");
+    const [firstname, setFirstName] = useState("");
+    const [lastname, setLastName] = useState("");
+    const [middlename, setMI] = useState("");
+    const [email, setEmail] = useState("");
     const [specialization, setSpecialization] = useState("");
-    const [roomNumber, setRoomNumber] = useState("");
-    const [contactNumber, setContactNumber] = useState("");
+    const [room_number, setRoomNumber] = useState("");
+    const [contact_number, setContactNumber] = useState("");
     const [address, setAddress] = useState("");
 
     const [selectedFile, setSelectedFile] = useState(null);
@@ -31,14 +31,16 @@ const DoctorModals = ({showAdd, onCloseAdd}) => {
         e.preventDefault();
     
         const formData = new FormData();
-        formData.append('profile_image', selectedFile);
-        formData.append('username', username);
-        formData.append('password', password);
-        formData.append('first_name', firstName);
-        formData.append('last_name', lastName);
-        formData.append('contact', contact);
+        formData.append('profile', selectedFile);
+        formData.append('firstname', firstname);
+        formData.append('lastname', lastname);
+        formData.append('middlename', middlename);
         formData.append('email', email);
-    
+        formData.append('specialization', specialization);
+        formData.append('room_number', room_number);
+        formData.append('contact_number', contact_number);
+        formData.append('address', address);
+
         try {
             const response = await axios.post('http://localhost:8000/api/admin/doctor', formData, {
                 headers: {
@@ -47,17 +49,20 @@ const DoctorModals = ({showAdd, onCloseAdd}) => {
                 },
             });
 
-            setUsername('');
-            setPassword('');
-            setFirstName('');
-            setLastName('');
-            setContact('');
-            setEmail('');
-            setSelectedFile(null);
-
-            onCloseAdd();
-
-            console.log(response.data);
+            if (response.status === 200) {
+                setFirstName('');
+                setLastName('');
+                setMI('');
+                setSpecialization('');
+                setRoomNumber('');
+                setContactNumber('');
+                setAddress('');
+                setSelectedFile(null);
+                onCloseAdd();
+                Swal('Success', 'Doctor created successfully!', 'success');
+            } else {
+                console.error('Request was not successful. Status code:', response.status);
+            }
         } catch (error) {
             console.error('Error creating doctor:', error);
         }
@@ -85,34 +90,41 @@ const DoctorModals = ({showAdd, onCloseAdd}) => {
                                 <Row>
                                     <Col md={5}>
                                         <FloatingLabel controlId="floatingInputFirstname" label="Firstname" className="mb-3">
-                                            <Form.Control type="text" value={firstName} onChange={e => setFirstName(e.target.value)} placeholder="Firstname"/>
+                                            <Form.Control type="text" value={firstname} onChange={e => setFirstName(e.target.value)} placeholder="Firstname"/>
                                         </FloatingLabel>
                                     </Col>
                                     <Col md={5}>
                                         <FloatingLabel controlId="floatingInputLastname" label="Lastname" className="mb-3">
-                                            <Form.Control type="text" value={lastName} onChange={e => setLastName(e.target.value)} placeholder="Lastname"/>
+                                            <Form.Control type="text" value={lastname} onChange={e => setLastName(e.target.value)} placeholder="Lastname"/>
                                         </FloatingLabel>
                                     </Col>
                                     <Col md={2}>
                                         <FloatingLabel controlId="floatingInputMI" label="MI" className="mb-3">
-                                            <Form.Control type="text" value={MI} onChange={e => setMI(e.target.value)} placeholder="MI"/>
+                                            <Form.Control type="text" value={middlename} onChange={e => setMI(e.target.value)} placeholder="MI"/>
                                         </FloatingLabel>
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col md={4}>
+                                    <Col md={6}>
                                         <FloatingLabel controlId="floatingInputSpecialization" label="Specialization" className="mb-3">
                                             <Form.Control type="text" value={specialization} onChange={e => setSpecialization(e.target.value)} placeholder="Specialization"/>
                                         </FloatingLabel>
                                     </Col>
-                                    <Col md={4}>
+                                    <Col md={6}>
                                         <FloatingLabel controlId="floatingInputRoomNumber" label="Room Number" className="mb-3">
-                                            <Form.Control type="text" value={roomNumber} onChange={e => setRoomNumber(e.target.value)} placeholder="RoomNumber"/>
+                                            <Form.Control type="text" value={room_number} onChange={e => setRoomNumber(e.target.value)} placeholder="RoomNumber"/>
                                         </FloatingLabel>
                                     </Col>
-                                    <Col md={4}>
+                                </Row>
+                                <Row>
+                                    <Col md={6}>
                                         <FloatingLabel controlId="floatingInputContactNumber" label="Contact Number" className="mb-3">
-                                            <Form.Control type="text" value={contactNumber} onChange={e => setContactNumber(e.target.value)} placeholder="ContactNumber"/>
+                                            <Form.Control type="text" value={contact_number} onChange={e => setContactNumber(e.target.value)} placeholder="ContactNumber"/>
+                                        </FloatingLabel>
+                                    </Col>
+                                    <Col md={6}>
+                                        <FloatingLabel controlId="floatingInputEmail" label="Email Address" className="mb-3">
+                                            <Form.Control type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="john@doe.com"/>
                                         </FloatingLabel>
                                     </Col>
                                 </Row>
