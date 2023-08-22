@@ -72,11 +72,6 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::apiResource('feedback', FeedbackController::class)->only([
                 'index', 'store'
             ]);
-            Route::controller(LoginController::class)->group(function () {
-                Route::get('profile', 'profile');
-                Route::post('signout', 'signout');
-                Route::put('updateProfile', 'updateProfile');
-            });
         });
     });
 
@@ -90,5 +85,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('role:Patient')->group(function () {
         Route::prefix('patient')->name('patient.')->group(function () {
         });
+    });
+
+    Route::controller(LoginController::class)->group(function () {
+        Route::get('profile', 'profile');
+        Route::post('signout', 'signout');
+        Route::put('updateProfile', 'updateProfile');
     });
 });

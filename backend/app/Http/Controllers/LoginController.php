@@ -86,9 +86,11 @@ class LoginController extends BaseController
             $user->tokens->each(function ($token, $key) {
                 $token->delete();
             });
+
+            return response()->json(['message' => 'User logged out'], 200);
         }
 
-        return ['message' => 'User logged out'];
+        return response()->json(['message' => 'No user logged in'], 401);
     }
 
     public function updateProfile(Request $request, User $user) {
