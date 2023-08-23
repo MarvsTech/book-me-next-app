@@ -1473,3 +1473,48 @@ td.fc-other-month .fc-day-number {
         }
     }
 }
+
+// 404 Page
+.banner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+
+    h1, h4, .button {
+        font-family: Montserrat;
+        margin-bottom: 0px;
+    }
+
+    h4 {
+        font-size: 1rem;
+        margin: 20px;
+    }
+
+    .banner-button {
+        width: fit-content !important;
+        font-size: 18px !important;
+        font-weight: 500 !important;
+        border-radius: 15px !important;
+        padding: 15px !important;
+    }
+}
+
+.banner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .banner-image {
+
+        img {
+            vertical-align: middle;
+            width: 400px !important;
+            height: 400px !important;
+        }
+    }
+}
+
+.banner-page-container {
+    margin-top: 20px;
+}

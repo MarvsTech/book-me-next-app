@@ -75,35 +75,37 @@
 </head>
 
 <body>
-    <div class="logo-email">
-        <h1>BOOKMENEXT</h1>
-    </div>
+    <div>
+        <div class="logo-email">
+            <h1>BOOKMENEXT</h1>
+        </div>
 
-    <div class="email-notifications-header">
-        <h1>Welcome to Book Me Next App</h1>
-    </div>
+        <div class="email-notifications-header">
+            <h1>Welcome to Book Me Next App</h1>
+        </div>
 
-    <div class="horizontal-line">
-        <hr>
-    </div>
+        <div class="horizontal-line">
+            <hr>
+        </div>
 
-    <div class="email-notification-container">
-        <div class="email-notification-content">
-            <p class="opening-greeting">Dear {{$user->firstname}} {{$user->middlename}} {{$user->lastname}}</p>
-            <p class="email-content">Your appointment has been successfully created.</p>
-            <p class="email-content">Here are your account details:</p>
-            <div class="email-content email-details">
-                <ul>
-                    <li><strong>Email:</strong> {{$user->email}}</li>
-                    <li><strong>Username:</strong> {{$user->email}}</li>
-                    <li><strong>Date:</strong> {{$user->created_at}}</li>
-                </ul>
+        <div class="email-notification-container">
+            <div class="email-notification-content">
+                <p class="opening-greeting">Dear {{$user->firstname}} {{$user->middlename}} {{$user->lastname}}</p>
+                <p class="email-content">Your appointment has been successfully created.</p>
+                <p class="email-content">Here are your account details:</p>
+                <div class="email-content email-details">
+                    <ul>
+                        <li><strong>Email:</strong> {{$user->email}}</li>
+                        <li><strong>Username:</strong> {{$user->email}}</li>
+                        <li><strong>Date:</strong> {{$user->created_at}}</li>
+                    </ul>
+                </div>
+                <p class="email-content">If you have any questions or need assistance, feel free to contact our support
+                    team.</p>
+                <p class="email-content">Thank you for using Book Me Next App!</p>
+                <p class="closing-greeting">Best regards,</p>
+                <p class="closing-greeting">The Book Me Next App Team</p>
             </div>
-            <p class="email-content">If you have any questions or need assistance, feel free to contact our support
-                team.</p>
-            <p class="email-content">Thank you for using Book Me Next App!</p>
-            <p class="closing-greeting">Best regards,</p>
-            <p class="closing-greeting">The Book Me Next App Team</p>
         </div>
     </div>
 </body>
