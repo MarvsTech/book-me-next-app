@@ -28,4 +28,11 @@ class DoctorRepository implements DoctorContract {
     {
         return $this->model->update($params);
     }
+
+    public function getAllDoctors(string $role)
+    {
+        return $this->model->whereHas('role', function ($query) use ($role) {
+            $query->where('role_name', $role);
+        })->get();
+    }
 }

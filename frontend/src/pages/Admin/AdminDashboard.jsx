@@ -10,8 +10,8 @@ const AdminDashboard = () => {
     lastname, 
     middlename,
     roleId,
+    token,
   }} = useAuth();
-  const name = `${firstname}`;
 
   const dataDoctor = {
     labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
@@ -67,7 +67,7 @@ const AdminDashboard = () => {
 
   return (
     <div>
-      <DashboardHeader name={ name }/>
+      <DashboardHeader firstname={ firstname } token={ token }/>
       <BookingCard />
       <div className='chart-card-wrapper'>
         <Chart chartType="line" dataLine={dataDoctor} />

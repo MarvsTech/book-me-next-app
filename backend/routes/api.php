@@ -59,9 +59,11 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::apiResource('role', RoleController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
             ]);
+            Route::get('/appointments/patient/records', [AppointmentController::class, 'getAllPatientAppointment']);
             Route::apiResource('appointment', AppointmentController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
             ]);
+            Route::get('/doctor/all', [DoctorController::class, 'getAllDoctors']);
             Route::apiResource('doctor', DoctorController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
             ]);
@@ -71,11 +73,6 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::apiResource('feedback', FeedbackController::class)->only([
                 'index', 'store'
             ]);
-            Route::controller(LoginController::class)->group(function () {
-                Route::get('profile', 'profile');
-                Route::post('signout', 'signout');
-                Route::put('updateProfile', 'updateProfile');
-            });
         });
     });
 
@@ -88,6 +85,13 @@ Route::middleware('auth:sanctum')->group(function () {
     // Routes for role: Patient
     Route::middleware('role:Patient')->group(function () {
         Route::prefix('patient')->name('patient.')->group(function () {
+            Route::get('/appointments/user/data', [AppointmentController::class, 'filterByLoginUser']);
         });
+    });
+
+    Route::controller(LoginController::class)->group(function () {
+        Route::get('profile', 'profile');
+        Route::post('signout', 'signout');
+        Route::put('updateProfile', 'updateProfile');
     });
 });

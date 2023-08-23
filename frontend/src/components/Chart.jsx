@@ -11,6 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2';
+import ProfileSettings from '../images/profile.svg'
 
 ChartJS.register(
   CategoryScale,

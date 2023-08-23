@@ -190,4 +190,43 @@ class AppointmentController extends Controller
             ], 500);
         }
     }
+
+    public function filterByLoginUser() {
+        try{
+            $loggedInUser = auth()->user();
+            $filteredAppointments = $this->appointmentContract->filterByLoginUser($loggedInUser->id, 3);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'This is your all appointment scheduled',
+                'data' => new AppointmentResource($filteredAppointments, __FUNCTION__),
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete appointment.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function getAllPatientAppointment() {
+        try{
+            $patientAppointments = $this->appointmentContract->getAllPatientAppointment(3);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'List of all the appointment',
+                'data' => new AppointmentResource($patientAppointments, __FUNCTION__),
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete appointment.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
 }

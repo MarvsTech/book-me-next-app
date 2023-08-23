@@ -2,7 +2,6 @@ import { createContext, useContext, useState } from 'react';
 
 const UserContext = createContext();
 
-
 const UserProvider = (({children}) => {
     const [currentUser, setCurrentUser] = useState(null);
 

@@ -5,58 +5,43 @@ import womanPortrait from '../../images/woman.svg'
 import manPortrait from '../../images/man.svg'
 import DashboardHeader from '../../components/DashboardHeader'
 import { useAuth } from '../../config/UserContext';
+import axios from 'axios';
 
 const AdminAppointment = () => {
-  const {currentUser: {
-    firstname, 
-    lastname, 
-    middlename,
-    roleId,
-  }} = useAuth();
-  const name = `${firstname}`;
+  const { currentUser } = useAuth();
+  const [appointments, setAppointments] = useState([]);
+  const [tableBody, setTableBody] = useState([]);
 
-  const tableBody = [
-    {
-      patient : 'Jane Doe',
-      email : 'janedoe@mail.com',
-      doctor : 'janedoe@mail.com',
-      booking_date : 'August 15, 2023',
-      booking_time : '8:00 AM - 9:30 AM',
-      status : 'pending',
-      doctor_specialization: 'Endocrinologist',
-      image: <img src={womanPortrait} alt="portrait of a woman"/>
-    },
-    {
-      patient : 'John Doe',
-      email : 'johndoe@mail.com',
-      doctor : 'johndoe@mail.com',
-      booking_date : 'August 15, 2023',
-      booking_time : '8:00 AM - 9:30 AM',
-      status : 'completed',
-      doctor_specialization: 'Endocrinologist',
-      image: <img src={manPortrait} alt="portrait of a woman"/>
-    },
-    {
-      patient : 'Juan Dela Cruz',
-      email : 'juandelacruz@mail.com',
-      doctor : 'juandelacruz@mail.com',
-      booking_date : 'August 15, 2023',
-      booking_time : '8:00 AM - 9:30 AM',
-      status : 'rejected',
-      doctor_specialization: 'Endocrinologist',
-      image: <img src={manPortrait} alt="portrait of a woman"/>
-    },
-    {
-      patient : 'Juana Dela Cruz',
-      email : 'juanadelacruz@mail.com',
-      doctor : 'juanadelacruz@mail.com',
-      booking_date : 'August 15, 2023',
-      booking_time : '8:00 AM - 9:30 AM',
-      status : 'pending',
-      doctor_specialization: 'Endocrinologist',
-      image: <img src={womanPortrait} alt="portrait of a woman"/>
+  useEffect(() => {
+    if (currentUser && currentUser.id && currentUser.token) {
+      axios.get('http://localhost:8000/api/admin/appointments/patient/records', {
+        headers: {
+          Authorization: `Bearer ${currentUser.token}`
+        }
+      })
+      .then(response => {
+        const responseData = response.data.data;
+        console.log(response.data.data);
+        const scheds = responseData.map((i) => {
+          return {
+            patient: i.patient,
+            doctor: i.doctor,
+            status: i.status_id,
+            booking_date: i.doctor_schedule_time.time_available,
+            booking_time: i.doctor_schedule_date.date_available,
+          };
+        });
+        setAppointments(scheds);
+
+        if (response.data && response.data.doctor) {
+          setTableBody([response.data.doctor]);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching appointments:', error);
+      });
     }
-  ]
+  }, [currentUser]);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -74,9 +59,9 @@ const AdminAppointment = () => {
 
   return (
     <>
-      <DashboardHeader name={ name }/>
+      <DashboardHeader name={ currentUser.firstname }/>
 
-      <PatientTable dataRow={tableBody} handleShowModal={handleShowModal}/>
+      <PatientTable dataRow={appointments} handleShowModal={handleShowModal}/>
 
       <ViewPatientModal show={showModal} onClose={handleCloseModal} dataRow={selectedRow}/>
     </>

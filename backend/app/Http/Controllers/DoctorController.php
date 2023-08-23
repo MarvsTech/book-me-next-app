@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\User;
+use Illuminate\Support\Str;
+use App\Services\SmsService;
 use App\Contracts\DoctorContract;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\DoctorResource;
 use App\Repositories\DoctorRepository;
+use App\Mail\CreateDoctorAccountNotificationMail;
 use App\Http\Requests\DoctorStoreControllerRequest;
 use App\Http\Requests\DoctorUpdateControllerRequest;
 
@@ -42,6 +46,27 @@ class DoctorController extends Controller
         }
     }
 
+    public function getAllDoctors(DoctorContract $doctorContract)
+    {
+        try {
+            $doctor = $this->doctorContract->getAllDoctors('doctor');
+
+            return (new DoctorResource($doctor, __FUNCTION__))->additional([
+                'status' => 'success',
+                'message' => 'Welcome to Doctor Page',
+            ]);
+
+        } catch(Exception $e) {
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed.',
+                'error' => $e->getMessage(),
+            ], 500);
+
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -56,13 +81,24 @@ class DoctorController extends Controller
                 'specialization',
                 'contact_number',
                 'address',
-                'email',
-                'password',
                 'room_number',
+                'email',
                 'profile',
             ]);
+
+            $defaultPassword = Str::random(8);
+
             $params['role_id'] = 2;
+            $params['password'] = bcrypt($defaultPassword);
+
             $doctor = $doctorRepository->store($params);
+
+            if(!empty($doctor)) {
+                Mail::to($doctor->email)->send(new CreateDoctorAccountNotificationMail (
+                    $doctor,
+                    $defaultPassword,
+                ));
+            }
 
             return response()->json([
                 'status' => 'success',

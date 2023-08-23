@@ -507,29 +507,44 @@
         margin-bottom: 30px;
 
         .change-profile-img {
-                display: flex !important;
-                cursor: pointer;
+            display: flex !important;
+            cursor: pointer;
+            justify-content: center;
+    
+            img {
+                height: 90px;
+                width: 90px;
+                border: 1px solid;
+                border-radius: 50%;
+            }
+            .camera-badge {
+                position: absolute;
+                bottom: 0;
+                right: 45%;
+                background-color: #000;
+                color: white;
+                border-radius: 50%;
+                padding: 2px 6px;
+                display: flex;
+                align-items: center;
                 justify-content: center;
-        
-                img {
-                    height: 90px;
-                    width: 90px;
+
+                svg {
+                    font-size: 14px;
+                    width: 14px;
+                    height: 20px;
                 }
+            }
         }
     }
 
     .modal-form-content {
         margin-bottom: 25px;
 
-        .form-group {
-            margin-bottom: 25px;
-
-            .form-control {
-                width: 20vw;
-                height: 50px;
-                border-radius: 10px;
-                background: #E6E6E6;
-                padding-left: 25px;
+        .container {
+            .row {
+                width: 100%;
+                margin-bottom: 20px;
             }
         }
     }
@@ -1259,49 +1274,60 @@
     padding-right: 60px !important;
     padding-top: 40px !important;
 
-    .form-label {
-        color: #545454;
-        font-family: Montserrat;
-        font-size: 15px;
-        font-weight: 400;
-        letter-spacing: 0.6px;
-    }
+    .container {
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            .row {
+                width: 100%;
 
-    .form-control, .form-select {
-        margin-bottom: 50px;
-        width: 300px;
-        height: 60px;
-        border-radius: 10px;
-        background: #E6E6E6;
-        padding-left: 20px;
-    }
+                .form-label {
+                    color: #545454;
+                    font-family: Montserrat;
+                    font-size: 15px;
+                    font-weight: 400;
+                    letter-spacing: 0.6px;
+                }
 
-    .form-select {
-        width: 100%;
-    }
+                .form-control, .form-select {
+                    margin-bottom: 50px;
+                    height: 60px;
+                    border-radius: 10px;
+                    background: #E6E6E6;
+                    padding-left: 20px;
+                }
 
-    .form-control::placeholder {
-        color: #545454;
-        font-family: Montserrat;
-        font-weight: 500;
-        letter-spacing: 0.75px;
-    }
+                .form-select {
+                    width: 100%;
+                }
 
-    .book-btn {
-        margin-top: 40px;
+                .form-control::placeholder {
+                    color: #545454;
+                    font-family: Montserrat;
+                    font-weight: 500;
+                    letter-spacing: 0.75px;
+                }
 
-        .btn {
-            width: 255px;
-            height: 50px;
-            border-radius: 10px;
-            background: #00AACF;
-            border: none;
-            margin: auto;
-        
-            color: #FFF;
-            font-family: Montserrat;
-            font-size: 20px;
-            font-weight: 600;
+                .book-btn {
+                    margin-top: 40px;
+
+                    .btn {
+                        width: 255px;
+                        height: 50px;
+                        border-radius: 10px;
+                        background: #00AACF;
+                        border: none;
+                        margin: auto;
+                    
+                        color: #FFF;
+                        font-family: Montserrat;
+                        font-size: 20px;
+                        font-weight: 600;
+                    }
+                }
+            }
         }
     }
 }
@@ -1395,4 +1421,100 @@ td.fc-other-month .fc-day-number {
     .form-control {
         margin-bottom: 35px !important;
     }
+}
+
+// Dropdown Profile
+.dropdown {
+    .btn-primary {
+        padding: 0px !important;
+        border: none !important;
+    }
+
+    .btn-primary:hover {
+        background-color: transparent !important;
+    }
+
+    .dropdown-menu.show {
+        transform: translate3d(0px, 70px, 0px) !important;
+    }
+
+    .dropdown-menu {
+        padding-top: 15px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 15px !important;
+        box-shadow: 2px 0px 15px 0px rgba(0, 0, 0, 0.25);
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+
+            div {
+                font-size: 16px;
+            }
+
+            div:hover {
+                color: #00AACF;
+            }
+    
+            img {
+                width: 20px;
+                height: 20px;
+                margin-right: 10px;
+                border: none !important;
+                border-radius: 0px !important;
+                color: #000;
+            }
+
+            img:hover {
+                color: transparent !important;
+            }
+        }
+    }
+}
+
+// 404 Page
+.banner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+
+    h1, h4, .button {
+        font-family: Montserrat;
+        margin-bottom: 0px;
+    }
+
+    h4 {
+        font-size: 1rem;
+        margin: 20px;
+    }
+
+    .banner-button {
+        width: fit-content !important;
+        font-size: 18px !important;
+        font-weight: 500 !important;
+        border-radius: 15px !important;
+        padding: 15px !important;
+    }
+}
+
+.banner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .banner-image {
+
+        img {
+            vertical-align: middle;
+            width: 400px !important;
+            height: 400px !important;
+        }
+    }
+}
+
+.banner-page-container {
+    margin-top: 20px;
 }

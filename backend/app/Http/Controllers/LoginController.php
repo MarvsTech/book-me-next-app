@@ -43,7 +43,7 @@ class LoginController extends BaseController
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-
+            $data['id'] = $user->id;
             $data['token'] = $user->createToken('BookMeNext')->plainTextToken;
             $data['firstname'] = $user->firstname;
             $data['lastname'] = $user->lastname;
@@ -86,9 +86,11 @@ class LoginController extends BaseController
             $user->tokens->each(function ($token, $key) {
                 $token->delete();
             });
+
+            return response()->json(['message' => 'User logged out'], 200);
         }
 
-        return ['message' => 'User logged out'];
+        return response()->json(['message' => 'No user logged in'], 401);
     }
 
     public function updateProfile(Request $request, User $user) {
