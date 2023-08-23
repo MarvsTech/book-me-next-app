@@ -13,6 +13,8 @@ import { useAuth } from '../../config/UserContext';
 import Calendar from '../../components/Calendar';
 import PatientProfileSettings from '../../components/PatientProfileSettings';
 import axios from 'axios';
+import PatientBookingAppointment from '../../components/PatientBookingAppointment';
+import PatientViewCalendar from '../../components/PatientViewCalendar';
 
 const PatientDashboard = () => {
   const { currentUser } = useAuth();
@@ -96,57 +98,10 @@ const PatientDashboard = () => {
           </Row>
         </Container>
       </div>
-      <Modal show={showModal1} onHide={handleCloseModal1} className='booking-modal-content'>
-        <Modal.Header closeButton className='booking-header'>
-          <h1>Book Appointment</h1>
-        </Modal.Header>
-        <Modal.Body className='booking-body'>
-          <Container fluid>
-            <Form className='booking-form'>
-              <Row className='booking-date-time'>
-                <Col className='date-picker'>
-                  <Form.Label>Booking Date:</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder='Choose date'
-                    onFocus={(e) => (e.target.type = "date")}
-                    onBlur={(e) => (e.target.type = "text")}
-                  />
-                </Col>
-                <Col className='time-picker'>
-                  <Form.Label>Booking Time:</Form.Label>
-                  <Form.Select>
-                    <option>Choose Time</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </Form.Select>
-                </Col>
-              </Row>
 
-              <Row className='choose-doctor'>
-                <Form.Label>Doctor:</Form.Label>
-                <Form.Select>
-                  <option>Choose Doctor</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </Form.Select>
-              </Row>
+      <PatientBookingAppointment show={showModal1} handleCloseModal={handleCloseModal1}/>
 
-              <Row className='book-btn'>
-                <Button type='submit' onClick={handleCloseModal1}>Book Appointment</Button>
-              </Row>
-            </Form>
-          </Container>
-        </Modal.Body>
-      </Modal>
-      <Modal show={showModal3} onHide={handleCloseModal3} className='view-calendar-modal'>
-        <Modal.Header closeButton></Modal.Header>
-        <Modal.Body>
-          <Calendar />
-        </Modal.Body>
-      </Modal>
+      <PatientViewCalendar show={showModal3} handleCloseModal={handleCloseModal3}/>
     </div>
   )
 }
