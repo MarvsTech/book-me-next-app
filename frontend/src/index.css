@@ -1264,4 +1264,42 @@ td.fc-other-month .fc-day-number {
 }
 .dropdown .dropdown-menu .dropdown-item img:hover {
   color: transparent !important;
+}
+
+.banner-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+.banner-content h1, .banner-content h4, .banner-content .button {
+  font-family: Montserrat;
+  margin-bottom: 0px;
+}
+.banner-content h4 {
+  font-size: 1rem;
+  margin: 20px;
+}
+.banner-content .banner-button {
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  border-radius: 15px !important;
+  padding: 15px !important;
+}
+
+.banner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.banner-container .banner-image img {
+  vertical-align: middle;
+  width: 400px !important;
+  height: 400px !important;
+}
+
+.banner-page-container {
+  margin-top: 20px;
 }/*# sourceMappingURL=index.css.map */
