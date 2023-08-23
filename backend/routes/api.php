@@ -84,6 +84,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Routes for role: Patient
     Route::middleware('role:Patient')->group(function () {
         Route::prefix('patient')->name('patient.')->group(function () {
+            Route::get('/appointments/user/data', [AppointmentController::class, 'filterByLoginUser']);
         });
     });
 

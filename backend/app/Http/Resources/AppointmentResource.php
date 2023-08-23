@@ -26,4 +26,9 @@ class AppointmentResource extends JsonResource
     {
         return $this->resource;
     }
+
+    public function filterByLoginUser()
+    {
+        return $this->resource;
+    }
 }

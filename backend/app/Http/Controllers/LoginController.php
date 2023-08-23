@@ -43,7 +43,7 @@ class LoginController extends BaseController
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-
+            $data['id'] = $user->id;
             $data['token'] = $user->createToken('BookMeNext')->plainTextToken;
             $data['firstname'] = $user->firstname;
             $data['lastname'] = $user->lastname;
