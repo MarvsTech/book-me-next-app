@@ -75,6 +75,7 @@ const NavbarDropdown = () => {
        <PatientProfileSettings
         show={showProfileSettingsModal}
         onHide={handleCloseProfileSettings}
+        handleCloseModal = {handleCloseProfileSettings}
       />
     </>
   );

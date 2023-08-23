@@ -91,7 +91,11 @@ const PatientDashboard = () => {
     const handleShowModal1 = () => setShowModal1(true);
 
     const [showModal2, setShowModal2] = useState(false);
-    const handleCloseModal2 = () => setShowModal2(false);
+    const handleCloseModal2 = () => {
+      
+      setShowModal2(false);
+      console.log(showModal2);
+    }
     const handleShowModal2 = () => setShowModal2(true);
 
     const [showModal3, setShowModal3] = useState(false);
