@@ -52,14 +52,6 @@ const PatientDashboard = () => {
   const handleCloseModal1 = () => setShowModal1(false);
   const handleShowModal1 = () => setShowModal1(true);
 
-  const [showModal2, setShowModal2] = useState(false);
-  const handleCloseModal2 = () => {
-    
-    setShowModal2(false);
-    console.log(showModal2);
-  }
-  const handleShowModal2 = () => setShowModal2(true);
-
   const [showModal3, setShowModal3] = useState(false);
   const handleCloseModal3 = () => setShowModal3(false);
   const handleShowModal3 = () => setShowModal3(true);
@@ -96,7 +88,6 @@ const PatientDashboard = () => {
         <Container>
           <Row>
             <Col md={12}>
-              <Button variant="primary" onClick={handleShowModal2}>View appointments</Button>
               <Button onClick={handleShowModal3}>View Calendar</Button>
             </Col>
             <Col md={12}>
@@ -150,7 +141,6 @@ const PatientDashboard = () => {
           </Container>
         </Modal.Body>
       </Modal>
-      <PatientProfileSettings show={showModal2} handleCloseModal={handleCloseModal2} handleShowModal={handleShowModal2} data={tableBody[0]}/>
       <Modal show={showModal3} onHide={handleCloseModal3} className='view-calendar-modal'>
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
