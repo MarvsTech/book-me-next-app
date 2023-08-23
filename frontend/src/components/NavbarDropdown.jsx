@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Dropdown } from 'react-bootstrap';
 import PatientProfile from '../images/woman.svg';
 import ProfileSettings from '../images/profile-settings.png';
@@ -12,6 +12,8 @@ import { useAuth } from '../config/UserContext';
 
 const NavbarDropdown = () => {
   const { currentUser: { token } } = useAuth();
+  const [showProfileSettingsModal, setShowProfileSettingsModal] = useState(false);
+
   const handleLogout = async () => {
     await Swal.fire({
       title: 'Logout',
@@ -43,28 +45,38 @@ const NavbarDropdown = () => {
     });
   };
 
-  return (
-    <Dropdown>
-      <Dropdown.Toggle id="dropdown-basic">
-        <img src={PatientProfile} alt="Logo" className='navlink dropdown-trigger'/>
-      </Dropdown.Toggle>
+  const handleCloseProfileSettings = () => {
+    setShowProfileSettingsModal(false);
+  };
 
-      <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">
-          <img src={ProfileSettings} alt="Profile Settings"></img>
-          <div>Profile Settings</div>
-          <PatientProfileSettings />
-        </Dropdown.Item>
-        <Dropdown.Item href="#/action-2">
-          <img src={PasswordSettings} alt="Password Settings"></img>
-          <div>Password</div>
-        </Dropdown.Item>
-        <Dropdown.Item onClick={handleLogout}>
-          <img src={Logout} alt="Logout" />
-          <div>Logout</div>
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+  return (
+    <>
+      <Dropdown>
+        <Dropdown.Toggle id="dropdown-basic">
+          <img src={PatientProfile} alt="Logo" className='navlink dropdown-trigger'/>
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item onClick={() => setShowProfileSettingsModal(true)}>
+            <img src={ProfileSettings} alt="Profile Settings" />
+            <div>Profile Settings</div>
+          </Dropdown.Item>
+          <Dropdown.Item href="#/action-2">
+            <img src={PasswordSettings} alt="Password Settings"></img>
+            <div>Password</div>
+          </Dropdown.Item>
+          <Dropdown.Item onClick={handleLogout}>
+            <img src={Logout} alt="Logout" />
+            <div>Logout</div>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+
+       <PatientProfileSettings
+        show={showProfileSettingsModal}
+        onHide={handleCloseProfileSettings}
+      />
+    </>
   );
 };
 
