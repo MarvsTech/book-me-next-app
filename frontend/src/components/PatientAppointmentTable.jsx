@@ -2,7 +2,6 @@ import React from 'react'
 import {Table, Button} from 'react-bootstrap'
 
 const PatientAppointmentTable = ({dataRow, handleShowModal}) => {
-
   return (
     <div className='table-content-wrapper'>
       <Table className='patient-appointment-table'>
@@ -21,17 +20,17 @@ const PatientAppointmentTable = ({dataRow, handleShowModal}) => {
               return (
                 <>
                   <tr key={`row-${index}`}>
-                    <td>{data.doctor}</td>
-                    <td>{data.email}</td>
+                    <td>{data.doctor.firstname} {data.doctor.middlename} {data.doctor.lastname}</td>
+                    <td>{data.doctor.email}</td>
                     <td>{data.booking_date}</td>
                     <td>{data.booking_time}</td>
                     <td>
                       {
-                        (data.status === 'pending') ? 
+                        (data.status === 2) ? 
                           <Button variant='warning' className='patient-appointment-status'>Pending</Button>
-                        : (data.status === 'completed') ?
+                        : (data.status === 1) ?
                           <Button variant='success' className='patient-appointment-status'>Completed</Button>
-                        : (data.status === 'rejected') ?
+                        : (data.status === 3) ?
                           <Button variant='danger' className='patient-appointment-status'>Rejected</Button>
                         :
                           null
