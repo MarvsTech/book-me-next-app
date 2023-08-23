@@ -59,6 +59,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::apiResource('role', RoleController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
             ]);
+            Route::get('/appointments/patient/records', [AppointmentController::class, 'getAllPatientAppointment']);
             Route::apiResource('appointment', AppointmentController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
             ]);

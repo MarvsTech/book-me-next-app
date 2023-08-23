@@ -123,7 +123,6 @@ const PatientDashboard = () => {
                   </Form.Select>
                 </Col>
               </Row>
-
               <Row className='choose-doctor'>
                 <Form.Label>Doctor:</Form.Label>
                 <Form.Select>

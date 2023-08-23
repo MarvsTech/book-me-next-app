@@ -211,4 +211,22 @@ class AppointmentController extends Controller
         }
     }
 
+    public function getAllPatientAppointment() {
+        try{
+            $patientAppointments = $this->appointmentContract->getAllPatientAppointment(3);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'List of all the appointment',
+                'data' => new AppointmentResource($patientAppointments, __FUNCTION__),
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete appointment.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
 }

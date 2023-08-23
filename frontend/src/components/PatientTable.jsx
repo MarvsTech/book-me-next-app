@@ -23,30 +23,29 @@ const PatientTable = ({dataRow, handleShowModal}) => {
               </tr>
             </thead>
             <tbody>
-              {
+              { 
                 (dataRow.map((data, index) => {
                   return (
                     <>
                       <tr key={`row-${index}`} onClick={() => handleShowModal(data)}>
-                        <td>{data.patient}</td>
-                        <td>{data.email}</td>
-                        <td>{data.doctor}</td>
+                        <td>{data.patient.firstname} {data.patient.middlename} {data.patient.lastname}</td>
+                        <td>{data.patient.email}</td>
+                        <td>{data.doctor.firstname} {data.doctor.middlename} {data.doctor.lastname}</td>
                         <td>{data.booking_date}</td>
                         <td>{data.booking_time}</td>
                         <td>
                           {
-                            (data.status === 'pending') ? 
-                                <Button variant='warning'>Pending</Button>
-                            : (data.status === 'completed') ?
-                                <Button variant='success'>Completed</Button>
-                            : (data.status === 'rejected') ?
-                                <Button variant='danger'>Rejected</Button>
+                            (data.status === 2) ? 
+                              <Button variant='warning' className='patient-appointment-status'>Pending</Button>
+                            : (data.status === 1) ?
+                              <Button variant='success' className='patient-appointment-status'>Completed</Button>
+                            : (data.status === 3) ?
+                              <Button variant='danger' className='patient-appointment-status'>Rejected</Button>
                             :
-                                null
+                              null
                           }
                         </td>
                       </tr>
-              
                     </>
                     )
                 }))
