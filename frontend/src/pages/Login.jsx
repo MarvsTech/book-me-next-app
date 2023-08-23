@@ -112,7 +112,7 @@ const Login = ({setUserInfo}) => {
                             </Form.Group>
                             <p>Dont have an account? <Link to="/register">Register</Link></p>
                             <div className='btn-submit'>
-                                <Button type="submit">Submit form</Button>
+                                <Button type="submit">Login</Button>
                             </div>
                         </Form>
                     </Col>

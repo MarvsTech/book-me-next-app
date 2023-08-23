@@ -98,9 +98,7 @@ const PatientDashboard = () => {
           </Row>
         </Container>
       </div>
-
       <PatientBookingAppointment show={showModal1} handleCloseModal={handleCloseModal1}/>
-
       <PatientViewCalendar show={showModal3} handleCloseModal={handleCloseModal3}/>
     </div>
   )
