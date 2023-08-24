@@ -10,6 +10,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::apiResource('role', RoleController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
             ]);
+            Route::get('/appointments/all/data', [AppointmentController::class, 'getAllAppointmentData']);
             Route::get('/appointments/patient/records', [AppointmentController::class, 'getAllPatientAppointment']);
             Route::apiResource('appointment', AppointmentController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
@@ -79,6 +81,9 @@ Route::middleware('auth:sanctum')->group(function () {
     // Routes for role: Doctor
     Route::middleware('role:Doctor')->group(function () {
         Route::prefix('doctor')->name('doctor.')->group(function () {
+            Route::get('/appointments/data', [AppointmentController::class, 'doctorAppointmentData']);
+            Route::get('/appointments/patient/records', [AppointmentController::class, 'getAllPatientAppointment']);
+            Route::get('/dashboard', [DashboardController::class, 'dashboardCards']);
         });
     });
 

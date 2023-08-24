@@ -45,6 +45,15 @@ const Sidebar = ({ children, roleId }) => {
     });
   }
 
+  if (roleId === 2) {
+    menuItems.splice(1, 0, { 
+      path: '/doctor/schedules',
+      name: 'schedule',
+      label: 'Schedules',
+      icon: <img src={Doctor} alt="Doctors" className='inverted-color' style={{ width: '20px' }} />,
+    });
+  }
+
   const logoutItems = [
     {
       path: '/logout',

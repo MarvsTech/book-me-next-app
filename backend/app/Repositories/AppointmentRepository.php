@@ -74,6 +74,28 @@ class AppointmentRepository implements AppointmentContract {
         ->whereRelation('patient', 'role_id', $roleId)
         ->get();
     }
+    public function doctorAppointmentData($userId, $roleId) {
+        return $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->where('doctor_id', $userId)
+        ->whereRelation('doctor', 'role_id', $roleId)
+        ->get();
+    }
+    public function getAllAppointmentData() {
+        return $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->get();
+    }
 
     public function getAllPatientAppointment($roleId)
     {

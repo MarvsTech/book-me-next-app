@@ -211,6 +211,45 @@ class AppointmentController extends Controller
         }
     }
 
+    public function doctorAppointmentData() {
+        try{
+            $loggedInUser = auth()->user();
+            $appointmentData = $this->appointmentContract->doctorAppointmentData($loggedInUser->id, 2);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'This is your all appointment scheduled',
+                'data' => new AppointmentResource($appointmentData, __FUNCTION__),
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete appointment.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function getAllAppointmentData() {
+        try{
+            $loggedInUser = auth()->user();
+            $appointmentData = $this->appointmentContract->getAllAppointmentData();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'This is your all appointment scheduled',
+                'data' => new AppointmentResource($appointmentData, __FUNCTION__),
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete appointment.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
     public function getAllPatientAppointment() {
         try{
             $patientAppointments = $this->appointmentContract->getAllPatientAppointment(3);

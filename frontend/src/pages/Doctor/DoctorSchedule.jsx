@@ -7,7 +7,7 @@ import DashboardHeader from '../../components/DashboardHeader'
 import { useAuth } from '../../config/UserContext';
 import axios from 'axios';
 
-const DoctorAppointment = () => {
+const DoctorSchedule = () => {
   const { currentUser } = useAuth();
   const [appointments, setAppointments] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -61,4 +61,4 @@ const DoctorAppointment = () => {
   )
 }
 
-export default DoctorAppointment
+export default DoctorSchedule
