@@ -1,10 +1,18 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import BookAppointment from '../images/book-appointment.png'
 import SearchDoctor from '../images/search-doctor.png'
 import BookingSteps from '../images/for-steps-booking.png'
 import FooterBookingLogo from '../images/booking-logo-white.png'
+import CreateAccount from '../images/create-account.svg'
+import SetSchedule from '../images/set-schedule.svg'
+import BookingDone from '../images/booking-done.svg'
+import EmailNotification from '../images/email-notification.svg'
+import AppointmentBooked from '../images/appointment-booked.svg'
+import Qoute from '../images/qoute.png'
+import { FaStar } from 'react-icons/fa'
 
 const Blog = () => {
 
@@ -12,11 +20,42 @@ const Blog = () => {
         isPatient : false
     }
 
+   function HowItWorksItem (props) {
+        return (
+            <>
+                <div className='booking-steps-content'>
+                    <img src={props.img} alt='booking step illustration'/>
+                    <p>{props.contentText}</p>
+                </div>
+                <div className='steps-number'>{props.stepNumber}</div>
+            </>
+        )
+   }
+
+   function Testimonials (props) {
+        return (
+            <div className='testimonial-content'>
+                <div className='testimonial-content-header'>
+                    <img src={Qoute} alt='a right qoute'></img>
+                    <p>{props.userName}</p>
+                </div>
+                <div className='testimonial-content-body'>
+                    <p><i>{props.testimony}</i></p>
+                    <div className='testimonial-star-fb'>
+                        {[...Array(5)].map((star) => {
+                            return <FaStar size={35} />
+                        })}
+                    </div>
+                </div>
+            </div>
+        )
+   }
+
   return (
     <div className='blog-container'>
-      <Navbar user={user}/>
+      <Navbar user={user} />
 
-      <Container fluid className='landing-page'>
+      <Container fluid className='landing-page' id='landing'>
         <Row className='row-container'>
             <Col className='left-landing'>
                 <div>
@@ -25,62 +64,44 @@ const Blog = () => {
                 </div>
             </Col>
             <Col className='right-landing'>
-                <div className='right-container'>
-                    <img src={BookAppointment} alt='book appointment illustration'/>
+                <Button className='right-container' as={Link} to={'/login'}>
+                    <img src={SearchDoctor} alt='book appointment illustration'/>
                     <h1>Search for Doctors</h1>
-                </div>
-                <div className='right-container'>
-                    <img src={SearchDoctor} alt='search doctor illustration'/>
+                </Button>
+                <Button className='right-container' as={Link} to={'/login'}>
+                    <img src={BookAppointment} alt='search doctor illustration'/>
                     <h1>Book an Appointment</h1>
-                </div>
+                </Button>
             </Col>
         </Row>
       </Container>
 
-      <Container className='how-it-works'>
+      <Container className='how-it-works' id='howItWorks'>
         <Row className='container-title'>
             <h1>HOW IT WORKS</h1>
         </Row>
         
         <Row className='row-container'>
             <div className='booking-steps-div' md={4}>
-                <div className='booking-steps-content'>
-                    <img src={BookingSteps} alt='booking step illustration'/>
-                    <p>Search for doctors</p>
-                </div>
+                <HowItWorksItem img={CreateAccount} contentText={"Create account/login"} stepNumber={"1"}/>
             </div>
             <div className='booking-steps-div' md={4}>
-                <div className='booking-steps-content'>
-                    <img src={BookingSteps} alt='booking step illustration'/>
-                    <p>Create account/login</p>
-                </div>
+                <HowItWorksItem img={SearchDoctor} contentText={"Search for doctors"} stepNumber={"2"}/>
             </div>
             <div className='booking-steps-div' md={4}>
-                <div className='booking-steps-content'>
-                    <img src={BookingSteps} alt='booking step illustration'/>
-                    <p>Set schedule and other details</p>
-                </div>
+                <HowItWorksItem img={SetSchedule} contentText={"Set schedule and other details"} stepNumber={"3"}/>
             </div>
         </Row>
 
         <Row className='row-container'>
             <div className='booking-steps-div' md={4}>
-                <div className='booking-steps-content'>
-                    <img src={BookingSteps} alt='booking step illustration'/>
-                    <p>Booking done</p>
-                </div>
+                <HowItWorksItem img={BookingDone} contentText={"Booking done"} stepNumber={"4"}/>
             </div>
             <div className='booking-steps-div' md={4}>
-                <div className='booking-steps-content'>
-                    <img src={BookingSteps} alt='booking step illustration'/>
-                    <p>Wait for email confirmation</p>
-                </div>
+                <HowItWorksItem img={EmailNotification} contentText={"Wait for email confirmation"} stepNumber={"5"}/>
             </div>
             <div className='booking-steps-div' md={4}>
-                <div className='booking-steps-content'>
-                    <img src={BookingSteps} alt='booking step illustration'/>
-                    <p>Book appointment</p>
-                </div>
+                <HowItWorksItem img={AppointmentBooked} contentText={"Appointment booked"} stepNumber={"6"}/>
             </div>
         </Row>
       </Container>
@@ -91,20 +112,14 @@ const Blog = () => {
         </Row>
 
         <Row className='row-container'>
-            <div className='booking-steps-div'>
-                <div className='booking-steps-content'>
-                    <p>Jane Doe</p>
-                </div>
+            <div className='testimonial-div'>
+                <Testimonials userName={'Jane Doe'} testimony={'Lorem ipsum dolor sit amet, consectetuer adipiscing elit diam.'} />
             </div>
-            <div className='booking-steps-div'>
-                <div className='booking-steps-content'>
-                    <p>Jane Smith</p>
-                </div>
+            <div className='testimonial-div'>
+                <Testimonials userName={'Juana Dela Cruz'} testimony={'Lorem ipsum dolor sit amet, consectetuer adipiscing elit diam.'} />
             </div>
-            <div className='booking-steps-div'>
-                <div className='booking-steps-content'>
-                    <p>Juana Dela Cruz</p>
-                </div>
+            <div className='testimonial-div'>
+                <Testimonials userName={'Jane Smith'} testimony={'Lorem ipsum dolor sit amet, consectetuer adipiscing elit diam.'} />
             </div>
         </Row>
       </Container>

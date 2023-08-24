@@ -563,6 +563,7 @@ html, body {
 .patient-navbar .row .navbar-brand-container {
   display: flex;
   align-items: end;
+  text-decoration: none;
 }
 .patient-navbar .row .navbar-brand-container .navbar-brand {
   display: flex;
@@ -929,6 +930,9 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  border: none !important;
+  --bs-btn-active-bg: #fff !important;
 }
 .landing-page .right-landing .right-container img {
   width: 200px;
@@ -942,6 +946,9 @@ html, body {
   font-weight: 500;
   line-height: normal;
   letter-spacing: 1px;
+}
+.landing-page .right-landing .right-container:hover {
+  box-shadow: 7px 7px 15px 0px rgba(250, 250, 250, 0.25);
 }
 
 .blog-container {
@@ -974,6 +981,7 @@ html, body {
   width: 33%;
   color: #fff;
   gap: 20px;
+  position: relative;
 }
 .how-it-works .booking-steps-div .booking-steps-content {
   display: flex;
@@ -984,6 +992,8 @@ html, body {
   width: 250px;
   height: 200px;
   border-radius: 20px;
+  background: #fff;
+  padding: 15px;
 }
 .how-it-works .booking-steps-div .booking-steps-content p {
   color: #545454;
@@ -993,6 +1003,21 @@ html, body {
   letter-spacing: 1px;
   width: 60%;
   text-align: center;
+}
+.how-it-works .booking-steps-div .steps-number {
+  position: absolute;
+  background: #00AACF;
+  color: #fff;
+  width: 50px;
+  border-radius: 40px;
+  text-align: center;
+  padding: 10px;
+  right: 270px;
+  top: -25px;
+  font-size: 20px;
+  font-size: weight;
+  font-weight: 500;
+  font-family: Montserrat;
 }
 
 .testimonials {
@@ -1006,12 +1031,12 @@ html, body {
 .testimonials .container-title h1 {
   color: #fff;
 }
-.testimonials .row-container .booking-steps-div {
+.testimonials .row-container .testimonial-div {
   width: 33%;
   display: flex;
   justify-content: center;
 }
-.testimonials .row-container .booking-steps-div .booking-steps-content {
+.testimonials .row-container .testimonial-div .testimonial-content {
   width: 400px;
   height: 50vh;
   border-radius: 20px;
@@ -1020,14 +1045,46 @@ html, body {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 15px;
+  padding: 40px;
+  position: relative;
 }
-.testimonials .row-container .booking-steps-div .booking-steps-content p {
+.testimonials .row-container .testimonial-div .testimonial-content .testimonial-content-header {
+  display: flex;
+  position: absolute;
+  top: 40px;
+  align-items: center;
+  left: 40px;
+}
+.testimonials .row-container .testimonial-div .testimonial-content .testimonial-content-header img {
+  max-width: 60px;
+  max-height: 60px;
+  margin-right: 40px;
+}
+.testimonials .row-container .testimonial-div .testimonial-content .testimonial-content-header p {
   color: #00AACF;
   font-family: Montserrat;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 600;
   letter-spacing: 1.25px;
+  margin-bottom: 0px;
+}
+.testimonials .row-container .testimonial-div .testimonial-content .testimonial-content-body p {
+  color: #000;
+  font-family: Montserrat;
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: 1.25px;
+  margin-bottom: 50px;
+  width: -moz-fit-content;
+  width: fit-content;
+  text-align: center;
+}
+.testimonials .row-container .testimonial-div .testimonial-content .testimonial-content-body .testimonial-star-fb {
+  display: flex;
+  justify-content: center;
+}
+.testimonials .row-container .testimonial-div .testimonial-content .testimonial-content-body .testimonial-star-fb svg {
+  color: #ffc107;
 }
 
 .footer-container {
