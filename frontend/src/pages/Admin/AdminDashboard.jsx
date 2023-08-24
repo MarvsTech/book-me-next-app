@@ -1,17 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DashboardHeader from '../../components/DashboardHeader'
 import BookingCard from '../../components/BookingCard'
 import { Chart } from '../../components/Chart'
 import { useAuth } from '../../config/UserContext';
+import axios from 'axios';
 
 const AdminDashboard = () => {
-  const {currentUser: {
-    firstname, 
-    lastname, 
-    middlename,
-    roleId,
-    token,
-  }} = useAuth();
+  const { currentUser } = useAuth();
 
   const dataDoctor = {
     labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
@@ -67,7 +62,7 @@ const AdminDashboard = () => {
 
   return (
     <div>
-      <DashboardHeader firstname={ firstname } token={ token }/>
+      <DashboardHeader name={ currentUser.firstname } token={ currentUser.token }/>
       <BookingCard />
       <div className='chart-card-wrapper'>
         <Chart chartType="line" dataLine={dataDoctor} />

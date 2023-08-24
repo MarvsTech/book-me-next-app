@@ -56,6 +56,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Routes for role: Admin
     Route::middleware('role:Admin')->group(function () {
         Route::prefix('admin')->name('admin.')->group(function () {
+            Route::get('/data/cards', [DashboardController::class, 'dashboardCards']);
             Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
             Route::apiResource('role', RoleController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
@@ -83,7 +84,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('doctor')->name('doctor.')->group(function () {
             Route::get('/appointments/data', [AppointmentController::class, 'doctorAppointmentData']);
             Route::get('/appointments/patient/records', [AppointmentController::class, 'getAllPatientAppointment']);
-            Route::get('/dashboard', [DashboardController::class, 'dashboardCards']);
         });
     });
 
