@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Modal, Container, Form, Row, Col, Button } from 'react-bootstrap';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import { useLocation } from 'react-router';
 
 const PatientProfileSettings = ({show, handleCloseModal, data}) => {
 
@@ -13,6 +14,8 @@ const PatientProfileSettings = ({show, handleCloseModal, data}) => {
     const [email, setEmail] = useState("");
     const [contact_number, setContactNumber] = useState("");
     const [address, setAddress] = useState("");
+
+    const location = useLocation();
 
     const onSubmit = e => {
       e.preventDefault();
@@ -43,16 +46,23 @@ const PatientProfileSettings = ({show, handleCloseModal, data}) => {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col md={6}>
-                                    <FloatingLabel controlId="floatingInputSpecialization" label="Specialization" className="mb-3">
-                                        <Form.Control type="text" value={specialization} onChange={e => setSpecialization(e.target.value)} placeholder=""/>
-                                    </FloatingLabel>
-                                </Col>
-                                <Col md={6}>
-                                    <FloatingLabel controlId="floatingInputRoomNumber" label="Room Number" className="mb-3">
-                                        <Form.Control type="text" value={room_number} onChange={e => setRoomNumber(e.target.value)} placeholder=""/>
-                                    </FloatingLabel>
-                                </Col>
+                                {
+                                    (location.pathname === '/doctor' || location.pathname === '/doctor/appointments') ?
+                                        <>
+                                            <Col md={6}>
+                                                <FloatingLabel controlId="floatingInputSpecialization" label="Specialization" className="mb-3">
+                                                    <Form.Control type="text" value={specialization} onChange={e => setSpecialization(e.target.value)} placeholder=""/>
+                                                </FloatingLabel>
+                                            </Col>
+                                            <Col md={6}>
+                                                <FloatingLabel controlId="floatingInputRoomNumber" label="Room Number" className="mb-3">
+                                                    <Form.Control type="text" value={room_number} onChange={e => setRoomNumber(e.target.value)} placeholder=""/>
+                                                </FloatingLabel>
+                                            </Col>
+                                        </>
+                                    :
+                                        null
+                                }
                             </Row>
                             <Row>
                                 <Col md={6}>
@@ -76,7 +86,6 @@ const PatientProfileSettings = ({show, handleCloseModal, data}) => {
                         </Container>
 
                         <Button type='submit' onClick={handleCloseModal}>Update Profile</Button>
-                        Patient
                     </Form>
                 </Container>
             </Modal.Body>

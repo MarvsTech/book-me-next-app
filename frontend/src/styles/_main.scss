@@ -587,7 +587,7 @@
         h2 {
             color: #000;
             font-family: Montserrat;
-            font-size: 15px;
+            font-size: 20px;
             font-weight: 400;
             letter-spacing: 0.45px;
             margin-bottom: 0;
@@ -599,8 +599,8 @@
         }
 
         img {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border-radius: 70px;
             border: 0.5px solid #545454;
             margin-left: 10px;
@@ -1493,6 +1493,8 @@ td.fc-other-month .fc-day-number {
     .btn-primary {
         padding: 0px !important;
         border: none !important;
+        --bs-btn-active-bg: transparent !important;
+        --bs-btn-bg: transparent !important;
     }
 
     .btn-primary:hover {
@@ -1524,8 +1526,8 @@ td.fc-other-month .fc-day-number {
             }
     
             img {
-                width: 20px;
-                height: 20px;
+                width: 20px !important;
+                height: 20px !important;
                 margin-right: 10px;
                 border: none !important;
                 border-radius: 0px !important;
@@ -1535,6 +1537,10 @@ td.fc-other-month .fc-day-number {
             img:hover {
                 color: transparent !important;
             }
+        }
+
+        .dropdown-item:active {
+            background-color: transparent !important;
         }
     }
 }
