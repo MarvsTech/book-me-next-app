@@ -47,7 +47,7 @@ const PatientProfileSettings = ({show, handleCloseModal, data}) => {
                             </Row>
                             <Row>
                                 {
-                                    (location.pathname === '/doctor' && '/doctor/appointments') ?
+                                    (location.pathname === '/doctor' || location.pathname === '/doctor/appointments') ?
                                         <>
                                             <Col md={6}>
                                                 <FloatingLabel controlId="floatingInputSpecialization" label="Specialization" className="mb-3">
