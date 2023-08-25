@@ -4,15 +4,22 @@ import PatientProfile from '../images/woman.svg';
 import ProfileSettings from '../images/profile-settings.png';
 import PasswordSettings from '../images/password-settings.png';
 import Logout from '../images/logout-black.png';
+import CreateSchedule from '../images/create-schedule.png'
 import PatientProfileSettings from './PatientProfileSettings';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
 import { useAuth } from '../config/UserContext';
+import CreateScheduleDoctor from './CreateScheduleDoctor';
+import { useLocation } from 'react-router';
 
 const NavbarDropdown = () => {
   const { currentUser: { token } } = useAuth();
+
   const [showProfileSettingsModal, setShowProfileSettingsModal] = useState(false);
+  const [showCreateSchedule, setShowCreateSchedule] = useState(false);
+
+  const location = useLocation();
 
   const handleLogout = async () => {
     await Swal.fire({
@@ -49,6 +56,10 @@ const NavbarDropdown = () => {
     setShowProfileSettingsModal(false);
   };
 
+  const handleCloseCreateSchedule = () => { 
+    setShowCreateSchedule(false);
+  }
+
   return (
     <>
       <Dropdown>
@@ -57,6 +68,16 @@ const NavbarDropdown = () => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
+          {
+            (location.pathname === '/doctor' || location.pathname === '/doctor/appointments') ?
+              <Dropdown.Item onClick={() => setShowCreateSchedule(true)}>
+                <img src={CreateSchedule} alt="Profile Settings" />
+                <div>Create Schedule</div>
+              </Dropdown.Item>
+            :
+              null
+          }
+          
           <Dropdown.Item onClick={() => setShowProfileSettingsModal(true)}>
             <img src={ProfileSettings} alt="Profile Settings" />
             <div>Profile Settings</div>
@@ -76,6 +97,11 @@ const NavbarDropdown = () => {
         show={showProfileSettingsModal}
         onHide={handleCloseProfileSettings}
         handleCloseModal = {handleCloseProfileSettings}
+      />
+
+      <CreateScheduleDoctor 
+        show={showCreateSchedule}
+        handleCloseModal={handleCloseCreateSchedule}
       />
     </>
   );
