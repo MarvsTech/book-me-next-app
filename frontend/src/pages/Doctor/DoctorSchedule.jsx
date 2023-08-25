@@ -3,7 +3,7 @@ import DashboardHeader from '../../components/DashboardHeader'
 import UserLogTable from '../../components/UserLogTable'
 import { useAuth } from '../../config/UserContext';
 
-const DoctorUserLogs = () => {
+const DoctorSchedule = () => {
   const {currentUser: {
     firstname, 
     lastname, 
@@ -14,16 +14,19 @@ const DoctorUserLogs = () => {
 
   const tableBody = [
     {
-      name : 'Jane Doe',
-      role : 'Patient',
-      ip : 'hmmmmmmm',
-      date_logged_in : 'August 15, 2023',
+      date : 'September 9, 2023',
+      time : '8:00 AM - 9:30 AM',
+      remarks : true,
     },
     {
-      name : 'Jane Doe',
-      role : 'Doctor',
-      ip : 'hmmmmmmm',
-      date_logged_in : 'August 15, 2023',
+      date : 'September 9, 2023',
+      time : '1:30 PM - 3:00 PM',
+      remarks : false,
+    },
+    {
+      date : 'September 9, 2023',
+      time : '3:00 PM - 4:30 PM',
+      remarks : true,
     },
   ]
 
@@ -36,4 +39,4 @@ const DoctorUserLogs = () => {
   )
 }
 
-export default DoctorUserLogs
+export default DoctorSchedule

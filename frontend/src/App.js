@@ -19,7 +19,7 @@ import ErrorPage from "./pages/ErrorPage";
 
 import DoctorDashboard from "./pages/Doctor/DoctorDashboard";
 import DoctorAppointment from "./pages/Doctor/DoctorAppointment";
-import DoctorUserLogs from "./pages/Doctor/DoctorUserLogs";
+import DoctorSchedule from "./pages/Doctor/DoctorSchedule";
 import DoctorSettings from "./pages/Doctor/DoctorSettings";
 
 import AdminDashboard from "./pages/Admin/AdminDashboard";
@@ -209,7 +209,8 @@ function DoctorElement(roleId, page) {
         return (
           <>
             <Sidebar roleId={roleId}>
-              <DoctorUserLogs />
+              {/* <DoctorUserLogs /> */}
+              <DoctorSchedule />
             </Sidebar>
           </>
         );

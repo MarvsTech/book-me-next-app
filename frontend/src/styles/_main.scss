@@ -1606,3 +1606,43 @@ td.fc-other-month .fc-day-number {
         padding-top: 0px !important;
     }
 }
+
+// Create Schedule
+.create-schedule-time {
+    display: flex;
+    align-items: center;
+
+    .btn-primary {
+        margin-left: 10px;
+        --bs-btn-bg: transparent !important;
+        --bs-btn-border-color: transparent !important;
+        --bs-btn-hover-bg: transparent !important;
+        --bs-btn-hover-border-color: transparent !important;
+        --bs-btn-active-bg: transparent !important;
+        --bs-btn-active-border-color: transparent !important;
+    }
+
+    .dropdown-menu.show {
+        transform: translate3d(28px, 32px, 0px) !important;
+    }
+
+    .dropdown-menu {
+        padding-top: 0px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        border-radius: 10px !important;
+        --bs-dropdown-padding-y: 0px !important;
+        --bs-dropdown-min-width: 0px !important;
+        --bs-dropdown-item-padding-x: 0px !important;
+        --bs-dropdown-item-padding-y: 0px !important;
+    }
+
+    .dropdown-item {
+        margin-bottom: 0px !important;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 5px;
+    }
+}

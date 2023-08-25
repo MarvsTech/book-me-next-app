@@ -7,6 +7,7 @@ import Appointment from '../images/appointment.svg';
 import Setting from '../images/settings.svg';
 import Logout from '../images/logout.svg';
 import Logo from '../images/booking-logo.svg';
+import CreateSchedule from '../images/create-schedule.png'
 
 const Sidebar = ({ children, roleId }) => {
   const menuItems = [
@@ -43,6 +44,23 @@ const Sidebar = ({ children, roleId }) => {
       label: 'Doctors',
       icon: <img src={Doctor} alt="Doctors" className='inverted-color' style={{ width: '20px' }} />,
     });
+  }
+
+  if (roleId === 2) {
+    menuItems.splice(2, 2,
+      { 
+      path: '/doctor/user/logs',
+      name: 'schedule',
+      label: 'Schedule',
+      icon: <img src={CreateSchedule} alt="Doctors" className='inverted-color' style={{ width: '20px' }} />,
+      },
+      {
+        path: '/doctor/settings',
+        name: 'calendar',
+        label: 'Calendar',
+        icon: <img src={Doctor} alt="Doctors" className='inverted-color' style={{ width: '20px' }} />,
+      }
+    );
   }
 
   const logoutItems = [
