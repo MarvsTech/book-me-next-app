@@ -1,15 +1,16 @@
 <?php
 namespace App\Repositories;
 
+use DB;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Mail\SampleMail;
+
 use App\Models\Appointment;
 use App\Mail\NotificationMail;
-
 use Illuminate\Support\Facades\Mail;
 use App\Contracts\AppointmentContract;
 use App\Mail\NotificationSuccessAppointment;
-use App\Mail\SampleMail;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class AppointmentRepository implements AppointmentContract {
@@ -95,6 +96,26 @@ class AppointmentRepository implements AppointmentContract {
             'status'
         ])
         ->get();
+    }
+
+    public function getAllAppointmentDataByMonth()
+    {
+        $result = $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->select('*', \DB::raw('MONTH(created_at) as month'))
+        ->get();
+
+        $counts = $result->groupBy('month')->map(function ($group) {
+            return $group->count();
+        });
+
+        return $counts;
+
     }
 
     public function getAllPatientAppointment($roleId)

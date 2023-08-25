@@ -41,4 +41,15 @@ class DashboardController extends Controller
             'data' => new AppointmentResource($cardData, __FUNCTION__),
         ]);
     }
+
+    public function chartCards()
+    {
+        $chartDataByMonth = $this->appointmentContract->getAllAppointmentDataByMonth();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'This is your all appointment scheduled',
+            'data' => new AppointmentResource($chartDataByMonth, __FUNCTION__),
+        ]);
+    }
 }

@@ -61,6 +61,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::apiResource('role', RoleController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
             ]);
+            Route::get('/appointments/data/month', [AppointmentController::class, 'getAllAppointmentDataByMonth']);
             Route::get('/appointments/all/data', [AppointmentController::class, 'getAllAppointmentData']);
             Route::get('/appointments/patient/records', [AppointmentController::class, 'getAllPatientAppointment']);
             Route::apiResource('appointment', AppointmentController::class)->only([

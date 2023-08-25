@@ -39,4 +39,8 @@ class AppointmentResource extends JsonResource
     {
         return $this->resource;
     }
+    public function getAllAppointmentDataByMonth()
+    {
+        return $this->resource;
+    }
 }
