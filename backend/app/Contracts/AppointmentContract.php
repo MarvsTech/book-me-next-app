@@ -9,5 +9,9 @@ interface AppointmentContract {
     public function update($id, $params);
     public function delete($id);
     public function filterByLoginUser($id, $roleId);
+    public function doctorAppointmentData($id, $roleId);
     public function getAllPatientAppointment($roleId);
+    public function getAllAppointmentData();
+    public function getAllAppointmentDataByMonth();
+    public function getAllAppointmentChartDataByMonthName();
 }

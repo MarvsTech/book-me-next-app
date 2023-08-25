@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 import BookingLogo from '../images/all-booking.svg';
 import BookingSuccess from '../images/booking-success.svg';
 import BookingPending from '../images/booking-pending.svg';
@@ -7,34 +7,56 @@ import BookingDelete from '../images/booking-delete.svg';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useAuth } from '../config/UserContext';
+import axios from 'axios';
 
 const BookingCard = () => {
+  const { currentUser } = useAuth();
+  const [cardData, setCardData] = useState([]);
+
+  useEffect(() => {
+    if (currentUser && currentUser.token) {
+      axios.get('http://localhost:8000/api/admin/data/cards', {
+        headers: {
+          Authorization: `Bearer ${currentUser.token}`
+        }
+      })
+      .then(response => {
+        setCardData(response.data.data);
+        console.log(response.data.data);
+      })
+      .catch(error => {
+        console.error('Error fetching appointments:', error);
+      });
+    }
+  }, [currentUser]);
+
   const bookingItems = [
     {
       title: 'Bookings',
-      value: '50',
-      percentage: '+55%',
+      value: cardData.bookings,
+      percentage: '+100%',
       background: '#00AACF',
       icon: <img src={BookingLogo} alt="BookingLogo" className="icon" />,
     },
     {
       title: 'Successful',
-      value: '140',
-      percentage: '+20%',
+      value: cardData.successful,
+      percentage: cardData.successful_percentage,
       background: '#008000',
       icon: <img src={BookingSuccess} alt="BookingSuccess" className="icon" />,
     },
     {
       title: 'Pending',
-      value: '14',
-      percentage: '-5%',
+      value: cardData.pending,
+      percentage: cardData.pending_percentage,
       background: '#F77F00',
       icon: <img src={BookingPending} alt="BookingPending" className="icon" />,
     },
     {
       title: 'Rejected',
-      value: '6',
-      percentage: '-2%',
+      value: cardData.rejected,
+      percentage: cardData.rejected_percentage,
       background: '#D62828',
       icon: <img src={BookingDelete} alt="BookingDelete" className="icon" />,
     },

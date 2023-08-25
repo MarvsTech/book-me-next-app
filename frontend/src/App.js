@@ -30,6 +30,7 @@ import AdminUserLog from "./pages/Admin/AdminUserLog";
 import { useAuth } from "./config/UserContext";
 import Blog from "./pages/Blog";
 import AdminSetting from "./pages/Admin/AdminSetting";
+import DoctorSchedule from "./pages/Doctor/DoctorSchedule";
 
 function App() {
   const { currentUser } = useAuth();
@@ -80,6 +81,10 @@ function App() {
         <Route
           path="/doctor/appointments"
           element={DoctorElement(CurrentUserType, "doctor-appointment")}
+        />
+        <Route
+          path="/doctor/schedules"
+          element={DoctorElement(CurrentUserType, "doctor-schedule")}
         />
         <Route
           path="/doctor/user/logs"
@@ -202,6 +207,14 @@ function DoctorElement(roleId, page) {
           <>
             <Sidebar roleId={roleId}>
               <DoctorAppointment />
+            </Sidebar>
+          </>
+        );
+      case "doctor-schedule":
+        return (
+          <>
+            <Sidebar roleId={roleId}>
+              <DoctorSchedule />
             </Sidebar>
           </>
         );
