@@ -1,9 +1,7 @@
 import React from 'react'
-import {Table, Button, Dropdown} from 'react-bootstrap'
-import ThreeVerticalDots from '../images/three-dots-vertical.svg'
+import {Table, Button} from 'react-bootstrap'
 
 const UserLogTable = ({data}) => {
-
   return (
     <div className='table-content-wrapper'>
       <div className='table-header'>
@@ -14,9 +12,10 @@ const UserLogTable = ({data}) => {
         <Table>
               <thead>
                 <tr>
-                  <th>Date</th>
-                  <th>Time</th>
-                  <th>Remarks</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>IP</th>
+                  <th>Date Logged In</th>
                 </tr>
               </thead>
               <tbody>
@@ -25,31 +24,10 @@ const UserLogTable = ({data}) => {
                     return (
                       <>
                         <tr key={`row-${index}`}>
-                          <td>{data.date}</td>
-                          <div className='create-schedule-time'>
-                            <td>{data.time}</td>
-                            <div className='disable-time'>
-                              <Dropdown>
-                                <Dropdown.Toggle>
-                                  <Button>
-                                    <img src={ThreeVerticalDots} />
-                                  </Button>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                  <Dropdown.Item>
-                                    <Button variant='danger'>Disable</Button>
-                                  </Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-                            </div>
-                          </div>
-                          
-                          {
-                            (data.remarks === true) ?
-                              <td>IN</td>
-                            :
-                              <td>OUT</td>
-                          }
+                          <td>{data.name}</td>
+                          <td>{data.role}</td>
+                          <td>{data.ip}</td>
+                          <td>{data.date_logged_in}</td>
                         </tr>
                       </>
                     )
