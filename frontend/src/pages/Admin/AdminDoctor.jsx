@@ -61,7 +61,7 @@ const AdminDoctor = () => {
   },[selectedRow])
   return (
     <>
-      <DashboardHeader firstname={ currentUser.firstname } token={ currentUser.token }/>
+      <DashboardHeader name={ currentUser.firstname } token={ currentUser.token }/>
       <div className='table-content-wrapper'>
         <div className='table-header'>
           <h1 className='title-with-btn'>Doctors</h1>
