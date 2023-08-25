@@ -15,6 +15,7 @@ use App\Mail\DeleteAppointmentNotificationMail;
 use App\Mail\UpdateAppointmentNotificationMail;
 use App\Http\Requests\AppointmentStoreControllerRequest;
 use App\Services\SmsService;
+use Carbon\Carbon;
 
 class AppointmentController extends Controller
 {
@@ -250,21 +251,70 @@ class AppointmentController extends Controller
     }
 
     public function getAllAppointmentDataByMonth() {
-        try{
+        try {
+            $chartDataByMonth = [];
             $appointmentDataByMonth = $this->appointmentContract->getAllAppointmentDataByMonth();
+
+            $chartData = $appointmentDataByMonth->groupBy('month')->map(function ($group) {
+                $successfulCount = $group->where('status_id', 1)->count();
+                $pendingCount = $group->where('status_id', 2)->count();
+                $rejectedCount = $group->where('status_id', 3)->count();
+
+                return [
+                    'successful' => $successfulCount,
+                    'pending' => $pendingCount,
+                    'rejected' => $rejectedCount,
+                ];
+            });
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'This is your all appointment scheduled',
-                'data' => new AppointmentResource($appointmentDataByMonth, __FUNCTION__),
+                'data' => $chartData,
             ]);
 
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to delete appointment.',
+                'message' => 'Failed to retrieve appointment data.',
                 'error' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function getAllAppointmentChartDataByMonthName() {
+        try {
+            $chartData = [];
+            $appointmentDataByMonth = $this->appointmentContract->getAllAppointmentChartDataByMonthName();
+
+            $chartData = $appointmentDataByMonth->groupBy('month')->map(function ($group, $month) {
+                $successfulCount = $group->where('status_id', 1)->count();
+                $pendingCount = $group->where('status_id', 2)->count();
+                $rejectedCount = $group->where('status_id', 3)->count();
+
+                return [
+                    'successful' => $successfulCount,
+                    'pending' => $pendingCount,
+                    'rejected' => $rejectedCount,
+                    'monthname' => date('M', strtotime($group[0]->created_at)),
+                    'date' => date('M', strtotime($group[0]->created_at)),
+                ];
+            })->values();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'This is your all appointment scheduled',
+                'data' => $chartData,
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to retrieve appointment data.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+
     }
 
     public function getAllPatientAppointment() {
