@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\AppointmentContract;
-use App\Contracts\DoctorContract;
-use App\Http\Resources\AppointmentResource;
+use Exception;
 use Illuminate\Http\Request;
+use App\Contracts\DoctorContract;
+use Illuminate\Support\Facades\Auth;
+use App\Contracts\AppointmentContract;
+use App\Http\Resources\AppointmentResource;
 
 class DashboardController extends Controller
 {
@@ -50,6 +52,40 @@ class DashboardController extends Controller
             'status' => 'success',
             'message' => 'This is your all appointment scheduled',
             'data' => new AppointmentResource($chartDataByMonth, __FUNCTION__),
+        ]);
+    }
+
+    public function dashboardBookingCardsByDoctor()
+    {
+        $cardData = [];
+        $user = Auth::user();
+        $bookings = $this->appointmentContract->getAllAppointmentDataByDoctor($user->role_id);
+
+        $cardData['bookings'] = $bookings->count();
+        $cardData['successful'] = $bookings->where('status_id', 1)->count();
+        $cardData['pending'] = $bookings->where('status_id', 2)->count();
+        $cardData['rejected'] = $bookings->where('status_id', 3)->count();
+
+        $cardData['successful_percentage'] = number_format(($cardData['successful'] / $cardData['bookings']) * 100, 2) . '%';
+        $cardData['pending_percentage'] = number_format(($cardData['pending'] / $cardData['bookings']) * 100, 2) . '%';
+        $cardData['rejected_percentage'] = number_format(($cardData['rejected'] / $cardData['bookings']) * 100, 2) . '%';
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'This is your all appointment scheduled',
+            'data' => new AppointmentResource($cardData, __FUNCTION__),
+        ]);
+    }
+
+    public function getDoctorAppointmentDataByMonth()
+    {
+        $user = Auth::user();
+        $chartDataByDoctorMonth = $this->appointmentContract->getDoctorAppointmentDataByMonth($user->role_id);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'This is your all appointment scheduled',
+            'data' => new AppointmentResource($chartDataByDoctorMonth, __FUNCTION__),
         ]);
     }
 }

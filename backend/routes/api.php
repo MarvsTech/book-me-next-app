@@ -61,6 +61,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::apiResource('role', RoleController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
             ]);
+            Route::get('/appointments/doctor/data', [AppointmentController::class, 'getAllAppointmentDataByDoctor']);
             Route::get('/appointments/data/month', [AppointmentController::class, 'getAllAppointmentDataByMonth']);
             Route::get('/appointments/data/month/name', [AppointmentController::class, 'getAllAppointmentChartDataByMonthName']);
             Route::get('/appointments/all/data', [AppointmentController::class, 'getAllAppointmentData']);
@@ -84,6 +85,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // Routes for role: Doctor
     Route::middleware('role:Doctor')->group(function () {
         Route::prefix('doctor')->name('doctor.')->group(function () {
+            Route::get('/appointments/booking/data', [DashboardController::class, 'dashboardBookingCardsByDoctor']);
+            Route::get('/appointments/chart/data', [DashboardController::class, 'getDoctorAppointmentDataByMonth']);
             Route::get('/appointments/data', [AppointmentController::class, 'doctorAppointmentData']);
             Route::get('/appointments/patient/records', [AppointmentController::class, 'getAllPatientAppointment']);
         });

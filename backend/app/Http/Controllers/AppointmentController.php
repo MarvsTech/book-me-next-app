@@ -335,4 +335,36 @@ class AppointmentController extends Controller
         }
     }
 
+    public function getDoctorAppointmentDataByMonth($roleId)
+    {
+        try {
+            $chartDataByMonth = [];
+            $appointmentDataByMonth = $this->appointmentContract->getAllAppointmentDataByMonth();
+
+            $chartData = $appointmentDataByMonth->groupBy('month')->map(function ($group) {
+                $successfulCount = $group->where('status_id', 1)->count();
+                $pendingCount = $group->where('status_id', 2)->count();
+                $rejectedCount = $group->where('status_id', 3)->count();
+
+                return [
+                    'successful' => $successfulCount,
+                    'pending' => $pendingCount,
+                    'rejected' => $rejectedCount,
+                ];
+            });
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'This is your all appointment scheduled',
+                'data' => $chartData,
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to retrieve appointment data.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }

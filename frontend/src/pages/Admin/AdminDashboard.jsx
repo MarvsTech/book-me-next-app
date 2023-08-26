@@ -8,6 +8,23 @@ import axios from 'axios';
 const AdminDashboard = () => {
   const { currentUser } = useAuth();
   const [chartData, setChartData] = useState([]);
+  const [cardData, setCardData] = useState([]);
+
+  useEffect(() => {
+    if (currentUser && currentUser.token) {
+      axios.get('http://localhost:8000/api/admin/data/cards', {
+        headers: {
+          Authorization: `Bearer ${currentUser.token}`
+        }
+      })
+      .then(response => {
+        setCardData(response.data.data);
+      })
+      .catch(error => {
+        console.error('Error fetching appointments:', error);
+      });
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     if (currentUser && currentUser.token) {
@@ -27,12 +44,19 @@ const AdminDashboard = () => {
 
   const dataDoctor = {
     labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
-    datasets: [{
+    datasets: [
+      {
         label: 'Doctor 1',
         data: [20, 50, 30, 30, 40, 35, 45],
         backgroundColor: '#00AACF',
         borderColor: '#00AACF',
-    },]
+      },{
+        label: 'Doctor 2',
+        data: [21, 22, 12, 78, 34, 35, 54],
+        backgroundColor: '#00AACF',
+        borderColor: '#00AACF',
+      },
+    ]
   }
 
   const dataBookings = [
@@ -80,7 +104,7 @@ const AdminDashboard = () => {
   return (
     <div>
       <DashboardHeader name={ currentUser.firstname } token={ currentUser.token }/>
-      <BookingCard />
+      <BookingCard cardData={cardData}/>
       <div className='chart-card-wrapper'>
         <Chart chartType="line" dataLine={dataDoctor} />
         <Chart chartType="bar" dataBar={dataBookings} />
