@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 import woman from '../images/woman.svg'
+import NavbarDropdown from './NavbarDropdown';
 
 const DashboardHeader = (props) => {
 
@@ -49,7 +50,7 @@ const DashboardHeader = (props) => {
                 <div className='right-header'>
                     <h2>Hello, <span>{ props.name }</span></h2>
                     <div>
-                        <img src={woman} alt='woman portrait'/>
+                        <NavbarDropdown/>
                     </div>
                 </div>
             </div>
