@@ -7,30 +7,8 @@ import BookingDelete from '../images/booking-delete.svg';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useAuth } from '../config/UserContext';
-import axios from 'axios';
 
-const BookingCard = () => {
-  const { currentUser } = useAuth();
-  const [cardData, setCardData] = useState([]);
-
-  useEffect(() => {
-    if (currentUser && currentUser.token) {
-      axios.get('http://localhost:8000/api/admin/data/cards', {
-        headers: {
-          Authorization: `Bearer ${currentUser.token}`
-        }
-      })
-      .then(response => {
-        setCardData(response.data.data);
-        console.log(response.data.data);
-      })
-      .catch(error => {
-        console.error('Error fetching appointments:', error);
-      });
-    }
-  }, [currentUser]);
-
+const BookingCard = ({cardData}) => { 
   const bookingItems = [
     {
       title: 'Bookings',
@@ -64,25 +42,25 @@ const BookingCard = () => {
 
   return (
     <>
-        <Container>
-            <Row>
-                {bookingItems.map((item, index) => (
-                    <Col className='d-flex justify-content-center'>
-                        <div className="card-wrapper" key={index}>
-                        <div className="card-icon-wrapper" style={{ backgroundColor: item.background }}>
-                            {item.icon}
-                        </div>
-                        <p className="bookings">{item.title}</p>
-                        <h1>{item.value}</h1>
-                        <div className="footer-card">
-                            <div className="horizontal-line"></div>
-                            <p><span className='percentage'>{item.percentage}</span> than last month</p>
-                        </div>
-                        </div>
-                    </Col>
-                ))} 
-            </Row>
-        </Container>
+      <Container>
+        <Row>
+          {bookingItems.map((item, index) => (
+            <Col className='d-flex justify-content-center'>
+              <div className="card-wrapper" key={index}>
+                <div className="card-icon-wrapper" style={{ backgroundColor: item.background }}>
+                  {item.icon}
+                </div>
+                <p className="bookings">{item.title}</p>
+                <h1>{item.value}</h1>
+                <div className="footer-card">
+                  <div className="horizontal-line"></div>
+                  <p><span className='percentage'>{item.percentage}</span> than last month</p>
+                </div>
+              </div>
+            </Col>
+          ))} 
+        </Row>
+      </Container>
     </>
   );
 };

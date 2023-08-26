@@ -30,12 +30,14 @@ const DoctorSchedule = () => {
     },
   ]
 
-  return (
-    <div>
-      <DashboardHeader name={ name }/>
+ return (
+    <>
+      <DashboardHeader name={ currentUser.name }/>
 
-      <UserLogTable data={tableBody} />
-    </div>
+      <PatientTable dataRow={appointments} handleShowModal={handleShowModal} itemPerPage={9}/>
+
+      <ViewPatientModal show={showModal} onClose={handleCloseModal} dataRow={selectedRow}/>
+    </>
   )
 }
 

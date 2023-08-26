@@ -61,7 +61,7 @@ const AdminAppointment = () => {
     <>
       <DashboardHeader name={ currentUser.firstname }/>
 
-      <PatientTable dataRow={appointments} handleShowModal={handleShowModal}/>
+      <PatientTable dataRow={appointments} handleShowModal={handleShowModal} itemPerPage={9}/>
 
       <ViewPatientModal show={showModal} onClose={handleCloseModal} dataRow={selectedRow}/>
     </>

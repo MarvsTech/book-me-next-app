@@ -11,8 +11,11 @@ import { useAuth } from '../../config/UserContext';
 import axios from 'axios';
 
 const AdminDoctor = () => {
-  const [doctors, setDoctors] = useState([])
+  const [selectedRow, setSelectedRow] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [doctors, setDoctors] = useState([]);
   const { currentUser } = useAuth();
+  const itemPerPage = 10;
 
   const [showModal1, setShowModal1] = useState(false);
   const handleCloseModal1 = () => setShowModal1(false);
@@ -25,7 +28,9 @@ const AdminDoctor = () => {
     setShowModal2(true);
   }
 
-  const [selectedRow, setSelectedRow] = useState({});
+  const startIndex = (currentPage - 1) * itemPerPage;
+  const endIndex = startIndex + itemPerPage;
+  const currentItem = doctors.slice(startIndex, endIndex);
 
   useEffect(() => {
     if (currentUser && currentUser.id && currentUser.token) {
@@ -58,7 +63,8 @@ const AdminDoctor = () => {
 
   useEffect(() => {
     console.log('selected row: ', selectedRow)
-  },[selectedRow])
+  },[selectedRow]);
+
   return (
     <>
       <DashboardHeader name={ currentUser.firstname } token={ currentUser.token }/>
@@ -85,7 +91,7 @@ const AdminDoctor = () => {
             </thead>
             <tbody>
               {
-                (doctors.map((data, index) => {
+                (currentItem.map((data, index) => {
                   return (
                     <>
                       <tr key={`row-${index}`}>
@@ -110,6 +116,10 @@ const AdminDoctor = () => {
               }
             </tbody>
           </Table>
+          <div>
+            <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+            <button onClick={() => setCurrentPage(currentPage + 1)} disabled={endIndex >= doctors.length}>Next</button>
+          </div>
         </div>
         <ViewModalDoctor showView={showModal2} onCloseView={handleCloseModal2} dataRow={selectedRow} />  
       </div>

@@ -5,7 +5,7 @@ use DB;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Mail\SampleMail;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\Appointment;
 use App\Mail\NotificationMail;
 use Illuminate\Support\Facades\Mail;
@@ -110,6 +110,7 @@ class AppointmentRepository implements AppointmentContract {
         ->select('*', \DB::raw('MONTH(created_at) as month'))
         ->get();
     }
+
     public function getAllAppointmentChartDataByMonthName()
     {
         return $this->model->with([
@@ -133,5 +134,33 @@ class AppointmentRepository implements AppointmentContract {
             'doctor_schedule_date',
             'status'
         ])->get();
+    }
+
+    public function getAllAppointmentDataByDoctor($roleId)
+    {
+        $data = $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->select('*', \DB::raw('MONTH(created_at) as month'))
+        ->where('doctor_id', $roleId)
+        ->get();
+    }
+
+    public function getDoctorAppointmentDataByMonth($roleId) {
+        return $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->select('*', \DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'))
+        ->orderBy('created_at', 'asc')
+        ->where('doctor_id', $roleId)
+        ->get();
     }
 }
