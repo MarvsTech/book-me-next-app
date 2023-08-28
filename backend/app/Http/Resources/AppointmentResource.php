@@ -61,4 +61,9 @@ class AppointmentResource extends JsonResource
     {
         return $this->resource;
     }
+
+    public function getAllDoctorAppointment()
+    {
+        return $this->resource;
+    }
 }

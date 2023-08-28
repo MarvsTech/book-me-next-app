@@ -85,6 +85,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Routes for role: Doctor
     Route::middleware('role:Doctor')->group(function () {
         Route::prefix('doctor')->name('doctor.')->group(function () {
+            Route::get('/appointments/all/data', [DashboardController::class, 'getAllDoctorAppointment']);
             Route::get('/appointments/booking/data', [DashboardController::class, 'dashboardBookingCardsByDoctor']);
             Route::get('/appointments/chart/data', [DashboardController::class, 'getDoctorAppointmentDataByMonth']);
             Route::get('/appointments/data', [AppointmentController::class, 'doctorAppointmentData']);

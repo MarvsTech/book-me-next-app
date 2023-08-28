@@ -134,4 +134,35 @@ class DashboardController extends Controller
             ], 500);
         }
     }
+
+    public function getAllDoctorAppointment() {
+        try {
+            $user = Auth::user();
+            $chartData = [];
+            $chartDataByDoctorMonth = $this->appointmentContract->getAllDoctorAppointment($user->id);
+
+            $chartData = $chartDataByDoctorMonth->groupBy('month')->map(function ($group, $month) {
+                $appointmentCount = $group->count();
+
+                return [
+                    'appointment' => $appointmentCount,
+                    'monthname' => date('M', strtotime($group[0]->created_at)),
+                    'date' => date('M', strtotime($group[0]->created_at)),
+                ];
+            })->values();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'This is your all appointment scheduled',
+                'data' => $chartData,
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to retrieve appointment data.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
