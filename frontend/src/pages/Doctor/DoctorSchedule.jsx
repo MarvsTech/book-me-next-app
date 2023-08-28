@@ -29,7 +29,8 @@ const events = [
   {
     title: "Checkup Patient 2",
     allDay: true,
-    start: new Date(2023, 7, 0)
+    start: new Date(2023, 7, 0),
+    end: new Date(2023, 7, 0)
   },
   {
     title: "Laboratory Checkup Patient 1",
