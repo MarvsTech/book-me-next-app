@@ -92,29 +92,46 @@ class DashboardController extends Controller
                 $pendingCount = $group->where('status_id', 2)->count();
                 $rejectedCount = $group->where('status_id', 3)->count();
 
-            return [
-                'successful' => $successfulCount,
-                'pending' => $pendingCount,
-                'rejected' => $rejectedCount,
-                'monthname' => date('M', strtotime($group[0]->created_at)),
-                'date' => date('M', strtotime($group[0]->created_at)),
-            ];
-        })->values();
+                return [
+                    'successful' => $successfulCount,
+                    'pending' => $pendingCount,
+                    'rejected' => $rejectedCount,
+                    'monthname' => date('M', strtotime($group[0]->created_at)),
+                    'date' => date('M', strtotime($group[0]->created_at)),
+                ];
+            })->values();
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'This is your all appointment scheduled',
-            'data' => $chartData,
-        ]);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'This is your all appointment scheduled',
+                'data' => $chartData,
+            ]);
 
-    } catch (Exception $e) {
-        return response()->json([
-            'status' => 'error',
-            'message' => 'Failed to retrieve appointment data.',
-            'error' => $e->getMessage(),
-        ], 500);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to retrieve appointment data.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
+
+    public function getAllAppointmentByPatient() {
+        try{
+            $user = Auth::user();
+            $patientAppointments = $this->appointmentContract->getAllAppointmentByPatient($user->id);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'List of all the appointment',
+                'data' => new AppointmentResource($patientAppointments, __FUNCTION__),
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete appointment.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
-
-
 }
