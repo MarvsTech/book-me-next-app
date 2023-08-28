@@ -116,9 +116,9 @@ const AdminDoctor = () => {
               }
             </tbody>
           </Table>
-          <div>
-            <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
-            <button onClick={() => setCurrentPage(currentPage + 1)} disabled={endIndex >= doctors.length}>Next</button>
+          <div className='prev-next-btn'>
+            <button className='prev-btn' onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+            <button className='next-btn' onClick={() => setCurrentPage(currentPage + 1)} disabled={endIndex >= doctors.length}>Next</button>
           </div>
         </div>
         <ViewModalDoctor showView={showModal2} onCloseView={handleCloseModal2} dataRow={selectedRow} />  

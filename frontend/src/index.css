@@ -23,14 +23,22 @@ html, body {
 }
 
 .sidebar {
-  position: relative;
   border-radius: 0px 30px 30px 0px;
   background: #E4E4E4;
   box-shadow: 2px 0px 15px 0px rgba(0, 0, 0, 0.25);
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
 }
 .sidebar .nav-item {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+.sidebar .nav-item .nav-link {
+  display: flex;
+  align-items: center;
 }
 .sidebar .nav-item .nav-link .inverted-color {
   filter: invert(1);
@@ -44,7 +52,7 @@ html, body {
   line-height: normal;
   top: 0;
   position: relative;
-  left: 20px;
+  left: 15px;
 }
 .sidebar .nav-item .nav-link .logo-header {
   color: #00AACF;
@@ -56,7 +64,7 @@ html, body {
   top: 0;
   position: relative;
   text-transform: uppercase;
-  left: 20px;
+  left: 15px;
 }
 .sidebar .nav-item .active {
   background-color: #00AACF;
@@ -77,12 +85,22 @@ html, body {
   margin-bottom: 10px;
 }
 .sidebar .logo-wrapper {
-  margin-top: 50px;
+  margin-top: 30px !important;
   margin-bottom: 5px;
-  border-bottom: 1px solid #545454;
+}
+.sidebar .logo-wrapper .nav-link {
+  display: flex;
+  align-items: center;
+}
+.sidebar .logo-wrapper .nav-link img {
+  width: 30px !important;
+}
+.sidebar hr {
+  width: 200px !important;
+  margin: auto !important;
 }
 .sidebar .logo-nav {
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 .sidebar .nav-link .inverted-color {
   filter: invert(1);
@@ -305,6 +323,19 @@ html, body {
   background-color: #C9C9C9;
   width: 100%;
   border-radius: 10px !important;
+}
+.table-content-wrapper .table-content .prev-next-btn {
+  position: absolute;
+  bottom: 0;
+  left: 45%;
+  margin-bottom: 15px;
+}
+.table-content-wrapper .table-content .prev-next-btn .prev-btn {
+  margin-right: 15px !important;
+}
+.table-content-wrapper .table-content .prev-next-btn button {
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .relative-container {

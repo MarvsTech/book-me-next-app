@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import DashboardHeader from '../../components/DashboardHeader'
 import UserLogTable from '../../components/UserLogTable'
 import { useAuth } from '../../config/UserContext';
+import PatientTable from '../../components/PatientTable';
 
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import { Calendar, dateFnsLocalizer} from "react-big-calendar";
