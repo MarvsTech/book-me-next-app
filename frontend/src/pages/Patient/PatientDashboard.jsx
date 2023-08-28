@@ -23,7 +23,7 @@ const PatientDashboard = () => {
 
   useEffect(() => {
     if (currentUser && currentUser.id && currentUser.token) {
-      axios.get('http://localhost:8000/api/patient/appointments/user/data', {
+      axios.get('http://localhost:8000/api/patient/appointments/data', {
         headers: {
           Authorization: `Bearer ${currentUser.token}`
         }
@@ -93,13 +93,13 @@ const PatientDashboard = () => {
               <Button onClick={handleShowModal3}>View Calendar</Button>
             </Col>
             <Col md={12}>
-              <PatientAppointmentTable dataRow={appointments} />
+              <PatientAppointmentTable dataRow={appointments} itemPerPage={9}/>
             </Col>
           </Row>
         </Container>
       </div>
       <PatientBookingAppointment show={showModal1} handleCloseModal={handleCloseModal1}/>
-      <PatientViewCalendar show={showModal3} handleCloseModal={handleCloseModal3}/>
+      <PatientViewCalendar dataRow={appointments} show={showModal3} handleCloseModal={handleCloseModal3}/>
     </div>
   )
 }

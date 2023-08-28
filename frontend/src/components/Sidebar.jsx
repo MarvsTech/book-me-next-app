@@ -63,15 +63,6 @@ const Sidebar = ({ children, roleId }) => {
     );
   }
 
-  const logoutItems = [
-    {
-      path: '/logout',
-      name: "logout",
-      label: "Logout",
-      icon: <img src={Logout} alt="Dashboard" className='inverted-color' style={{ width: '20px'}}/>,
-    },
-  ];
-
   const logoItems = [
     {
       path: '/book-me-next',
@@ -105,16 +96,6 @@ const Sidebar = ({ children, roleId }) => {
                   <span className='nav-link-text'>{item.label}</span>
                 </NavLink>
               </li>
-            ))}
-          </ul>
-        </div>
-        <div className="logout">
-          <ul className="nav flex-column">
-            {logoutItems.map((item, index) => (
-              <NavLink exact to={dashboardPath} className="nav-link" activeClassName="active">
-                {item.icon} 
-                <span className='nav-link-text'>{item.label}</span>
-              </NavLink>
             ))}
           </ul>
         </div>

@@ -52,7 +52,7 @@ const DoctorAppointment = () => {
 
   return (
     <>
-      <DashboardHeader name={ currentUser.name }/>
+      <DashboardHeader name={ currentUser.firstname }/>
 
       <PatientTable dataRow={appointments} handleShowModal={handleShowModal} itemPerPage={9}/>
 

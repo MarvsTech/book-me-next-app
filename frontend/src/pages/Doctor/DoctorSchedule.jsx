@@ -55,13 +55,15 @@ const DoctorSchedule = () => {
  return (
     <>
       <DashboardHeader name={ currentUser.firstname }/>
-      <Calendar 
-        localizer={localizer} 
-        events={allEvent} 
-        startAccessor="start" 
-        endAccessor="end" 
-        style={{ height: 500, margin: "50px" }}
-      />
+      <div className='doctor-calendar-container'>
+        <Calendar 
+          localizer={localizer} 
+          events={allEvent} 
+          startAccessor="start" 
+          endAccessor="end" 
+          style={{ height: 500, margin: "50px" }}
+        />
+      </div>
     </>
   )
 }
