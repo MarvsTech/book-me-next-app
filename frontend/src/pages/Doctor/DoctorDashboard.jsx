@@ -1,9 +1,8 @@
-import React, {useContext, useState, useEffect} from 'react'
-import Sidebar from '../../components/Sidebar'
+import React, {useState, useEffect} from 'react'
 import DashboardHeader from '../../components/DashboardHeader'
 import BookingCard from '../../components/BookingCard'
 import { Chart } from '../../components/Chart'
-import UserProvider, { useAuth } from '../../config/UserContext';
+import { useAuth } from '../../config/UserContext';
 import axios from 'axios'
 
 const DoctorDashboard = () => {

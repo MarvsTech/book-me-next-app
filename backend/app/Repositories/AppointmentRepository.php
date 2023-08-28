@@ -191,4 +191,18 @@ class AppointmentRepository implements AppointmentContract {
         ->where('doctor_id', $doctorId)
         ->get();
     }
+
+    public function getAllDoctorAppointmentSchedule($doctorId)
+    {
+        return $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->where('doctor_id', $doctorId)
+        ->orderBy('created_at', 'asc')
+        ->get();
+    }
 }
