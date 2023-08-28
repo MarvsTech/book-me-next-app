@@ -20,7 +20,7 @@ import ErrorPage from "./pages/ErrorPage";
 import DoctorDashboard from "./pages/Doctor/DoctorDashboard";
 import DoctorAppointment from "./pages/Doctor/DoctorAppointment";
 import DoctorUserLogs from "./pages/Doctor/DoctorUserLogs";
-import DoctorSettings from "./pages/Doctor/DoctorSettings";
+import DoctorSettings from "./pages/Doctor/DoctorCalendar";
 
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminDoctor from "./pages/Admin/AdminDoctor";
@@ -86,13 +86,13 @@ function App() {
           path="/doctor/schedules"
           element={DoctorElement(CurrentUserType, "doctor-schedule")}
         />
-        <Route
+        {/* <Route
           path="/doctor/user/logs"
           element={DoctorElement(CurrentUserType, "doctor-log")}
-        />
+        /> */}
         <Route
-          path="/doctor/settings"
-          element={DoctorElement(CurrentUserType, "doctor-setting")}
+          path="/doctor/calendar"
+          element={DoctorElement(CurrentUserType, "doctor-calendar")}
         />
 
         <Route path="*" element={PatientElement(CurrentUserType, "")} />
@@ -218,15 +218,15 @@ function DoctorElement(roleId, page) {
             </Sidebar>
           </>
         );
-      case "doctor-log":
-        return (
-          <>
-            <Sidebar roleId={roleId}>
-              <DoctorUserLogs />
-            </Sidebar>
-          </>
-        );
-      case "doctor-setting":
+      // case "doctor-log":
+      //   return (
+      //     <>
+      //       <Sidebar roleId={roleId}>
+      //         <DoctorUserLogs />
+      //       </Sidebar>
+      //     </>
+      //   );
+      case "doctor-calendar":
         return (
           <>
             <Sidebar roleId={roleId}>

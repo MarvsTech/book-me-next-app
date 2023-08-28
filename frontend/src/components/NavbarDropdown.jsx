@@ -69,7 +69,7 @@ const NavbarDropdown = () => {
 
         <Dropdown.Menu>
           {
-            (location.pathname === '/doctor' || location.pathname === '/doctor/appointments') ?
+            (location.pathname === '/doctor' || location.pathname === '/doctor/appointments' || location.pathname === '/doctor/schedules' || location.pathname === '/doctor/calendar') ?
               <Dropdown.Item onClick={() => setShowCreateSchedule(true)}>
                 <img src={CreateSchedule} alt="Profile Settings" />
                 <div>Create Schedule</div>
