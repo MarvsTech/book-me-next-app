@@ -18,5 +18,5 @@ interface AppointmentContract {
     public function getAllAppointmentChartDataByMonthName();
     public function getAllAppointmentByPatient($patientId);
     public function getAllDoctorAppointment($doctorId);
-    public function getAllDoctorAppointmentSchedule($doctorId);
+    public function getAllDoctorAppointmentSchedule($doctorId, $statusId);
 }

@@ -169,7 +169,7 @@ class DashboardController extends Controller
     public function getAllDoctorAppointmentSchedule() {
         try{
             $user = Auth::user();
-            $patientAppointments = $this->appointmentContract->getAllDoctorAppointmentSchedule($user->id);
+            $patientAppointments = $this->appointmentContract->getAllDoctorAppointmentSchedule($user->id, 2);
             return response()->json([
                 'status' => 'success',
                 'message' => 'List of all the appointment',

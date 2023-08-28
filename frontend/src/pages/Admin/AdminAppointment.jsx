@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PatientTable from '../../components/PatientTable'
 import ViewPatientModal from '../../components/ViewPatientModal'
-import womanPortrait from '../../images/woman.svg'
-import manPortrait from '../../images/man.svg'
 import DashboardHeader from '../../components/DashboardHeader'
 import { useAuth } from '../../config/UserContext';
 import axios from 'axios';
