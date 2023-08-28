@@ -13,12 +13,13 @@ const DoctorDashboard = () => {
 
     useEffect(() => {
         if (currentUser && currentUser.token) {
-            axios.get('http://localhost:8000/api/doctor/appointments/booking/data', {
+          axios.get('http://localhost:8000/api/doctor/appointments/booking/data', {
             headers: {
-            Authorization: `Bearer ${currentUser.token}`
+              Authorization: `Bearer ${currentUser.token}`
             }
         })
         .then(response => {
+          console.log(currentUser.token);
             setCardData(response.data.data);
             console.log(response.data.data);
         })

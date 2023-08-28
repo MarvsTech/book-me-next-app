@@ -138,7 +138,7 @@ class AppointmentRepository implements AppointmentContract {
 
     public function getAllAppointmentDataByDoctor($roleId)
     {
-        $data = $this->model->with([
+        return $this->model->with([
             'doctor',
             'patient',
             'doctor_schedule_time',
@@ -159,8 +159,8 @@ class AppointmentRepository implements AppointmentContract {
             'status'
         ])
         ->select('*', \DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'))
-        ->orderBy('created_at', 'asc')
         ->where('doctor_id', $roleId)
+        ->orderBy('created_at', 'asc')
         ->get();
     }
 }

@@ -4,14 +4,7 @@ import UserLogTable from '../../components/UserLogTable'
 import { useAuth } from '../../config/UserContext';
 
 const DoctorSchedule = () => {
-  const {currentUser: {
-    firstname, 
-    lastname, 
-    middlename,
-    roleId,
-  }} = useAuth();
-  const name = `${firstname}`;
-
+  const { currentUser } = useAuth();
   const tableBody = [
     {
       date : 'September 9, 2023',
@@ -34,9 +27,9 @@ const DoctorSchedule = () => {
     <>
       <DashboardHeader name={ currentUser.name }/>
 
-      <PatientTable dataRow={appointments} handleShowModal={handleShowModal} itemPerPage={9}/>
+      {/* <PatientTable dataRow={appointments} handleShowModal={handleShowModal} itemPerPage={9}/>
 
-      <ViewPatientModal show={showModal} onClose={handleCloseModal} dataRow={selectedRow}/>
+      <ViewPatientModal show={showModal} onClose={handleCloseModal} dataRow={selectedRow}/> */}
     </>
   )
 }

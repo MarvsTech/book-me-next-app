@@ -314,7 +314,6 @@ class AppointmentController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
-
     }
 
     public function getAllPatientAppointment() {
