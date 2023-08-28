@@ -1590,19 +1590,42 @@ td.fc-other-month .fc-day-number {
     margin-top: 20px;
 }
 
-// Create Schedule Modal
-.create-sched-modal {
-    .modal-dialog {
-        .modal-content {
-            width: 100% !important;
-            height: 100% !important;
-            left: 0 !important;
+// Doctor Create Schedule Dropdown
+.create-sched {
+    display: flex;
+    align-items: center;
+
+    .action-container {
+        margin-left: 10px;
+
+        .dropdown-menu.show {
+            transform: translate3d(0px, 29px, 0px) !important;;
+
+            .dropdown-item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 0px;
+            }
+        }
+
+        .dropdown-menu {
+            padding-top: 0px;
+            padding-left: 0px;
+            padding-right: 0px;
+            border-radius: 10px !important;
+            --bs-dropdown-min-width: 0px;
+            --bs-dropdown-padding-y: 0px;
+            --bs-dropdown-item-padding-x: 0px;
+            --bs-dropdown-item-padding-y: 0px;
         }
     }
+}
 
-    .create-sched-body {
-        padding: 30px;
-        margin-bottom: 25px;
-        padding-top: 0px !important;
-    }
+// Doctor View Calendar
+.doctor-calendar-container {
+    margin: 12px;
+    padding: 20px;
+    border-radius: 15px;
+    background: #fff;
 }

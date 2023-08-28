@@ -7,6 +7,7 @@ import Appointment from '../images/appointment.svg';
 import Setting from '../images/settings.svg';
 import Logout from '../images/logout.svg';
 import Logo from '../images/booking-logo.svg';
+import CreateSchedule from '../images/create-schedule.png'
 
 const Sidebar = ({ children, roleId }) => {
   const menuItems = [
@@ -23,13 +24,13 @@ const Sidebar = ({ children, roleId }) => {
       icon: <img src={Appointment} alt="Appointments" className='inverted-color' style={{ width: '20px'}} />,
     },
     {
-      path: (roleId === 1) ? '/admin/user/logs' : '/doctor/user/logs',
+      path: (roleId === 1) ? '/admin/user/logs' : '/doctor/schedule',
       name: "userlogs",
       label: "User logs",
       icon: <img src={UserLog} alt="User Logs" className='inverted-color' style={{ width: '20px'}} />,
     },
     {
-      path: (roleId === 1) ? '/admin/settings' : '/doctor/settings',
+      path: (roleId === 1) ? '/admin/settings' : '/doctor/calendar',
       name: "settings",
       label: "Settings",
       icon: <img src={Setting} alt="Settings" className='inverted-color' style={{ width: '20px'}} />,
@@ -46,12 +47,20 @@ const Sidebar = ({ children, roleId }) => {
   }
 
   if (roleId === 2) {
-    menuItems.splice(1, 0, { 
+    menuItems.splice(2, 2, 
+      { 
       path: '/doctor/schedules',
       name: 'schedule',
       label: 'Schedules',
+      icon: <img src={CreateSchedule} alt="Doctors" className='inverted-color' style={{ width: '20px' }} />,
+      },
+      { 
+      path: '/doctor/calendar',
+      name: 'calendar',
+      label: 'Calendar',
       icon: <img src={Doctor} alt="Doctors" className='inverted-color' style={{ width: '20px' }} />,
-    });
+      },
+    );
   }
 
   const logoutItems = [
