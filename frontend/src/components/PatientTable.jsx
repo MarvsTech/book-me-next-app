@@ -57,9 +57,9 @@ const PatientTable = ({dataRow, handleShowModal, itemPerPage}) => {
               }
             </tbody>
           </Table> 
-          <div>
-            <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
-            <button onClick={() => setCurrentPage(currentPage + 1)} disabled={endIndex >= dataRow.length}>Next</button>
+          <div className='prev-next-btn'>
+            <button className='prev-btn' onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+            <button className='next-btn' onClick={() => setCurrentPage(currentPage + 1)} disabled={endIndex >= dataRow.length}>Next</button>
           </div>
         </div>
       </div>

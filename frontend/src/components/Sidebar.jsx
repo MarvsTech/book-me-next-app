@@ -7,7 +7,7 @@ import Appointment from '../images/appointment.svg';
 import Setting from '../images/settings.svg';
 import Logout from '../images/logout.svg';
 import Logo from '../images/booking-logo.svg';
-import CreateSchedule from '../images/create-schedule.png'
+import Schedule from '../images/schedule.svg'
 
 const Sidebar = ({ children, roleId }) => {
   const menuItems = [
@@ -23,18 +23,18 @@ const Sidebar = ({ children, roleId }) => {
       label: "Appointments",
       icon: <img src={Appointment} alt="Appointments" className='inverted-color' style={{ width: '20px'}} />,
     },
-    {
-      path: (roleId === 1) ? '/admin/user/logs' : '/doctor/schedule',
-      name: "userlogs",
-      label: "User logs",
-      icon: <img src={UserLog} alt="User Logs" className='inverted-color' style={{ width: '20px'}} />,
-    },
-    {
-      path: (roleId === 1) ? '/admin/settings' : '/doctor/calendar',
-      name: "settings",
-      label: "Settings",
-      icon: <img src={Setting} alt="Settings" className='inverted-color' style={{ width: '20px'}} />,
-    },
+    // {
+    //   path: (roleId === 1) ? '/admin/user/logs' : '/doctor/schedule',
+    //   name: "userlogs",
+    //   label: "User logs",
+    //   icon: <img src={UserLog} alt="User Logs" className='inverted-color' style={{ width: '20px'}} />,
+    // },
+    // {
+    //   path: (roleId === 1) ? '/admin/settings' : '/doctor/calendar',
+    //   name: "settings",
+    //   label: "Settings",
+    //   icon: <img src={Setting} alt="Settings" className='inverted-color' style={{ width: '20px'}} />,
+    // },
   ];
 
   if (roleId === 1) {
@@ -47,30 +47,24 @@ const Sidebar = ({ children, roleId }) => {
   }
 
   if (roleId === 2) {
-    menuItems.splice(2, 2, 
-      { 
-      path: '/doctor/schedules',
-      name: 'schedule',
-      label: 'Schedules',
-      icon: <img src={CreateSchedule} alt="Doctors" className='inverted-color' style={{ width: '20px' }} />,
-      },
+    menuItems.splice(2, 0,
       { 
       path: '/doctor/calendar',
-      name: 'calendar',
-      label: 'Calendar',
+      name: 'schedule',
+      label: 'Schedule',
       icon: <img src={Doctor} alt="Doctors" className='inverted-color' style={{ width: '20px' }} />,
       },
     );
   }
 
-  const logoutItems = [
-    {
-      path: '/logout',
-      name: "logout",
-      label: "Logout",
-      icon: <img src={Logout} alt="Dashboard" className='inverted-color' style={{ width: '20px'}}/>,
-    },
-  ];
+  // const logoutItems = [
+  //   {
+  //     path: '/logout',
+  //     name: "logout",
+  //     label: "Logout",
+  //     icon: <img src={Logout} alt="Dashboard" className='inverted-color' style={{ width: '20px'}}/>,
+  //   },
+  // ];
 
   const logoItems = [
     {
@@ -81,7 +75,7 @@ const Sidebar = ({ children, roleId }) => {
     },
   ];
 
-  const dashboardPath = '/';
+  // const dashboardPath = '/';
 
   return (
     <>
@@ -96,6 +90,9 @@ const Sidebar = ({ children, roleId }) => {
             ))}
           </ul>
         </div>
+
+        <hr></hr>
+
         <div className="position-sticky">
           <ul className="nav flex-column">
             {menuItems.map((item, index) => (
@@ -108,7 +105,8 @@ const Sidebar = ({ children, roleId }) => {
             ))}
           </ul>
         </div>
-        <div className="logout">
+
+        {/* <div className="logout">
           <ul className="nav flex-column">
             {logoutItems.map((item, index) => (
               <NavLink exact to={dashboardPath} className="nav-link" activeClassName="active">
@@ -117,7 +115,7 @@ const Sidebar = ({ children, roleId }) => {
               </NavLink>
             ))}
           </ul>
-        </div>
+        </div> */}
       </nav>
       <div className='main-content'>{children}</div>
     </>

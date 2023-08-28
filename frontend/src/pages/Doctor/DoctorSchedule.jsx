@@ -2,15 +2,18 @@ import React from 'react'
 import DashboardHeader from '../../components/DashboardHeader'
 import UserLogTable from '../../components/UserLogTable'
 import { useAuth } from '../../config/UserContext';
+import PatientTable from '../../components/PatientTable';
 
 const DoctorSchedule = () => {
-  const {currentUser: {
-    firstname, 
-    lastname, 
-    middlename,
-    roleId,
-  }} = useAuth();
-  const name = `${firstname}`;
+  // const {currentUser: {
+  //   firstname, 
+  //   lastname, 
+  //   middlename,
+  //   roleId,
+  // }} = useAuth();
+  // const name = `${firstname}`;
+
+  const { currentUser } = useAuth();
 
   const tableBody = [
     {
@@ -34,9 +37,9 @@ const DoctorSchedule = () => {
     <>
       <DashboardHeader name={ currentUser.name }/>
 
-      <PatientTable dataRow={appointments} handleShowModal={handleShowModal} itemPerPage={9}/>
+      {/* <PatientTable dataRow={appointments} handleShowModal={handleShowModal} itemPerPage={9}/>
 
-      <ViewPatientModal show={showModal} onClose={handleCloseModal} dataRow={selectedRow}/>
+      <ViewPatientModal show={showModal} onClose={handleCloseModal} dataRow={selectedRow}/> */}
     </>
   )
 }
