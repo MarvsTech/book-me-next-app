@@ -1,7 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Table, Button} from 'react-bootstrap'
 
-const PatientAppointmentTable = ({dataRow, handleShowModal}) => {
+const PatientAppointmentTable = ({dataRow, itemPerPage}) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const startIndex = (currentPage - 1) * itemPerPage;
+  const endIndex = startIndex + itemPerPage;
+  const currentItem = dataRow.slice(startIndex, endIndex);
+
   return (
     <div className='table-content-wrapper'>
       <Table className='patient-appointment-table'>
@@ -16,7 +22,7 @@ const PatientAppointmentTable = ({dataRow, handleShowModal}) => {
         </thead>
         <tbody>
           {
-            (dataRow.map((data, index) => {
+            (currentItem.map((data, index) => {
               return (
                 <>
                   <tr key={`row-${index}`}>
@@ -43,6 +49,10 @@ const PatientAppointmentTable = ({dataRow, handleShowModal}) => {
             }))
           }
         </tbody>
+        <div>
+          <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+          <button onClick={() => setCurrentPage(currentPage + 1)} disabled={endIndex >= dataRow.length}>Next</button>
+        </div>
       </Table> 
     </div>
   )

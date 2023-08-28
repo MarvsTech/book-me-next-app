@@ -314,7 +314,6 @@ class AppointmentController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
-
     }
 
     public function getAllPatientAppointment() {
@@ -338,7 +337,7 @@ class AppointmentController extends Controller
     public function getDoctorAppointmentDataByMonth($roleId)
     {
         try {
-            $chartDataByMonth = [];
+            $chartData = [];
             $appointmentDataByMonth = $this->appointmentContract->getAllAppointmentDataByMonth();
 
             $chartData = $appointmentDataByMonth->groupBy('month')->map(function ($group) {

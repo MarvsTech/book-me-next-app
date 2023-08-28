@@ -138,7 +138,7 @@ class AppointmentRepository implements AppointmentContract {
 
     public function getAllAppointmentDataByDoctor($roleId)
     {
-        $data = $this->model->with([
+        return $this->model->with([
             'doctor',
             'patient',
             'doctor_schedule_time',
@@ -159,8 +159,50 @@ class AppointmentRepository implements AppointmentContract {
             'status'
         ])
         ->select('*', \DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'))
-        ->orderBy('created_at', 'asc')
         ->where('doctor_id', $roleId)
+        ->orderBy('created_at', 'asc')
+        ->get();
+    }
+
+    public function getAllAppointmentByPatient($patientId) {
+        return $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->where('patient_id', $patientId)
+        ->orderBy('created_at', 'asc')
+        ->get();
+    }
+
+    public function getAllDoctorAppointment($doctorId)
+    {
+        return $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->select('*', \DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'))
+        ->orderBy('created_at', 'asc')
+        ->where('doctor_id', $doctorId)
+        ->get();
+    }
+
+    public function getAllDoctorAppointmentSchedule($doctorId)
+    {
+        return $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->where('doctor_id', $doctorId)
+        ->orderBy('created_at', 'asc')
         ->get();
     }
 }
