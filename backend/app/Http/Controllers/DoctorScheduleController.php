@@ -9,6 +9,7 @@ use App\Contracts\DoctorScheduleContract;
 use App\Http\Resources\DoctorScheduleResource;
 use App\Repositories\DoctorScheduleRepository;
 use App\Http\Requests\DoctorScheduleStoreControllerRequest;
+use Illuminate\Support\Facades\Auth;
 
 class DoctorScheduleController extends Controller
 {
@@ -45,6 +46,8 @@ class DoctorScheduleController extends Controller
     public function store(DoctorScheduleStoreControllerRequest $request)
     {
         try {
+
+            $user = Auth::user();
             $params = $request->only([
                 'doctor_id',
                 'title',
@@ -54,6 +57,7 @@ class DoctorScheduleController extends Controller
                 'time_end',
             ]);
 
+            $params['doctor_id'] = $user->id;
             $doctorSchedule = $this->doctorScheduleContract->store($params);
 
             return response()->json([
