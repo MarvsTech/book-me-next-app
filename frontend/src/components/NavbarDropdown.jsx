@@ -12,12 +12,14 @@ import axios from 'axios';
 import { useAuth } from '../config/UserContext';
 import CreateScheduleDoctor from './CreateScheduleDoctor';
 import { useLocation } from 'react-router';
+import ChangePasswordModal from './ChangePasswordModal';
 
 const NavbarDropdown = () => {
   const { currentUser: { token } } = useAuth();
 
   const [showProfileSettingsModal, setShowProfileSettingsModal] = useState(false);
   const [showCreateSchedule, setShowCreateSchedule] = useState(false);
+  const [showChangePassword, setShowChangePassword] = useState(false);
 
   const location = useLocation();
 
@@ -60,13 +62,18 @@ const NavbarDropdown = () => {
     setShowCreateSchedule(false);
   }
 
+  const handleCloseChangePassword = () => {
+    setShowChangePassword(false);
+  }
+
   const admin = {
     firstname : 'admin',
     lastname : 'admin',
     middlename : 'a',
     contact_number : '091234567890',
     email : 'admin@admin.com',
-    address : 'hmmmm'
+    address : 'hmmmm',
+    currentPassword : 'hahaha'
   }
 
   const doctor = {
@@ -77,7 +84,8 @@ const NavbarDropdown = () => {
     email : 'doctor@doctor.com',
     address : 'hmmmm',
     specialization : 'ENT',
-    room_number : '7'
+    room_number : '7',
+    currentPassword : 'hehehe'
   }
 
   const patient = {
@@ -86,7 +94,8 @@ const NavbarDropdown = () => {
     middlename : 'p',
     contact_number : '091234567890',
     email : 'patient@patient.com',
-    address : 'hmmmm'
+    address : 'hmmmm',
+    currentPassword : 'hohoho'
   }
 
   return (
@@ -111,7 +120,7 @@ const NavbarDropdown = () => {
             <img src={ProfileSettings} alt="Profile Settings" />
             <div>Profile Settings</div>
           </Dropdown.Item>
-          <Dropdown.Item href="#/action-2">
+          <Dropdown.Item onClick={() => setShowChangePassword(true)}>
             <img src={PasswordSettings} alt="Password Settings"></img>
             <div>Password</div>
           </Dropdown.Item>
@@ -124,26 +133,47 @@ const NavbarDropdown = () => {
 
       {
         (location.pathname === '/admin' || location.pathname === '/admin/doctors' || location.pathname === '/admin/appointments') ?
-          <PatientProfileSettings
-            show={showProfileSettingsModal}
-            onHide={handleCloseProfileSettings}
-            handleCloseModal = {handleCloseProfileSettings}
-            data = {admin}
-          />
+          <>
+            <PatientProfileSettings
+              show={showProfileSettingsModal}
+              onHide={handleCloseProfileSettings}
+              handleCloseModal = {handleCloseProfileSettings}
+              data = {admin}
+            />
+            <ChangePasswordModal
+              show={showChangePassword}
+              handleCloseModal={handleCloseChangePassword}
+              data={admin}
+            />
+          </>
         : (location.pathname === '/doctor' || location.pathname === '/doctor/appointments' || location.pathname === '/doctor/schedules' || location.pathname === '/doctor/calendar') ?
-          <PatientProfileSettings
-            show={showProfileSettingsModal}
-            onHide={handleCloseProfileSettings}
-            handleCloseModal = {handleCloseProfileSettings}
-            data = {doctor}
-          />
+          <>
+            <PatientProfileSettings
+              show={showProfileSettingsModal}
+              onHide={handleCloseProfileSettings}
+              handleCloseModal = {handleCloseProfileSettings}
+              data = {doctor}
+            />
+            <ChangePasswordModal
+              show={showChangePassword}
+              handleCloseModal={handleCloseChangePassword}
+              data={doctor}
+            />
+          </>
         : (location.pathname === '/patient') ?
-          <PatientProfileSettings
-            show={showProfileSettingsModal}
-            onHide={handleCloseProfileSettings}
-            handleCloseModal = {handleCloseProfileSettings}
-            data = {patient}
-          />
+          <>
+            <PatientProfileSettings
+              show={showProfileSettingsModal}
+              onHide={handleCloseProfileSettings}
+              handleCloseModal = {handleCloseProfileSettings}
+              data = {patient}
+            />
+            <ChangePasswordModal
+              show={showChangePassword}
+              handleCloseModal={handleCloseChangePassword}
+              data={patient}
+            />
+          </>
         :
           null
       }
@@ -152,6 +182,7 @@ const NavbarDropdown = () => {
         show={showCreateSchedule}
         handleCloseModal={handleCloseCreateSchedule}
       />
+
     </>
   );
 };
