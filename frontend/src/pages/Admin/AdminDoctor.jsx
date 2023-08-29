@@ -9,6 +9,7 @@ import DashboardHeader from '../../components/DashboardHeader'
 import { useAuth } from '../../config/UserContext';
 
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 const AdminDoctor = () => {
   const [selectedRow, setSelectedRow] = useState({});
@@ -65,6 +66,30 @@ const AdminDoctor = () => {
     console.log('selected row: ', selectedRow)
   },[selectedRow]);
 
+  const doctorStatusDeactivate = () => {
+    Swal.fire({
+      title: 'Deactivate',
+      text: 'Are you sure you want to deactivate this account?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Deactivate',
+    })
+  }
+
+   const doctorStatusActivate = () => {
+    Swal.fire({
+      title: 'Activate',
+      text: 'Are you sure you want to activate this account?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2ecc71',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Activate',
+    })
+  }
+
   return (
     <>
       <DashboardHeader name={ currentUser.firstname } token={ currentUser.token }/>
@@ -103,9 +128,9 @@ const AdminDoctor = () => {
                         <td>
                         {
                           (data.isActive === 0) ? 
-                          <Button variant='danger'>Deactivate</Button>
+                          <Button variant='danger' onClick={doctorStatusDeactivate}>Deactivate</Button>
                           :
-                          <Button variant='success'>Activate</Button>
+                          <Button variant='success' onClick={doctorStatusActivate}>Activate</Button>
                         }
                         </td>
                       </tr>
