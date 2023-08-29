@@ -11,6 +11,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DoctorScheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +92,10 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/appointments/chart/data', [DashboardController::class, 'getDoctorAppointmentDataByMonth']);
             Route::get('/appointments/data', [AppointmentController::class, 'doctorAppointmentData']);
             Route::get('/appointments/patient/records', [AppointmentController::class, 'getAllPatientAppointment']);
+
+            Route::apiResource('schedule', DoctorScheduleController::class)->only([
+                'index', 'store', 'show', 'update', 'destroy'
+            ]);
         });
     });
 
