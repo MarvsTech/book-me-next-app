@@ -4,14 +4,11 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import PatientProfile from '../../images/woman.svg';
-import { Modal, Form } from 'react-bootstrap'
 import AddButton from '../../images/add-btn.svg';
 import PatientAppointmentTable from '../../components/PatientAppointmentTable';
 import PatientCard from '../../components/PatientCard';
 
 import { useAuth } from '../../config/UserContext';
-import Calendar from '../../components/Calendar';
-import PatientProfileSettings from '../../components/PatientProfileSettings';
 import axios from 'axios';
 import PatientBookingAppointment from '../../components/PatientBookingAppointment';
 import PatientViewCalendar from '../../components/PatientViewCalendar';

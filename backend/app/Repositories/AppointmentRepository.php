@@ -192,7 +192,7 @@ class AppointmentRepository implements AppointmentContract {
         ->get();
     }
 
-    public function getAllDoctorAppointmentSchedule($doctorId)
+    public function getAllDoctorAppointmentSchedule($doctorId, $statusId)
     {
         return $this->model->with([
             'doctor',
@@ -202,6 +202,7 @@ class AppointmentRepository implements AppointmentContract {
             'status'
         ])
         ->where('doctor_id', $doctorId)
+        ->where('status_id', $statusId)
         ->orderBy('created_at', 'asc')
         ->get();
     }
