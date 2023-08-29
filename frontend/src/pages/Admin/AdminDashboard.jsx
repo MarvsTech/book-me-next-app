@@ -42,6 +42,22 @@ const AdminDashboard = () => {
     }
   }, [currentUser]);
 
+  useEffect(() => {
+    if (currentUser && currentUser.token) {
+      axios.get('http://localhost:8000/api/admin/appointments/data/chart', {
+        headers: {
+          Authorization: `Bearer ${currentUser.token}`
+        }
+      })
+      .then(response => {
+        console.log(response.data.data);
+        //setCardData(response.data.data);
+      })
+      .catch(error => {
+        console.error('Error fetching appointments:', error);
+      });
+    }
+  }, [currentUser]);
   const dataDoctor = {
     labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
     datasets: [
@@ -53,6 +69,16 @@ const AdminDashboard = () => {
       },{
         label: 'Doctor 2',
         data: [21, 22, 12, 78, 34, 35, 54],
+        backgroundColor: '#00AACF',
+        borderColor: '#00AACF',
+      },{
+        label: 'Doctor 3',
+        data: [10, 5, 15, 20, 25, 21, 10],
+        backgroundColor: '#00AACF',
+        borderColor: '#00AACF',
+      },{
+        label: 'Doctor 4',
+        data: [10, 2, 12, 10, 5, 10, 10],
         backgroundColor: '#00AACF',
         borderColor: '#00AACF',
       },

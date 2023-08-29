@@ -10,6 +10,7 @@ use App\Contracts\DoctorContract;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\DoctorResource;
 use App\Repositories\DoctorRepository;
+use App\Contracts\DoctorScheduleContract;
 use App\Mail\CreateDoctorAccountNotificationMail;
 use App\Http\Requests\DoctorStoreControllerRequest;
 use App\Http\Requests\DoctorUpdateControllerRequest;
@@ -17,10 +18,12 @@ use App\Http\Requests\DoctorUpdateControllerRequest;
 class DoctorController extends Controller
 {
     protected $doctorContract;
+    protected $doctorScheduleContract;
 
-    public function __construct(DoctorContract $doctorContract)
+    public function __construct(DoctorContract $doctorContract, DoctorScheduleContract $doctorScheduleContract)
     {
         $this->doctorContract = $doctorContract;
+        $this->doctorScheduleContract = $doctorScheduleContract;
     }
 
     public function index()
@@ -195,5 +198,10 @@ class DoctorController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function doctorChangeStatus(DoctorStoreControllerRequest $request, $doctor)
+    {
+        dd($doctor);
     }
 }

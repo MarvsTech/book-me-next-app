@@ -64,6 +64,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/appointments/doctor/data', [AppointmentController::class, 'getAllAppointmentDataByDoctor']);
             Route::get('/appointments/data/month', [AppointmentController::class, 'getAllAppointmentDataByMonth']);
             Route::get('/appointments/data/month/name', [AppointmentController::class, 'getAllAppointmentChartDataByMonthName']);
+            Route::get('/appointments/data/chart', [AppointmentController::class, 'getAllAppointmentChartData']);
             Route::get('/appointments/all/data', [AppointmentController::class, 'getAllAppointmentData']);
             Route::get('/appointments/patient/records', [AppointmentController::class, 'getAllPatientAppointment']);
             Route::apiResource('appointment', AppointmentController::class)->only([
@@ -79,6 +80,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::apiResource('feedback', FeedbackController::class)->only([
                 'index', 'store'
             ]);
+            Route::get('/profile', [DoctorController::class, 'doctorChangeStatus']);
         });
     });
 

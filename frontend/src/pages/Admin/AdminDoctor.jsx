@@ -78,7 +78,7 @@ const AdminDoctor = () => {
     })
   }
 
-   const doctorStatusActivate = () => {
+  const doctorStatusActivate = () => {
     Swal.fire({
       title: 'Activate',
       text: 'Are you sure you want to activate this account?',

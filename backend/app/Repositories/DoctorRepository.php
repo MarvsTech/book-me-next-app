@@ -35,4 +35,9 @@ class DoctorRepository implements DoctorContract {
             $query->where('role_name', $role);
         })->get();
     }
+
+    public function doctorChangeStatus($id, $params)
+    {
+        return $this->model->update($params);
+    }
 }

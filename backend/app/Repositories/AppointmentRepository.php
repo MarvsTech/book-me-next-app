@@ -111,6 +111,48 @@ class AppointmentRepository implements AppointmentContract {
         ->get();
     }
 
+    public function getAllAppointmentByID()
+    {
+        $users = User::where('specialization', 'doctor')->get();
+        $appointments = $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->where('status_id',1)
+        ->select('*', \DB::raw('MONTH(created_at) as month'))
+        ->get();
+
+        $data = [];
+
+        foreach($users as $user) {
+            $user_appointment = [
+                '1' => 0,
+                '2' => 0,
+                '3' => 0,
+                '4' => 0,
+                '5' => 0,
+                '6' => 0,
+                '7' => 0,
+                '8' => 0,
+                '9' => 0,
+                '10' => 0,
+                '11' => 0,
+                '12' => 0,
+            ];
+            foreach($appointments as $app) {
+                if ($user->id == $app->doctor_id) {
+                    $user_appointment[$app->month] = $user_appointment[$app->month] + 1;
+                }
+            }
+            array_push($data, ['doctor_id'=> $user->id, 'months' => $user_appointment]);
+        }
+
+        return $data;
+    }
+
     public function getAllAppointmentChartDataByMonthName()
     {
         return $this->model->with([
