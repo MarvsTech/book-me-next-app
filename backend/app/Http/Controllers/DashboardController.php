@@ -80,7 +80,6 @@ class DashboardController extends Controller
 
     public function getDoctorAppointmentDataByMonth()
     {
-
         try {
             $user = Auth::user();
 
@@ -116,7 +115,8 @@ class DashboardController extends Controller
         }
     }
 
-    public function getAllAppointmentByPatient() {
+    public function getAllAppointmentByPatient()
+    {
         try{
             $user = Auth::user();
             $patientAppointments = $this->appointmentContract->getAllAppointmentByPatient($user->id);
@@ -135,7 +135,8 @@ class DashboardController extends Controller
         }
     }
 
-    public function getAllDoctorAppointment() {
+    public function getAllDoctorAppointment()
+    {
         try {
             $user = Auth::user();
             $chartData = [];
@@ -166,7 +167,8 @@ class DashboardController extends Controller
         }
     }
 
-    public function getAllDoctorAppointmentSchedule() {
+    public function getAllDoctorAppointmentSchedule()
+    {
         try{
             $user = Auth::user();
             $patientAppointments = $this->appointmentContract->getAllDoctorAppointmentSchedule($user->id, 2);
