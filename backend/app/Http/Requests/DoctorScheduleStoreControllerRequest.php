@@ -22,7 +22,7 @@ class DoctorScheduleStoreControllerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'doctor_id' => 'required|integer',
+            'doctor_id' => 'integer',
             'title' => 'required|string',
             'description' => 'nullable|string',
             'schedule_date' => 'required|date',
@@ -34,7 +34,6 @@ class DoctorScheduleStoreControllerRequest extends FormRequest
     public function messages()
     {
         return [
-            'doctor_id.required' => 'Doctor is required',
             'doctor_id.integer' => 'Doctor ID should be an integer',
             'title.required' => 'Title is required',
             'title.string' => 'Title should be a string',
