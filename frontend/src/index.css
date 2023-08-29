@@ -1397,23 +1397,32 @@ td.fc-other-month .fc-day-number {
   margin-top: 20px;
 }
 
-.create-sched {
-  display: flex;
-  align-items: center;
+.create-sched-header div {
+  margin: auto;
+  font-size: 25px;
+  font-weight: 600;
 }
-.create-sched .action-container {
+.create-sched-header .btn-close {
+  margin: 0px !important;
+}
+
+.create-sched-body {
+  display: flex;
+  padding-top: 25px !important;
+}
+.create-sched-body .action-container {
   margin-left: 10px;
 }
-.create-sched .action-container .dropdown-menu.show {
+.create-sched-body .action-container .dropdown-menu.show {
   transform: translate3d(0px, 29px, 0px) !important;
 }
-.create-sched .action-container .dropdown-menu.show .dropdown-item {
+.create-sched-body .action-container .dropdown-menu.show .dropdown-item {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 0px;
 }
-.create-sched .action-container .dropdown-menu {
+.create-sched-body .action-container .dropdown-menu {
   padding-top: 0px;
   padding-left: 0px;
   padding-right: 0px;
@@ -1422,6 +1431,25 @@ td.fc-other-month .fc-day-number {
   --bs-dropdown-padding-y: 0px;
   --bs-dropdown-item-padding-x: 0px;
   --bs-dropdown-item-padding-y: 0px;
+}
+.create-sched-body .form-label {
+  font-size: 15px;
+  font-family: Montserrat;
+  margin-bottom: 5px;
+  margin-top: 15px;
+  font-weight: 500;
+}
+.create-sched-body .form-control, .create-sched-body .form-select {
+  padding: 15px;
+  font-weight: 300;
+  font-family: Montserrat;
+  border-radius: 10px;
+  background: #E6E6E6;
+}
+.create-sched-body .create-sched-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
 }
 
 .doctor-calendar-container {

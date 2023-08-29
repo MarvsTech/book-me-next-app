@@ -1627,9 +1627,21 @@ td.fc-other-month .fc-day-number {
 }
 
 // Doctor Create Schedule Dropdown
-.create-sched {
+.create-sched-header {
+    div {
+        margin: auto;
+        font-size: 25px;
+        font-weight: 600;
+    }
+
+    .btn-close {
+        margin: 0px !important;
+    }
+}
+
+.create-sched-body {
     display: flex;
-    align-items: center;
+    padding-top: 25px !important;
 
     .action-container {
         margin-left: 10px;
@@ -1655,6 +1667,28 @@ td.fc-other-month .fc-day-number {
             --bs-dropdown-item-padding-x: 0px;
             --bs-dropdown-item-padding-y: 0px;
         }
+    }
+
+    .form-label {
+        font-size: 15px;
+        font-family: Montserrat;
+        margin-bottom: 5px;
+        margin-top: 15px;
+        font-weight: 500;
+    }
+
+    .form-control, .form-select {
+        padding: 15px;
+        font-weight: 300;
+        font-family: Montserrat;
+        border-radius: 10px;
+        background: #E6E6E6;
+    }
+
+    .create-sched-btn {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
     }
 }
 
