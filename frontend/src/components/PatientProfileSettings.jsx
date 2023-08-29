@@ -25,9 +25,9 @@ const PatientProfileSettings = ({show, handleCloseModal, data}) => {
         <Modal className='edit-profile-modal' show={show} onHide={handleCloseModal}>
             <Modal.Header closeButton></Modal.Header>
             <Modal.Body className='booking-body'>
-                <Container>
+                <Container fluid>
                     <Form onSubmit={e => onSubmit(e)}>
-                        <Container>
+                        <Container fluid>
                             <Row>
                                 <Col md={5}>
                                     <FloatingLabel controlId="floatingInputFirstname" label="Firstname" className="mb-3">
@@ -84,8 +84,10 @@ const PatientProfileSettings = ({show, handleCloseModal, data}) => {
                                 </Col>
                             </Row>
                         </Container>
-
-                        <Button type='submit' onClick={handleCloseModal}>Update Profile</Button>
+                        
+                        <div>
+                            <Button type='submit' onClick={handleCloseModal}>Update Profile</Button>
+                        </div>
                     </Form>
                 </Container>
             </Modal.Body>
