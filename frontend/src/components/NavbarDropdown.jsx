@@ -60,6 +60,35 @@ const NavbarDropdown = () => {
     setShowCreateSchedule(false);
   }
 
+  const admin = {
+    firstname : 'admin',
+    lastname : 'admin',
+    middlename : 'a',
+    contact_number : '091234567890',
+    email : 'admin@admin.com',
+    address : 'hmmmm'
+  }
+
+  const doctor = {
+    firstname : 'doctor',
+    lastname : 'doctor',
+    middlename : 'd',
+    contact_number : '091234567890',
+    email : 'doctor@doctor.com',
+    address : 'hmmmm',
+    specialization : 'ENT',
+    room_number : '7'
+  }
+
+  const patient = {
+    firstname : 'patient',
+    lastname : 'patient',
+    middlename : 'p',
+    contact_number : '091234567890',
+    email : 'patient@patient.com',
+    address : 'hmmmm'
+  }
+
   return (
     <>
       <Dropdown>
@@ -93,11 +122,31 @@ const NavbarDropdown = () => {
         </Dropdown.Menu>
       </Dropdown>
 
-       <PatientProfileSettings
-        show={showProfileSettingsModal}
-        onHide={handleCloseProfileSettings}
-        handleCloseModal = {handleCloseProfileSettings}
-      />
+      {
+        (location.pathname === '/admin' || location.pathname === '/admin/doctors' || location.pathname === '/admin/appointments') ?
+          <PatientProfileSettings
+            show={showProfileSettingsModal}
+            onHide={handleCloseProfileSettings}
+            handleCloseModal = {handleCloseProfileSettings}
+            data = {admin}
+          />
+        : (location.pathname === '/doctor' || location.pathname === '/doctor/appointments' || location.pathname === '/doctor/schedules' || location.pathname === '/doctor/calendar') ?
+          <PatientProfileSettings
+            show={showProfileSettingsModal}
+            onHide={handleCloseProfileSettings}
+            handleCloseModal = {handleCloseProfileSettings}
+            data = {doctor}
+          />
+        : (location.pathname === '/patient') ?
+          <PatientProfileSettings
+            show={showProfileSettingsModal}
+            onHide={handleCloseProfileSettings}
+            handleCloseModal = {handleCloseProfileSettings}
+            data = {patient}
+          />
+        :
+          null
+      }
 
       <CreateScheduleDoctor 
         show={showCreateSchedule}

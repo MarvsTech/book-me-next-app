@@ -1371,11 +1371,12 @@
 }
 
 .booking-body {
-    padding-left: 60px !important;
-    padding-right: 60px !important;
-    padding-top: 40px !important;
+    // padding-left: 60px !important;
+    // padding-right: 60px !important;
+    // padding-top: 40px !important;
+    padding: 35px 40px 0px 40px !important;
 
-    .container {
+    .container-fluid {
         form {
             display: flex;
             flex-direction: column;
@@ -1641,7 +1642,7 @@ td.fc-other-month .fc-day-number {
 
 .create-sched-body {
     display: flex;
-    padding-top: 25px !important;
+    padding: 35px 40px 0px 40px !important;
 
     .action-container {
         margin-left: 10px;

@@ -14,7 +14,7 @@ const CreateScheduleDoctor = ({show, handleCloseModal}) => {
             <Modal.Header className='create-sched-header' closeButton>
                 <div>Create Schedule</div>
             </Modal.Header>
-            <Modal.Body className='booking-body create-sched-body'>
+            <Modal.Body className='create-sched-body'>
                 <Container fluid>
                     <Form onSubmit={e => onSubmit(e)}>
                         <Container fluid>

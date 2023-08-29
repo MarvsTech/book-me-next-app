@@ -1180,51 +1180,49 @@ html, body {
 }
 
 .booking-body {
-  padding-left: 60px !important;
-  padding-right: 60px !important;
-  padding-top: 40px !important;
+  padding: 35px 40px 0px 40px !important;
 }
-.booking-body .container form {
+.booking-body .container-fluid form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.booking-body .container form .row {
+.booking-body .container-fluid form .row {
   width: 100%;
 }
-.booking-body .container form .row .form-label {
+.booking-body .container-fluid form .row .form-label {
   color: #545454;
   font-family: Montserrat;
   font-size: 15px;
   font-weight: 400;
   letter-spacing: 0.6px;
 }
-.booking-body .container form .row .form-control, .booking-body .container form .row .form-select {
+.booking-body .container-fluid form .row .form-control, .booking-body .container-fluid form .row .form-select {
   margin-bottom: 50px;
   height: 60px;
   border-radius: 10px;
   background: #E6E6E6;
   padding-left: 20px;
 }
-.booking-body .container form .row .form-select {
+.booking-body .container-fluid form .row .form-select {
   width: 100%;
 }
-.booking-body .container form .row .form-control::-moz-placeholder {
+.booking-body .container-fluid form .row .form-control::-moz-placeholder {
   color: #545454;
   font-family: Montserrat;
   font-weight: 500;
   letter-spacing: 0.75px;
 }
-.booking-body .container form .row .form-control::placeholder {
+.booking-body .container-fluid form .row .form-control::placeholder {
   color: #545454;
   font-family: Montserrat;
   font-weight: 500;
   letter-spacing: 0.75px;
 }
-.booking-body .container form .row .book-btn {
+.booking-body .container-fluid form .row .book-btn {
   margin-top: 40px;
 }
-.booking-body .container form .row .book-btn .btn {
+.booking-body .container-fluid form .row .book-btn .btn {
   width: 255px;
   height: 50px;
   border-radius: 10px;
@@ -1408,7 +1406,7 @@ td.fc-other-month .fc-day-number {
 
 .create-sched-body {
   display: flex;
-  padding-top: 25px !important;
+  padding: 35px 40px 0px 40px !important;
 }
 .create-sched-body .action-container {
   margin-left: 10px;

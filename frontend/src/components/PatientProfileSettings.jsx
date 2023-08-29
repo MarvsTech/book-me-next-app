@@ -17,13 +17,29 @@ const PatientProfileSettings = ({show, handleCloseModal, data}) => {
 
     const location = useLocation();
 
+    useEffect(() => {
+
+        if (data) {
+            setFirstname(data.firstname);
+            setLastname(data.lastname);
+            setMI(data.middlename);
+            setContactNumber(data.contact_number);
+            setEmail(data.email);
+            setAddress(data.address);
+            setSpecialization(data.specialization);
+            setRoomNumber(data.room_number);
+        }
+
+    }, [data])
     const onSubmit = e => {
       e.preventDefault();
     }
 
     return (
         <Modal className='edit-profile-modal' show={show} onHide={handleCloseModal}>
-            <Modal.Header closeButton></Modal.Header>
+            <Modal.Header className='create-sched-header' closeButton>
+                <div>Update Profile</div>
+            </Modal.Header>
             <Modal.Body className='booking-body'>
                 <Container fluid>
                     <Form onSubmit={e => onSubmit(e)}>
@@ -47,7 +63,7 @@ const PatientProfileSettings = ({show, handleCloseModal, data}) => {
                             </Row>
                             <Row>
                                 {
-                                    (location.pathname === '/doctor' || location.pathname === '/doctor/appointments') ?
+                                    (location.pathname === '/doctor' || location.pathname === '/doctor/appointments' || location.pathname === '/doctor/schedules' || location.pathname === '/doctor/calendar') ?
                                         <>
                                             <Col md={6}>
                                                 <FloatingLabel controlId="floatingInputSpecialization" label="Specialization" className="mb-3">
@@ -85,7 +101,7 @@ const PatientProfileSettings = ({show, handleCloseModal, data}) => {
                             </Row>
                         </Container>
                         
-                        <div>
+                        <div className='update-profile-btn'>
                             <Button type='submit' onClick={handleCloseModal}>Update Profile</Button>
                         </div>
                     </Form>
