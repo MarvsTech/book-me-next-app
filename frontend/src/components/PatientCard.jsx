@@ -7,14 +7,7 @@ import Address from '../images/maps.svg';
 
 const PatientCard = ({ currentUser }) => {
     const {
-        genderId,
-        firstname,
-        lastname,
-        middlename,
-        contactNumber,
-        address,
-        birthday,
-        profile,
+        genderId,firstname,lastname,middlename,contactNumber,address,birthday
     } = currentUser;
     
     const genderText = genderId === 1 ? 'Male' : 'Female';

@@ -4,14 +4,11 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import PatientProfile from '../../images/woman.svg';
-import { Modal, Form } from 'react-bootstrap'
 import AddButton from '../../images/add-btn.svg';
 import PatientAppointmentTable from '../../components/PatientAppointmentTable';
 import PatientCard from '../../components/PatientCard';
 
 import { useAuth } from '../../config/UserContext';
-import Calendar from '../../components/Calendar';
-import PatientProfileSettings from '../../components/PatientProfileSettings';
 import axios from 'axios';
 import PatientBookingAppointment from '../../components/PatientBookingAppointment';
 import PatientViewCalendar from '../../components/PatientViewCalendar';
@@ -23,7 +20,7 @@ const PatientDashboard = () => {
 
   useEffect(() => {
     if (currentUser && currentUser.id && currentUser.token) {
-      axios.get('http://localhost:8000/api/patient/appointments/user/data', {
+      axios.get('http://localhost:8000/api/patient/appointments/data', {
         headers: {
           Authorization: `Bearer ${currentUser.token}`
         }
@@ -93,13 +90,13 @@ const PatientDashboard = () => {
               <Button onClick={handleShowModal3}>View Calendar</Button>
             </Col>
             <Col md={12}>
-              <PatientAppointmentTable dataRow={appointments} />
+              <PatientAppointmentTable dataRow={appointments} itemPerPage={9}/>
             </Col>
           </Row>
         </Container>
       </div>
       <PatientBookingAppointment show={showModal1} handleCloseModal={handleCloseModal1}/>
-      <PatientViewCalendar show={showModal3} handleCloseModal={handleCloseModal3}/>
+      <PatientViewCalendar dataRow={appointments} show={showModal3} handleCloseModal={handleCloseModal3}/>
     </div>
   )
 }

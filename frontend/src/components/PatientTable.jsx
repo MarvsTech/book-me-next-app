@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Table, Button} from 'react-bootstrap'
 
-const PatientTable = ({dataRow, handleShowModal}) => {
+const PatientTable = ({dataRow, handleShowModal, itemPerPage}) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const startIndex = (currentPage - 1) * itemPerPage;
+  const endIndex = startIndex + itemPerPage;
+  const currentItem = dataRow.slice(startIndex, endIndex);
 
   return (
     <>
@@ -24,7 +29,7 @@ const PatientTable = ({dataRow, handleShowModal}) => {
             </thead>
             <tbody>
               { 
-                (dataRow.map((data, index) => {
+                (currentItem.map((data, index) => {
                   return (
                     <>
                       <tr key={`row-${index}`} onClick={() => handleShowModal(data)}>
@@ -52,6 +57,10 @@ const PatientTable = ({dataRow, handleShowModal}) => {
               }
             </tbody>
           </Table> 
+          <div>
+            <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+            <button onClick={() => setCurrentPage(currentPage + 1)} disabled={endIndex >= dataRow.length}>Next</button>
+          </div>
         </div>
       </div>
       

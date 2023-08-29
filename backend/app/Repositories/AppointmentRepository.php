@@ -1,15 +1,16 @@
 <?php
 namespace App\Repositories;
 
+use DB;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Mail\SampleMail;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Appointment;
 use App\Mail\NotificationMail;
-
 use Illuminate\Support\Facades\Mail;
 use App\Contracts\AppointmentContract;
 use App\Mail\NotificationSuccessAppointment;
-use App\Mail\SampleMail;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class AppointmentRepository implements AppointmentContract {
@@ -74,6 +75,55 @@ class AppointmentRepository implements AppointmentContract {
         ->whereRelation('patient', 'role_id', $roleId)
         ->get();
     }
+    public function doctorAppointmentData($userId, $roleId) {
+        return $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->where('doctor_id', $userId)
+        ->whereRelation('doctor', 'role_id', $roleId)
+        ->get();
+    }
+    public function getAllAppointmentData() {
+        return $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->get();
+    }
+
+    public function getAllAppointmentDataByMonth()
+    {
+        return $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->select('*', \DB::raw('MONTH(created_at) as month'))
+        ->get();
+    }
+
+    public function getAllAppointmentChartDataByMonthName()
+    {
+        return $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->select('*', \DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'))
+        ->orderBy('created_at', 'asc')
+        ->get();
+    }
 
     public function getAllPatientAppointment($roleId)
     {
@@ -84,5 +134,76 @@ class AppointmentRepository implements AppointmentContract {
             'doctor_schedule_date',
             'status'
         ])->get();
+    }
+
+    public function getAllAppointmentDataByDoctor($roleId)
+    {
+        return $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->select('*', \DB::raw('MONTH(created_at) as month'))
+        ->where('doctor_id', $roleId)
+        ->get();
+    }
+
+    public function getDoctorAppointmentDataByMonth($roleId) {
+        return $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->select('*', \DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'))
+        ->where('doctor_id', $roleId)
+        ->orderBy('created_at', 'asc')
+        ->get();
+    }
+
+    public function getAllAppointmentByPatient($patientId) {
+        return $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->where('patient_id', $patientId)
+        ->orderBy('created_at', 'asc')
+        ->get();
+    }
+
+    public function getAllDoctorAppointment($doctorId)
+    {
+        return $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->select('*', \DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'))
+        ->orderBy('created_at', 'asc')
+        ->where('doctor_id', $doctorId)
+        ->get();
+    }
+
+    public function getAllDoctorAppointmentSchedule($doctorId, $statusId)
+    {
+        return $this->model->with([
+            'doctor',
+            'patient',
+            'doctor_schedule_time',
+            'doctor_schedule_date',
+            'status'
+        ])
+        ->where('doctor_id', $doctorId)
+        ->where('status_id', $statusId)
+        ->orderBy('created_at', 'asc')
+        ->get();
     }
 }
