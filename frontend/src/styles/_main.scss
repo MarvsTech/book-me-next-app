@@ -1700,3 +1700,14 @@ td.fc-other-month .fc-day-number {
     border-radius: 15px;
     background: #fff;
 }
+
+// Change Password Modal
+.change-password-btn {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.change-password-input {
+    margin-bottom: 3rem !important;
+}

@@ -31,6 +31,7 @@ const PatientProfileSettings = ({show, handleCloseModal, data}) => {
         }
 
     }, [data])
+    
     const onSubmit = e => {
       e.preventDefault();
     }

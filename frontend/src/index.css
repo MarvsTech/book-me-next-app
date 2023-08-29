@@ -1455,4 +1455,14 @@ td.fc-other-month .fc-day-number {
   padding: 20px;
   border-radius: 15px;
   background: #fff;
+}
+
+.change-password-btn {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.change-password-input {
+  margin-bottom: 3rem !important;
 }/*# sourceMappingURL=index.css.map */
