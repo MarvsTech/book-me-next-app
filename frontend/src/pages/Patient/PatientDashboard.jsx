@@ -86,7 +86,7 @@ const PatientDashboard = () => {
         </Container>
         <Container>
           <Row>
-            <Col md={12}>
+            <Col md={12} className='patient-view-calendar'>
               <Button onClick={handleShowModal3}>View Calendar</Button>
             </Col>
             <Col md={12}>

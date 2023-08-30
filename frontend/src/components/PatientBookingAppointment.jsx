@@ -46,8 +46,10 @@ const PatientBookingAppointment = ({show, handleCloseModal}) => {
                 </Form.Select>
               </Row>
 
-              <Row className='book-btn'>
-                <Button type='submit' onClick={handleCloseModal}>Book Appointment</Button>
+              <Row>
+                <div className='book-btn'>
+                  <Button type='submit' onClick={handleCloseModal}>Book Appointment</Button>
+                </div>
               </Row>
             </Form>
           </Container>
