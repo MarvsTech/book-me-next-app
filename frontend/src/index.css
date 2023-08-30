@@ -318,11 +318,15 @@ html, body {
 }
 .table-content-wrapper .table-content .table {
   margin-top: 30px;
+  text-align: center;
 }
 .table-content-wrapper .table-content .table tbody tr:hover {
   background-color: #C9C9C9;
   width: 100%;
   border-radius: 10px !important;
+}
+.table-content-wrapper .table-content .table tbody .btn {
+  width: 110px;
 }
 .table-content-wrapper .table-content .prev-next-btn {
   position: absolute !important;
@@ -518,11 +522,20 @@ html, body {
   justify-content: center;
 }
 
+.header-wrapper {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  background: #DEDEDE;
+  padding: 15px;
+}
+
 .header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
 }
 .header-top .left-header h1 {
   color: #545454;
