@@ -1327,6 +1327,10 @@ td.fc-other-month .fc-day-number {
   height: 720px !important;
 }
 
+.rbc-month-view {
+  z-index: 0;
+}
+
 .edit-profile-modal .left-col .form-group {
   padding-right: 10px !important;
 }

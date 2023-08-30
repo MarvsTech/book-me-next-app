@@ -32,7 +32,7 @@ const PatientTable = ({dataRow, handleShowModal, itemPerPage}) => {
                 (currentItem.map((data, index) => {
                   return (
                     <>
-                      <tr key={`row-${index}`} onClick={() => handleShowModal(data)}>
+                      <tr key={`row-${index}`}>
                         <td>{data.patient.firstname} {data.patient.middlename} {data.patient.lastname}</td>
                         <td>{data.patient.email}</td>
                         <td>{data.doctor.firstname} {data.doctor.middlename} {data.doctor.lastname}</td>
