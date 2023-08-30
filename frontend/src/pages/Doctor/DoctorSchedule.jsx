@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import DashboardHeader from '../../components/DashboardHeader'
 import UserLogTable from '../../components/UserLogTable'
 import { useAuth } from '../../config/UserContext';
@@ -11,57 +11,61 @@ import parse from "date-fns/parse";
 import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import DatePicker from "react-datepicker";
-
+import axios from 'axios';
 
 const locales = {
   "en-US": require("date-fns/locale/en-US")
-}
-const localizer = dateFnsLocalizer({
-  format,parse,startOfWeek,getDay,locales
-});
+};
 
-const events = [
-  {
-    title: "Checkup Patient 1",
-    allDay: false, // Set to false for events with specific times
-    start: new Date(2023, 7, 1, 10, 0), // Add time here (10:00 AM)
-    end: new Date(2023, 7, 1, 11, 0) // Add time here (11:00 AM)
-  },
-  {
-    title: "Checkup Patient 2",
-    allDay: true,
-    start: new Date(2023, 7, 0),
-    end: new Date(2023, 7, 0)
-  },
-  {
-    title: "Laboratory Checkup Patient 1",
-    allDay: false,
-    start: new Date(2023, 7, 13, 14, 30), // Add time here (2:30 PM)
-    end: new Date(2023, 7, 13, 16, 0) // Add time here (4:00 PM)
-  },
-  {
-    title: "Meeting",
-    allDay: false,
-    start: new Date(2023, 7, 15, 15, 0), // Add time here (3:00 PM)
-    end: new Date(2023, 7, 15, 16, 0) // Add time here (4:00 PM)
-  }
-];
+const localizer = dateFnsLocalizer({
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  locales
+});
 
 const DoctorSchedule = () => {
   const { currentUser } = useAuth();
+  const [allEvent, setAllEvent] = useState([]);
 
-  const [newEvent, setNewEvent] = useState({title: "", start: "", end: ""});
-  const [allEvent, setAllEvent] = useState(events);
+  useEffect(() => {
+    if (currentUser && currentUser.id && currentUser.token) {
+      axios.get('http://localhost:8000/api/doctor/all/schedule', {
+        headers: {
+          Authorization: `Bearer ${currentUser.token}`
+        }
+      })
+      .then(response => {
+        const responseData = response.data.data;
+        console.log(response.data.data);
+        const scheds = responseData.map(i => {         
+          const bookingStart = new Date(`${i.schedule_date}T${i.time_start}`);
+          const bookingEnd = new Date(`${i.schedule_date}T${i.time_end}`);
+          return {
+            title: i.title,
+            start: bookingStart,
+            end: bookingEnd,
+          };
+        });
+        setAllEvent(scheds);
+        
+      })
+      .catch(error => {
+        console.error('Error fetching appointments:', error);
+      });
+    }
+  }, [currentUser]);
 
  return (
     <>
       <DashboardHeader name={ currentUser.firstname }/>
       <div className='doctor-calendar-container'>
-        <Calendar 
-          localizer={localizer} 
-          events={allEvent} 
-          startAccessor="start" 
-          endAccessor="end" 
+        <Calendar
+          localizer={localizer}
+          events={allEvent}
+          startAccessor="start"
+          endAccessor="end"
           style={{ height: 500, margin: "50px" }}
         />
       </div>

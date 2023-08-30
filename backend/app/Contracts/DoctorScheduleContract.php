@@ -8,4 +8,5 @@ interface DoctorScheduleContract {
     public function store($params);
     public function update($id, $params);
     public function find($id);
+    public function getAllDoctorSchedule($doctorId);
 }
