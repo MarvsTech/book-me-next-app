@@ -10,6 +10,7 @@ use App\Contracts\DoctorContract;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\DoctorResource;
 use App\Repositories\DoctorRepository;
+use Illuminate\Support\Facades\Request;
 use App\Contracts\DoctorScheduleContract;
 use App\Mail\CreateDoctorAccountNotificationMail;
 use App\Http\Requests\DoctorStoreControllerRequest;
@@ -200,8 +201,59 @@ class DoctorController extends Controller
         }
     }
 
-    public function doctorChangeStatus(DoctorStoreControllerRequest $request, $doctor)
+    public function deactivateDoctor(User $doctor)
     {
-        dd($doctor);
+        try {
+
+            if (!$doctor) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Doctor not found.',
+                ], 404);
+            }
+
+            $status = 1;
+
+            $this->doctorContract->changeDoctorStatus($doctor->id, $status);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Doctor deleted successfully!',
+                'data' => new DoctorResource($doctor, __FUNCTION__),
+            ]);
+
+        } catch(Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function activateDoctor(User $doctor)
+    {
+        try {
+            if (!$doctor) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Doctor not found.',
+                ], 404);
+            }
+
+            $status = 0;
+
+            $this->doctorContract->changeDoctorStatus($doctor->id, $status);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Doctor status changed successfully',
+            ]);
+
+        } catch(Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 }

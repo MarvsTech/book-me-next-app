@@ -36,8 +36,9 @@ class DoctorRepository implements DoctorContract {
         })->get();
     }
 
-    public function doctorChangeStatus($id, $params)
+    public function changeDoctorStatus($id, $status)
     {
-        return $this->model->update($params);
+        return $this->model->where('id', $id)->update(['isActive' => $status]);
     }
+
 }
