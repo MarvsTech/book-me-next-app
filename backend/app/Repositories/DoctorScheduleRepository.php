@@ -33,4 +33,14 @@ class DoctorScheduleRepository implements DoctorScheduleContract {
     {
         return $this->model->find($id);
     }
+
+    public function getAllDoctorSchedule($doctorId)
+    {
+        return $this->model->with([
+            'doctor',
+        ])
+        ->where('doctor_id', $doctorId)
+        ->orderBy('created_at', 'asc')
+        ->get();
+    }
 }

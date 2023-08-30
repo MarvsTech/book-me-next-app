@@ -26,4 +26,9 @@ class DoctorScheduleResource extends JsonResource
     {
         return $this->resource;
     }
+
+    public function getAllDoctorSchedule()
+    {
+        return $this->resource;
+    }
 }

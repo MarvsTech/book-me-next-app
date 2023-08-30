@@ -170,4 +170,24 @@ class DoctorScheduleController extends Controller
             ], 500);
         }
     }
+
+    public function getAllDoctorSchedule()
+    {
+        try{
+            $user = Auth::user();
+            $doctorSchedule = $this->doctorScheduleContract->getAllDoctorSchedule($user->id);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'List of all the appointment',
+                'data' => new DoctorScheduleResource($doctorSchedule, __FUNCTION__),
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete appointment.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
