@@ -44,7 +44,7 @@ const Register = () => {
                 icon:"success",
                 text:data.message
             })
-            navigate("/user/login")
+            navigate("/login")
             }).catch(({response}) => {
 
             if(response.status===422){
