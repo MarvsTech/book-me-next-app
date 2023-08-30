@@ -49,7 +49,7 @@ const PatientAppointmentTable = ({dataRow, itemPerPage}) => {
             }))
           }
         </tbody>
-        <div>
+        <div className='prev-next-btn-patient'>
           <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
           <button onClick={() => setCurrentPage(currentPage + 1)} disabled={endIndex >= dataRow.length}>Next</button>
         </div>
