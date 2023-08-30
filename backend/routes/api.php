@@ -97,6 +97,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/appointments/chart/data', [DashboardController::class, 'getDoctorAppointmentDataByMonth']);
             Route::get('/appointments/data', [AppointmentController::class, 'doctorAppointmentData']);
             Route::get('/appointments/patient/records', [AppointmentController::class, 'getAllPatientAppointment']);
+            Route::get('/all/schedule', [DoctorScheduleController::class, 'getAllDoctorSchedule']);
 
             Route::apiResource('schedule', DoctorScheduleController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
