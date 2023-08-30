@@ -215,6 +215,7 @@ class AppointmentRepository implements AppointmentContract {
             'status'
         ])
         ->where('patient_id', $patientId)
+        ->where('status_id', 2)
         ->orderBy('created_at', 'asc')
         ->get();
     }

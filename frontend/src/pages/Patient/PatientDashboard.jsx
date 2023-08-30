@@ -36,7 +36,6 @@ const PatientDashboard = () => {
           };
         });
         setAppointments(scheds);
-
         if (response.data && response.data.doctor) {
           setTableBody([response.data.doctor]);
         }
