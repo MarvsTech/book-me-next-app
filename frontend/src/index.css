@@ -475,7 +475,7 @@ html, body {
   padding-left: 0;
 }
 .modal-content .change-profile {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .modal-content .change-profile .change-profile-img {
   display: flex !important;
@@ -505,9 +505,6 @@ html, body {
   width: 14px;
   height: 20px;
 }
-.modal-content .modal-form-content {
-  margin-bottom: 25px;
-}
 .modal-content .modal-form-content .container .row {
   width: 100%;
   margin-bottom: 20px;
@@ -519,7 +516,6 @@ html, body {
 .modal-content .btn-container {
   display: flex;
   justify-content: center;
-  margin-top: 40px;
 }
 
 .header-top {
@@ -1422,7 +1418,7 @@ td.fc-other-month .fc-day-number {
 
 .create-sched-body {
   display: flex;
-  padding: 35px 40px 0px 40px !important;
+  padding: 20px 40px 0px 40px !important;
 }
 .create-sched-body .action-container {
   margin-left: 10px;
