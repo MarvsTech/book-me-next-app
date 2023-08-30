@@ -282,11 +282,30 @@ class AppointmentController extends Controller
         }
     }
 
+    public function getAllAppointmentChartData() {
+        try {
+            $chartData = [];
+            $chartData = $this->appointmentContract->getAllAppointmentByID();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'This is your all appointment scheduled',
+                'data' => $chartData,
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to retrieve appointment data.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
     public function getAllAppointmentChartDataByMonthName() {
         try {
             $chartData = [];
             $appointmentDataByMonth = $this->appointmentContract->getAllAppointmentChartDataByMonthName();
-
             $chartData = $appointmentDataByMonth->groupBy('month')->map(function ($group, $month) {
                 $successfulCount = $group->where('status_id', 1)->count();
                 $pendingCount = $group->where('status_id', 2)->count();

@@ -44,6 +44,7 @@ const AdminDoctor = () => {
         const responseData = response.data.data;
         const scheds = responseData.map((i) => {
           return {
+            id: i.id,
             firstname: i.firstname,
             lastname: i.lastname,
             middlename: i.middlename,
@@ -66,7 +67,7 @@ const AdminDoctor = () => {
     console.log('selected row: ', selectedRow)
   },[selectedRow]);
 
-  const doctorStatusDeactivate = () => {
+  const doctorStatusDeactivate = (doctorId) => {
     Swal.fire({
       title: 'Deactivate',
       text: 'Are you sure you want to deactivate this account?',
@@ -75,10 +76,24 @@ const AdminDoctor = () => {
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
       confirmButtonText: 'Deactivate',
-    })
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.post(`http://localhost:8000/api/admin/doctors/${doctorId}/deactivate`, null, {
+          headers: {
+            Authorization: `Bearer ${currentUser.token}`,
+          },
+        })
+        .then(response => {
+          Swal.fire('Deactivated!', 'Doctor account has been deactivated.', 'success');
+        })
+        .catch(error => {
+          console.error('Error deactivating doctor:', error);
+        });
+      }
+    });
   }
 
-   const doctorStatusActivate = () => {
+  const doctorStatusActivate = (doctorId) => {
     Swal.fire({
       title: 'Activate',
       text: 'Are you sure you want to activate this account?',
@@ -87,7 +102,22 @@ const AdminDoctor = () => {
       confirmButtonColor: '#2ecc71',
       cancelButtonColor: '#3085d6',
       confirmButtonText: 'Activate',
-    })
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+        axios.post(`http://localhost:8000/api/admin/doctors/${doctorId}/activate`, null, {
+          headers: {
+            Authorization: `Bearer ${currentUser.token}`,
+          },
+        })
+        .then(response => {
+          Swal.fire('Activated!', 'Doctor account has been activated.', 'success');
+        })
+        .catch(error => {
+          console.error('Error activating doctor:', error);
+        });
+      }
+    });
   }
 
   return (
@@ -128,9 +158,9 @@ const AdminDoctor = () => {
                         <td>
                         {
                           (data.isActive === 0) ? 
-                          <Button variant='danger' onClick={doctorStatusDeactivate}>Deactivate</Button>
+                          <Button variant='danger' onClick={() => doctorStatusDeactivate(data.id)}>Deactivate</Button>
                           :
-                          <Button variant='success' onClick={doctorStatusActivate}>Activate</Button>
+                          <Button variant='success' onClick={() =>doctorStatusActivate(data.id)}>Activate</Button>
                         }
                         </td>
                       </tr>

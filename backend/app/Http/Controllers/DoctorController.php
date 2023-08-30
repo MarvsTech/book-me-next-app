@@ -10,6 +10,8 @@ use App\Contracts\DoctorContract;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\DoctorResource;
 use App\Repositories\DoctorRepository;
+use Illuminate\Support\Facades\Request;
+use App\Contracts\DoctorScheduleContract;
 use App\Mail\CreateDoctorAccountNotificationMail;
 use App\Http\Requests\DoctorStoreControllerRequest;
 use App\Http\Requests\DoctorUpdateControllerRequest;
@@ -17,10 +19,12 @@ use App\Http\Requests\DoctorUpdateControllerRequest;
 class DoctorController extends Controller
 {
     protected $doctorContract;
+    protected $doctorScheduleContract;
 
-    public function __construct(DoctorContract $doctorContract)
+    public function __construct(DoctorContract $doctorContract, DoctorScheduleContract $doctorScheduleContract)
     {
         $this->doctorContract = $doctorContract;
+        $this->doctorScheduleContract = $doctorScheduleContract;
     }
 
     public function index()
@@ -192,6 +196,62 @@ class DoctorController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Failed to delete Doctor.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function deactivateDoctor(User $doctor)
+    {
+        try {
+
+            if (!$doctor) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Doctor not found.',
+                ], 404);
+            }
+
+            $status = 1;
+
+            $this->doctorContract->changeDoctorStatus($doctor->id, $status);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Doctor deleted successfully!',
+                'data' => new DoctorResource($doctor, __FUNCTION__),
+            ]);
+
+        } catch(Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function activateDoctor(User $doctor)
+    {
+        try {
+            if (!$doctor) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Doctor not found.',
+                ], 404);
+            }
+
+            $status = 0;
+
+            $this->doctorContract->changeDoctorStatus($doctor->id, $status);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Doctor status changed successfully',
+            ]);
+
+        } catch(Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed.',
                 'error' => $e->getMessage(),
             ], 500);
         }

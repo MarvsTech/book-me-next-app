@@ -8,4 +8,5 @@ interface DoctorContract {
     public function store($params);
     public function update($id, $params);
     public function getAllDoctors(string $role);
+    public function changeDoctorStatus($id, $status);
 }

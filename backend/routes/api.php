@@ -57,20 +57,22 @@ Route::middleware('auth:sanctum')->group(function () {
     // Routes for role: Admin
     Route::middleware('role:Admin')->group(function () {
         Route::prefix('admin')->name('admin.')->group(function () {
+
             Route::get('/data/cards', [DashboardController::class, 'dashboardCards']);
             Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
-            Route::apiResource('role', RoleController::class)->only([
-                'index', 'store', 'show', 'update', 'destroy'
-            ]);
             Route::get('/appointments/doctor/data', [AppointmentController::class, 'getAllAppointmentDataByDoctor']);
             Route::get('/appointments/data/month', [AppointmentController::class, 'getAllAppointmentDataByMonth']);
             Route::get('/appointments/data/month/name', [AppointmentController::class, 'getAllAppointmentChartDataByMonthName']);
+            Route::get('/appointments/data/chart', [AppointmentController::class, 'getAllAppointmentChartData']);
             Route::get('/appointments/all/data', [AppointmentController::class, 'getAllAppointmentData']);
             Route::get('/appointments/patient/records', [AppointmentController::class, 'getAllPatientAppointment']);
+            Route::get('/doctor/all', [DoctorController::class, 'getAllDoctors']);
+            Route::post('/doctors/{doctor}/deactivate', [DoctorController::class, 'deactivateDoctor']);
+            Route::post('/doctors/{doctor}/activate', [DoctorController::class, 'activateDoctor']);
+
             Route::apiResource('appointment', AppointmentController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
             ]);
-            Route::get('/doctor/all', [DoctorController::class, 'getAllDoctors']);
             Route::apiResource('doctor', DoctorController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
             ]);
@@ -79,6 +81,9 @@ Route::middleware('auth:sanctum')->group(function () {
             ]);
             Route::apiResource('feedback', FeedbackController::class)->only([
                 'index', 'store'
+            ]);
+            Route::apiResource('role', RoleController::class)->only([
+                'index', 'store', 'show', 'update', 'destroy'
             ]);
         });
     });
