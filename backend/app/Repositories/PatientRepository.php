@@ -28,4 +28,22 @@ class PatientRepository implements PatientContract {
     {
         return $this->model->update($params);
     }
+
+    public function getUserProfile($userId)
+    {
+        return $this->model->where('id', $userId)->first();
+    }
+
+    public function updateUserProfile($userId, $data)
+    {
+        $userProfile = $this->model->where('user_id', $userId)->first();
+
+        if (!$userProfile) {
+            // Handle error
+        }
+
+        $userProfile->update($data);
+
+        return $userProfile;
+    }
 }

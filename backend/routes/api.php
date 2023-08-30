@@ -110,6 +110,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('patient')->name('patient.')->group(function () {
             Route::get('/appointments/user/data', [AppointmentController::class, 'filterByLoginUser']);
             Route::get('/appointments/data', [DashboardController::class, 'getAllAppointmentByPatient']);
+            Route::get('/profile', [PatientController::class, 'getUserProfile']);
         });
     });
 
