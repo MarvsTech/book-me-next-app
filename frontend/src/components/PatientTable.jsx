@@ -27,16 +27,17 @@ const PatientTable = ({dataRow, handleShowModal, itemPerPage}) => {
       confirmButtonText: 'Complete',
     }).then((result) => {
       if (result.isConfirmed) {
+        
         axios.post(`http://localhost:8000/api/doctor/appointments/${appointmentId}/success`, null, {
           headers: {
             Authorization: `Bearer ${currentUser.token}`,
           },
         })
         .then(response => {
-          Swal.fire('Status Changed!', 'Appointment status changed to "Complete".', 'success');
+          Swal.fire('Activated!', 'Doctor account has been activated.', 'success');
         })
         .catch(error => {
-          console.error('Error changing appointment status:', error);
+          console.error('Error activating doctor:', error);
         });
       }
     });
@@ -75,14 +76,11 @@ const PatientTable = ({dataRow, handleShowModal, itemPerPage}) => {
                         <td>
                           {
                             (data.status === 2 && location.pathname === '/doctor/appointments') ?  
-                              <Button variant='warning' className='patient-appointment-status' onClick={() => console.log(data.id)}>Pending</Button>
-
-                            : (data.status === 2 && location.pathname === '/admin/appointments') ?
+                              <Button variant='warning' className='patient-appointment-status' onClick={() => changeAppointmentStatus(data.id)}>Pending</Button>
+                            : (data.status === 2) ?
                               <Button variant='warning' className='patient-appointment-status' disabled>Pending</Button>
-
                             : (data.status === 1) ?
                               <Button variant='success' className='patient-appointment-status' disabled>Completed</Button>
-
                             : (data.status === 3) ?
                               <Button variant='danger' className='patient-appointment-status' disabled>Rejected</Button>
                             :

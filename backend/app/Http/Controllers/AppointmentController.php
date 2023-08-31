@@ -71,12 +71,13 @@ class AppointmentController extends Controller
                     $appointment->doctor_schedule_date,
                 ));
 
-                $this->smsService->sendSms("639126897665", 'Appointment created successfully');
+                // $this->smsService->sendSms("639126897665", 'Appointment created successfully');
             }
 
             return response()->json([
                 'status' => 'success',
                 'message' => 'Appointment created successfully.',
+                'redirectTo' => route('paypal'),
                 'data' => new AppointmentResource($appointment, __FUNCTION__),
             ], 200);
 

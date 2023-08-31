@@ -45,6 +45,10 @@ const PatientBookingAppointment = ({show, handleCloseModal}) => {
           title: 'Success',
           text: 'Appointment created successfully!',
         });
+
+        console.log(response.data.redirectTo)
+        window.open(response.data.redirectTo, '_blank');
+
       } else {
         console.error('Request was not successful. Status code:', response.status);
         Swal.fire({
