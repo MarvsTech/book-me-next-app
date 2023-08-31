@@ -100,7 +100,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/appointments/data', [AppointmentController::class, 'doctorAppointmentData']);
             Route::get('/appointments/patient/records', [AppointmentController::class, 'getAllPatientAppointment']);
             Route::get('/all/schedule', [DoctorScheduleController::class, 'getAllDoctorSchedule']);
-
+            Route::post('/appointments/{appointment}/success', [AppointmentController::class, 'changeAppointmentStatus']);
             Route::apiResource('schedule', DoctorScheduleController::class)->only([
                 'index', 'store', 'show', 'update', 'destroy'
             ]);
@@ -112,13 +112,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('patient')->name('patient.')->group(function () {
             Route::get('/appointments/user/data', [AppointmentController::class, 'filterByLoginUser']);
             Route::get('/appointments/data', [DashboardController::class, 'getAllAppointmentByPatient']);
-<<<<<<< Updated upstream
             Route::get('/profile', [PatientController::class, 'getUserProfile']);
-=======
             Route::get('/doctor/all', [DoctorController::class, 'getAllDoctors']);
             Route::get('/doctor/schedule/date', [DoctorScheduleDateController::class, 'getAllDoctorScheduleDate']);
             Route::get('/doctor/schedule/time', [DoctorScheduleTimeController::class, 'getAllDoctorScheduleTime']);
->>>>>>> Stashed changes
+            Route::apiResource('appointment', AppointmentController::class)->only(['store']);
         });
     });
 

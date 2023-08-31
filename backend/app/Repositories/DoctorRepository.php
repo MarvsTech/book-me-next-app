@@ -40,5 +40,4 @@ class DoctorRepository implements DoctorContract {
     {
         return $this->model->where('id', $id)->update(['isActive' => $status]);
     }
-
 }

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use Carbon\Carbon;
 use Vonage\Client;
 use App\Models\Appointment;
+use App\Services\SmsService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Contracts\AppointmentContract;
 use App\Http\Resources\AppointmentResource;
@@ -14,8 +17,6 @@ use App\Mail\CreateAppointmentNotificationMail;
 use App\Mail\DeleteAppointmentNotificationMail;
 use App\Mail\UpdateAppointmentNotificationMail;
 use App\Http\Requests\AppointmentStoreControllerRequest;
-use App\Services\SmsService;
-use Carbon\Carbon;
 
 class AppointmentController extends Controller
 {
@@ -381,6 +382,33 @@ class AppointmentController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Failed to retrieve appointment data.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function changeAppointmentStatus(Appointment $appointment)
+    {
+        try {
+            if (!$appointment) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Doctor not found.',
+                ], 404);
+            }
+
+            $status = 1;
+
+            $this->appointmentContract->changeAppointmentStatus($appointment->id, $status);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Doctor status changed successfully',
+            ]);
+
+        } catch(Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed.',
                 'error' => $e->getMessage(),
             ], 500);
         }

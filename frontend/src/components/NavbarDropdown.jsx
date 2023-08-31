@@ -37,7 +37,7 @@ const NavbarDropdown = () => {
         try {
           const response = await axios.post('http://localhost:8000/api/signout', null, {
             headers: {
-              'Authorization': `Bearer ${token}`,
+              'Authorization': `Bearer ${currentUser.token}`,
             },
           });
 
