@@ -12,6 +12,8 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorScheduleController;
+use App\Http\Controllers\DoctorScheduleDateController;
+use App\Http\Controllers\DoctorScheduleTimeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,7 +112,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('patient')->name('patient.')->group(function () {
             Route::get('/appointments/user/data', [AppointmentController::class, 'filterByLoginUser']);
             Route::get('/appointments/data', [DashboardController::class, 'getAllAppointmentByPatient']);
+<<<<<<< Updated upstream
             Route::get('/profile', [PatientController::class, 'getUserProfile']);
+=======
+            Route::get('/doctor/all', [DoctorController::class, 'getAllDoctors']);
+            Route::get('/doctor/schedule/date', [DoctorScheduleDateController::class, 'getAllDoctorScheduleDate']);
+            Route::get('/doctor/schedule/time', [DoctorScheduleTimeController::class, 'getAllDoctorScheduleTime']);
+>>>>>>> Stashed changes
         });
     });
 

@@ -9,6 +9,8 @@ use App\Contracts\DoctorContract;
 use App\Contracts\PatientContract;
 use App\Contracts\FeedbackContract;
 use App\Contracts\DoctorScheduleContract;
+use App\Contracts\DoctorScheduleDateContract;
+use App\Contracts\DoctorScheduleTimeContract;
 
 // REPOSITORY
 use App\Repositories\RoleRepository;
@@ -17,6 +19,8 @@ use App\Repositories\DoctorRepository;
 use App\Repositories\PatientRepository;
 use App\Repositories\FeedbackRepository;
 use App\Repositories\DoctorScheduleRepository;
+use App\Repositories\DoctorScheduleDateRepository;
+use App\Repositories\DoctorScheduleTimeRepository;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -27,6 +31,8 @@ class RepositoryServiceProvider extends ServiceProvider
         AppointmentContract::class => AppointmentRepository::class,
         DoctorContract::class => DoctorRepository::class,
         PatientContract::class => PatientRepository::class,
+        DoctorScheduleTimeContract::class => DoctorScheduleTimeRepository::class,
+        DoctorScheduleDateContract::class => DoctorScheduleDateRepository::class,
         DoctorScheduleContract::class => DoctorScheduleRepository::class,
         FeedbackContract::class => FeedbackRepository::class,
     ];

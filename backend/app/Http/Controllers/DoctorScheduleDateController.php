@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DoctorScheduleDate;
+use Exception;
 use Illuminate\Http\Request;
+use App\Models\DoctorScheduleDate;
+use App\Contracts\DoctorScheduleDateContract;
+use App\Http\Resources\DoctorScheduleDateResource;
+use App\Repositories\DoctorScheduleDateRepository;
+use App\Http\Requests\DoctorScheduleDateStoreControllerRequest;
 
 class DoctorScheduleDateController extends Controller
 {
+    protected $doctorScheduleDateContract;
+
+    public function __construct(DoctorScheduleDateContract $doctorScheduleDateContract)
+    {
+        $this->doctorScheduleDateContract = $doctorScheduleDateContract;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -61,5 +73,23 @@ class DoctorScheduleDateController extends Controller
     public function destroy(DoctorScheduleDate $doctorScheduleDate)
     {
         //
+    }
+
+    public function getAllDoctorScheduleDate()
+    {
+        try {
+
+            $doctorScheduleDate = $this->doctorScheduleDateContract->getAllDoctorScheduleDate();
+            return new DoctorScheduleDateResource($doctorScheduleDate, __FUNCTION__);
+
+        } catch(Exception $e) {
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed.',
+                'error' => $e->getMessage(),
+            ], 500);
+
+        }
     }
 }
