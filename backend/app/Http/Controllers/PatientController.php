@@ -5,16 +5,18 @@ namespace App\Http\Controllers;
 use Exception;
 use Vonage\Client;
 use App\Models\User;
+use App\Services\SmsService;
 use App\Mail\NotificationMail;
 use App\Contracts\PatientContract;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\PatientResource;
 use App\Repositories\PatientRepository;
+use Illuminate\Support\Facades\Request;
+
 use App\Mail\CreateAccountNotificationMail;
 use App\Http\Requests\PatientStoreControllerRequest;
 use App\Http\Requests\PatientUpdateControllerRequest;
-
-use App\Services\SmsService;
 
 class PatientController extends Controller
 {
@@ -172,5 +174,33 @@ class PatientController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function getUserProfile()
+    {
+        try {
+
+            $user = Auth::user();
+            $userProfile = $this->patientContract->getUserProfile($user->id);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Patient updated successfully!',
+                'data' => new PatientResource($userProfile, __FUNCTION__),
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to update Patient.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function updateUserProfile(Request $request)
+    {
+        $data = $request->all();
+        $userProfile = $this->patientContract->updateUserProfile($request->user()->id, $data);
+        return response()->json($userProfile);
     }
 }

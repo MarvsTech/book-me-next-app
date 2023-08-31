@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Dropdown } from 'react-bootstrap';
 import PatientProfile from '../images/woman.svg';
 import ProfileSettings from '../images/profile-settings.png';
@@ -15,8 +15,8 @@ import { useLocation } from 'react-router';
 import ChangePasswordModal from './ChangePasswordModal';
 
 const NavbarDropdown = () => {
-  const { currentUser: { token } } = useAuth();
-
+  const { currentUser } = useAuth();
+  const [userData, setUserData] = useState([]);
   const [showProfileSettingsModal, setShowProfileSettingsModal] = useState(false);
   const [showCreateSchedule, setShowCreateSchedule] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
@@ -66,37 +66,27 @@ const NavbarDropdown = () => {
     setShowChangePassword(false);
   }
 
-  const admin = {
-    firstname : 'admin',
-    lastname : 'admin',
-    middlename : 'a',
-    contact_number : '091234567890',
-    email : 'admin@admin.com',
-    address : 'hmmmm',
-    currentPassword : 'hahaha'
-  }
-
-  const doctor = {
-    firstname : 'doctor',
-    lastname : 'doctor',
-    middlename : 'd',
-    contact_number : '091234567890',
-    email : 'doctor@doctor.com',
-    address : 'hmmmm',
-    specialization : 'ENT',
-    room_number : '7',
-    currentPassword : 'hehehe'
-  }
-
-  const patient = {
-    firstname : 'patient',
-    lastname : 'patient',
-    middlename : 'p',
-    contact_number : '091234567890',
-    email : 'patient@patient.com',
-    address : 'hmmmm',
-    currentPassword : 'hohoho'
-  }
+  useEffect(() => {
+    if (currentUser && currentUser.id && currentUser.token) {
+      axios.get('http://localhost:8000/api/patient/profile', {
+        headers: {
+          Authorization: `Bearer ${currentUser.token}`
+        }
+      })
+      .then(response => {
+        const responseData = response.data.data;
+        const userData = responseData.map((i) => {
+          return {
+            userInfo: i.user,
+          };
+        });
+        setUserData(userData);
+      })
+      .catch(error => {
+        console.error('Error fetching appointments:', error);
+      });
+    }
+  }, [currentUser]);
 
   return (
     <>
@@ -138,12 +128,12 @@ const NavbarDropdown = () => {
               show={showProfileSettingsModal}
               onHide={handleCloseProfileSettings}
               handleCloseModal = {handleCloseProfileSettings}
-              data = {admin}
+              data = {userData}
             />
             <ChangePasswordModal
               show={showChangePassword}
               handleCloseModal={handleCloseChangePassword}
-              data={admin}
+              data={userData}
             />
           </>
         : (location.pathname === '/doctor' || location.pathname === '/doctor/appointments' || location.pathname === '/doctor/schedules' || location.pathname === '/doctor/calendar') ?
@@ -152,12 +142,12 @@ const NavbarDropdown = () => {
               show={showProfileSettingsModal}
               onHide={handleCloseProfileSettings}
               handleCloseModal = {handleCloseProfileSettings}
-              data = {doctor}
+              data = {userData}
             />
             <ChangePasswordModal
               show={showChangePassword}
               handleCloseModal={handleCloseChangePassword}
-              data={doctor}
+              data={userData}
             />
           </>
         : (location.pathname === '/patient') ?
@@ -166,12 +156,12 @@ const NavbarDropdown = () => {
               show={showProfileSettingsModal}
               onHide={handleCloseProfileSettings}
               handleCloseModal = {handleCloseProfileSettings}
-              data = {patient}
+              data = {userData}
             />
             <ChangePasswordModal
               show={showChangePassword}
               handleCloseModal={handleCloseChangePassword}
-              data={patient}
+              data={userData}
             />
           </>
         :
