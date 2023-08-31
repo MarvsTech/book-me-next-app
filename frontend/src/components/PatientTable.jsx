@@ -1,12 +1,46 @@
 import React, { useState } from 'react'
 import {Table, Button} from 'react-bootstrap'
+import { useLocation } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import { useAuth } from '../config/UserContext';
 
 const PatientTable = ({dataRow, handleShowModal, itemPerPage}) => {
   const [currentPage, setCurrentPage] = useState(1);
 
+  const { currentUser } = useAuth();
+
   const startIndex = (currentPage - 1) * itemPerPage;
   const endIndex = startIndex + itemPerPage;
   const currentItem = dataRow.slice(startIndex, endIndex);
+
+  const location = useLocation();
+
+  const changeAppointmentStatus = (appointmentId) => {
+    Swal.fire({
+      title: 'Change Status',
+      text: 'Are you sure you want to set the status to "Complete"?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2ecc71',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Complete',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.post(`http://localhost:8000/api/doctor/appointments/${appointmentId}/success`, null, {
+          headers: {
+            Authorization: `Bearer ${currentUser.token}`,
+          },
+        })
+        .then(response => {
+          Swal.fire('Status Changed!', 'Appointment status changed to "Complete".', 'success');
+        })
+        .catch(error => {
+          console.error('Error changing appointment status:', error);
+        });
+      }
+    });
+  }
 
   return (
     <>
@@ -40,12 +74,17 @@ const PatientTable = ({dataRow, handleShowModal, itemPerPage}) => {
                         <td>{data.booking_time}</td>
                         <td>
                           {
-                            (data.status === 2) ? 
-                              <Button variant='warning' className='patient-appointment-status'>Pending</Button>
+                            (data.status === 2 && location.pathname === '/doctor/appointments') ?  
+                              <Button variant='warning' className='patient-appointment-status' onClick={() => console.log(data.id)}>Pending</Button>
+
+                            : (data.status === 2 && location.pathname === '/admin/appointments') ?
+                              <Button variant='warning' className='patient-appointment-status' disabled>Pending</Button>
+
                             : (data.status === 1) ?
-                              <Button variant='success' className='patient-appointment-status'>Completed</Button>
+                              <Button variant='success' className='patient-appointment-status' disabled>Completed</Button>
+
                             : (data.status === 3) ?
-                              <Button variant='danger' className='patient-appointment-status'>Rejected</Button>
+                              <Button variant='danger' className='patient-appointment-status' disabled>Rejected</Button>
                             :
                               null
                           }

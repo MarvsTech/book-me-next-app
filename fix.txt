@@ -1,0 +1,24 @@
+fix:
+
+--> prev and next button patient dashboard (done)
+--> add doctor modal, admin side (done) 
+--> add navlink for calendar, doctor side
+
+In branch 10-fix-add-doctor-modal-style changes on
+--> patient appointment table
+	- margin top table-content-wrapper
+--> create doctor schedule
+	- padding on create-sched-body
+
+
+Why make a booking appointment application?
+1. booking system applications has already made a lot of people's lives easier at the comfort of their homes. From booking a flight to booking a hotel or an airbnb. Booking system applications offers a convenient way of planning your travels ahead of time.
+2. just like booking system applications, appointment applications allows you to also plan your appointment at your preferred date and time at the comfort of your home.
+3. being able to book an appointment at your preferred date and time at the comfort of your home without going through pen and paper, and the long lines.
+4. Aside from making the clients/users lives easier, the one running or using the booking appointment application will be able to organize the workload easily, and gather valuable data in order to provide great customer service.
+
+What is BookMeNext?
+1. BookMeNext is a booking appointment application, where our client, the patient, are able to book an appointment at the comfort of their home without going through long lines and pen and paper just to make an appointment with a doctor.
+2. This application is part of the training project of the newly boarded Zuitt trainees.
+3. This project was made by integrating third party APIs as such are FullCalendar JS (where the doctor accepting the booked appointments will be able to view his/her schedules), Google (for sending email notifications), Vonage (for sending sms notifications), and Paypal (for the payment of the booked appointment).
+4. The technologies used in the development of BookMeNext are, for the front end: ReactJS, React Bootstrap, SASS, and for the back end: laravel.

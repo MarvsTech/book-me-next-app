@@ -24,9 +24,9 @@ const Navbar = ({children, roleId}) => {
             {
               (roleId) ?
                 <>
-                  <NavLink to="/" className='navlink'>Home</NavLink>
+                  {/* <NavLink to="/" className='navlink'>Home</NavLink>
                   <NavLink to="/" className='navlink'>How it works</NavLink>
-                  <NavLink to="/" className='navlink'>Our doctors</NavLink>
+                  <NavLink to="/" className='navlink'>Our doctors</NavLink> */}
                   <NavbarDropdown/>
                 </>
               :
