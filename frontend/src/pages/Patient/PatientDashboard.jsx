@@ -12,11 +12,14 @@ import { useAuth } from '../../config/UserContext';
 import axios from 'axios';
 import PatientBookingAppointment from '../../components/PatientBookingAppointment';
 import PatientViewCalendar from '../../components/PatientViewCalendar';
+import { useNavigate } from 'react-router-dom';
 
 const PatientDashboard = () => {
   const { currentUser } = useAuth();
   const [appointments, setAppointments] = useState([]);
   const [tableBody, setTableBody] = useState([]);
+
+  const navigate  = useNavigate();
 
   useEffect(() => {
     if (currentUser && currentUser.id && currentUser.token) {
@@ -39,6 +42,8 @@ const PatientDashboard = () => {
         if (response.data && response.data.doctor) {
           setTableBody([response.data.doctor]);
         }
+
+        // navigate('http://localhost:8000/paypal')
       })
       .catch(error => {
         console.error('Error fetching appointments:', error);
