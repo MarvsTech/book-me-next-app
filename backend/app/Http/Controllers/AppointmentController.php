@@ -17,6 +17,7 @@ use App\Mail\CreateAppointmentNotificationMail;
 use App\Mail\DeleteAppointmentNotificationMail;
 use App\Mail\UpdateAppointmentNotificationMail;
 use App\Http\Requests\AppointmentStoreControllerRequest;
+use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class AppointmentController extends Controller
 {
@@ -56,19 +57,13 @@ class AppointmentController extends Controller
     public function store(AppointmentStoreControllerRequest $request)
     {
         try {
-            $params = $request->only([
-                'doctor_id',
-                'patient_id',
-                'doctor_schedule_time_id',
-                'doctor_schedule_date_id',
-                'status_id',
-                'remarks',
-            ]);
+            $validatedData = $request->validated();
 
-            $appointment = $this->appointmentContract->store($params);
+            $appointment = $this->appointmentContract->store($validatedData);
 
-            if(!empty($appointment)) {
-                Mail::to($appointment->patient->email)->send(new CreateAppointmentNotificationMail (
+            if (!empty($appointment)) {
+
+                Mail::to($appointment->patient->email)->send(new CreateAppointmentNotificationMail(
                     $appointment,
                     $appointment->patient,
                     $appointment->doctor,
@@ -81,11 +76,12 @@ class AppointmentController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Appointment created successfully!',
+                'message' => 'Appointment created successfully.',
                 'data' => new AppointmentResource($appointment, __FUNCTION__),
-            ]);
+            ], 200);
 
         } catch (Exception $e) {
+            dd($e->getMessage());
             return response()->json([
                 'status' => 'error',
                 'message' => 'Failed to create appointment.',

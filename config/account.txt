@@ -5,25 +5,3 @@ password: 56dwypNYPEz
 #EMAIL NOTIFICATION
 APP PASSWORD: bebjuaxsrx
 USERNAME: ramos.marvin@seedtech.ph
-
-example roles in react
-import React from 'react'
-
-const Appointment = () => {
-
-  user = {is: 1, name: 'amrv', role: 1}
-
-  isAdminUser() {
-    return user.role === 1 
-  }
-  return (
-    {
-      if(isAdminUser) {
-        return <h1>hsahsa</h1>
-      }
-    }
-    <div>Appointment</div>
-  )
-}
-
-export default Appointment

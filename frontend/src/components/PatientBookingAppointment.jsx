@@ -26,9 +26,7 @@ const PatientBookingAppointment = ({show, handleCloseModal}) => {
     formData.append('remarks', 'Pending');
   
     try {
-      const response = await axios.post(
-        'http://localhost:8000/api/patient/appointment',
-        formData,
+      const response = await axios.post('http://localhost:8000/api/patient/appointment', formData,
         {
           headers: {
             Authorization: `Bearer ${currentUser.token}`,
