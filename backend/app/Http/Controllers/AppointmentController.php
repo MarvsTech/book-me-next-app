@@ -71,7 +71,7 @@ class AppointmentController extends Controller
                     $appointment->doctor_schedule_date,
                 ));
 
-                $this->smsService->sendSms("639126897665", 'Appointment created successfully');
+                $this->smsService->sendSms("639274058265", 'Appointment created successfully');
             }
 
             return response()->json([
@@ -139,7 +139,7 @@ class AppointmentController extends Controller
                     $appointment->doctor_schedule_time,
                     $appointment->doctor_schedule_date,
                 ));
-                $this->smsService->sendSms("639126897665", 'Appointment updated successfully');
+                $this->smsService->sendSms("639274058265", 'Appointment updated successfully');
             }
 
             return response()->json([
@@ -172,7 +172,7 @@ class AppointmentController extends Controller
                     $appointment->doctor_schedule_time,
                     $appointment->doctor_schedule_date,
                 ));
-                $this->smsService->sendSms("639126897665", 'Appointment Deleted successfully');
+                $this->smsService->sendSms("639274058265", 'Appointment Deleted successfully');
             }
 
             return response()->json([
