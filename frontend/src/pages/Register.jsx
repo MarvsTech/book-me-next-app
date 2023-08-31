@@ -115,7 +115,7 @@ const Register = () => {
                                 </Col>
                             </Row>
 
-                            <p>Do you have an account? <Link to="/user/login">Login</Link></p>
+                            <p>Do you have an account? <Link to="/login">Login</Link></p>
                             <div className='btn-submit'>
                                 <Button type="submit">Register Account</Button>
                             </div>

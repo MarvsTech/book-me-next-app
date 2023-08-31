@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { NavLink, useLocation  } from 'react-router-dom';
 import Dashboard from '../images/dashboard.svg';
 import Doctor from '../images/doctor.svg';
 import UserLog from '../images/user.svg';
@@ -64,6 +64,11 @@ const Sidebar = ({ children, roleId }) => {
     );
   }
 
+  const isActiveUrl = (url)  => {
+    const location = window.location.pathname
+    return location == url
+  }
+
   const logoItems = [
     {
       path: '/book-me-next',
@@ -72,8 +77,6 @@ const Sidebar = ({ children, roleId }) => {
       icon: <img src={Logo} alt="BookMeNext-Logo" style={{ width: '20px'}}/>,
     },
   ];
-
-  // const dashboardPath = '/';
 
   return (
     <>
@@ -95,7 +98,9 @@ const Sidebar = ({ children, roleId }) => {
           <ul className="nav flex-column">
             {menuItems.map((item, index) => (
               <li className="nav-item" key={index}>
-                <NavLink exact to={item.path} className="nav-link" activeClassName="active">
+                <NavLink exact to={item.path} activeClassName="active" className={() =>
+    isActiveUrl(item.path) ? "active nav-link" : "nav-link"
+  }>
                   {item.icon} 
                   <span className='nav-link-text'>{item.label}</span>
                 </NavLink>
