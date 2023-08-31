@@ -249,4 +249,9 @@ class AppointmentRepository implements AppointmentContract {
         ->orderBy('created_at', 'asc')
         ->get();
     }
+
+    public function changeAppointmentStatus($id, $status)
+    {
+        return $this->model->where('id', $id)->update(['status_id' => $status, 'remarks' => 'Success']);
+    }
 }

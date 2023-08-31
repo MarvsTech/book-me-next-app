@@ -20,4 +20,5 @@ interface AppointmentContract {
     public function getAllAppointmentByPatient($patientId);
     public function getAllDoctorAppointment($doctorId);
     public function getAllDoctorAppointmentSchedule($doctorId, $statusId);
+    public function changeAppointmentStatus($id, $status);
 }

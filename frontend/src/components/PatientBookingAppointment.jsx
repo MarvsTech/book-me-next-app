@@ -2,19 +2,69 @@ import React, {useState, useEffect} from 'react'
 import { Form, Modal, Container, Row, Col, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { useAuth } from '../config/UserContext';
+import Swal from 'sweetalert2';
 
 const PatientBookingAppointment = ({show, handleCloseModal}) => {
   const { currentUser } = useAuth();
   const [doctorScheduleDates, setDoctorScheduleDates] = useState([]);
-  const [selectedDoctorScheduleDate, setSelectedDoctorScheduleDate] = useState('');
   const [doctorScheduleTimes, setDoctorScheduleTimes] = useState([]);
-  const [selectedDoctorScheduleTime, setSelectedDoctorScheduleTime] = useState('');
   const [doctors, setDoctors] = useState([]);
+
+  const [selectedDoctorScheduleDate, setSelectedDoctorScheduleDate] = useState('');
+  const [selectedDoctorScheduleTime, setSelectedDoctorScheduleTime] = useState('');
   const [selectedDoctor, setSelectedDoctor] = useState('');
 
-  const onSubmit = e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-  }
+  
+    const formData = new FormData();
+    formData.append('doctor_schedule_date_id', selectedDoctorScheduleDate);
+    formData.append('doctor_schedule_time_id', selectedDoctorScheduleTime);
+    formData.append('doctor_id', selectedDoctor);
+    formData.append('patient_id', currentUser.id);
+    formData.append('status_id', 2);
+    formData.append('remarks', 'Pending');
+  
+    try {
+      const response = await axios.post(
+        'http://localhost:8000/api/patient/appointment',
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${currentUser.token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+  
+      if (response.status === 200) {
+        setSelectedDoctorScheduleDate('');
+        setSelectedDoctorScheduleTime('');
+        setSelectedDoctor('');
+  
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Appointment created successfully!',
+        });
+      } else {
+        console.error('Request was not successful. Status code:', response.status);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to create appointment.',
+        });
+      }
+    } catch (error) {
+      console.error('Error creating appointment:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'An error occurred while creating the appointment.',
+      });
+    }
+  };
+  
 
   const handleSelectDoctorScheduleDate = (event) => {
     setSelectedDoctorScheduleDate(event.target.value);
